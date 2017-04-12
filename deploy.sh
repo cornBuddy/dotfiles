@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo build suckless soft
+for dir in `ls ./suckless`
+do
+    sudo make -C ./suckless/${dir}
+    sudo make clean -C ./suckless/${dir}
+done
+
+echo set up nvim
+mkdir -p ~/.config/nvim/after/ftplugin/
+ln -sf `pwd`/ftplugin/* ~/.config/nvim/after/ftplugin/
+ln -sf `pwd`/init.vim ~/.config/nvim/
+
+echo set up tmux
+ln -sf `pwd`/tmux.conf ~/.tmux.conf
+mkdir ~/.tmuxinator
+ln -sf `pwd`/tmuxinator/* ~/.tmuxinator/
+
+echo set up bash
+ln -sf `pwd`/bash/bash_aliases ~/.bash_aliases
+ln -sf `pwd`/bash/bash_logout ~/.bash_logout
+ln -sf `pwd`/bash/bash_profile ~/.bash_profile
+ln -sf `pwd`/bash/bashrc ~/.bashrc
+
+echo set up fish
+mkdir -p ~/.config/fish/{completions,functions}
+ln -sf `pwd`/fish/completions/* ~/.config/fish/completions/
+ln -sf `pwd`/fish/functions/* ~/.config/fish/functions/
+ln -sf `pwd`/fish/config.fish ~/.config/fish/config.fish
+
+echo set up git
+ln -sf `pwd`/gitconfig ~/.gitconfig
