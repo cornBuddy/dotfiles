@@ -1,5 +1,21 @@
 [user]
-	name = cornBuddy
-	email = heorhi.sakovich@gmail.com
+    name = cornBuddy
+    email = heorhi.sakovich@gmail.com
 [push]
-	default = simple
+    default = simple
+[merge]
+    tool = nvimdiff
+    conflictStyle = diff3
+[mergetool]
+    prompt = true
+[mergetool "nvimdiff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[diff]
+    tool = nvimdiff
+[difftool]
+    prompt = false
+[difftool "nvimdiff"]
+    cmd = nvim -d $BASE $LOCAL
+[alias]
+    lg = !"git lg-specific --all"
+    lg-specific = log --graph --abbrev-commit --decorate --stat --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)%C(reset)%n'
