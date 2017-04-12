@@ -3,7 +3,7 @@
 echo build suckless soft
 for dir in `ls ./suckless`
 do
-    sudo make -C ./suckless/${dir}
+    sudo make install -C ./suckless/${dir}
     sudo make clean -C ./suckless/${dir}
 done
 

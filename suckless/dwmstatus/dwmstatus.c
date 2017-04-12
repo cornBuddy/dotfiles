@@ -10,6 +10,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/sysinfo.h>
+#include <unistd.h>
 
 #include <X11/Xlib.h>
 
@@ -25,62 +26,62 @@ static Display *dpy;
 char *
 smprintf(char *fmt, ...)
 {
-	va_list fmtargs;
-	char *ret;
-	int len;
+    va_list fmtargs;
+    char *ret;
+    int len;
 
-	va_start(fmtargs, fmt);
-	len = vsnprintf(NULL, 0, fmt, fmtargs);
-	va_end(fmtargs);
+    va_start(fmtargs, fmt);
+    len = vsnprintf(NULL, 0, fmt, fmtargs);
+    va_end(fmtargs);
 
-	ret = malloc(++len);
-	if (ret == NULL) {
-		perror("malloc");
-		exit(1);
-	}
+    ret = malloc(++len);
+    if (ret == NULL) {
+        perror("malloc");
+        exit(1);
+    }
 
-	va_start(fmtargs, fmt);
-	vsnprintf(ret, len, fmt, fmtargs);
-	va_end(fmtargs);
+    va_start(fmtargs, fmt);
+    vsnprintf(ret, len, fmt, fmtargs);
+    va_end(fmtargs);
 
-	return ret;
+    return ret;
 }
 
 void
 settz(char *tzname)
 {
-	setenv("TZ", tzname, 1);
+    setenv("TZ", tzname, 1);
 }
 
 char *
 mktimes(char *fmt, char *tzname)
 {
-	char buf[129];
-	time_t tim;
-	struct tm *timtm;
+    char buf[129];
+    time_t tim;
+    struct tm *timtm;
 
-	memset(buf, 0, sizeof(buf));
-	settz(tzname);
-	tim = time(NULL);
-	timtm = localtime(&tim);
-	if (timtm == NULL) {
-		perror("localtime");
-		exit(1);
-	}
+    memset(buf, 0, sizeof(buf));
+    settz(tzname);
+    tim = time(NULL);
+    timtm = localtime(&tim);
+    if (timtm == NULL) {
+        perror("localtime");
+        exit(1);
+    }
 
-	if (!strftime(buf, sizeof(buf)-1, fmt, timtm)) {
-		fprintf(stderr, "strftime == 0\n");
-		exit(1);
-	}
+    if (!strftime(buf, sizeof(buf)-1, fmt, timtm)) {
+        fprintf(stderr, "strftime == 0\n");
+        exit(1);
+    }
 
-	return smprintf("%s", buf);
+    return smprintf("%s", buf);
 }
 
 void
 setstatus(char *str)
 {
-	XStoreName(dpy, DefaultRootWindow(dpy), str);
-	XSync(dpy, False);
+    XStoreName(dpy, DefaultRootWindow(dpy), str);
+    XSync(dpy, False);
 }
 
 char *
@@ -120,53 +121,53 @@ d_bar(int p)
 char *
 battery(void)
 {
-    char stat[12];
-    int now = 0;
-    int full = 0;
+    if(access( BATSTAT, F_OK ) != -1) {
+        char stat[12];
+        int now = 0;
+        int full = 0;
+        FILE* batst = fopen(BATSTAT, "r");
+        fscanf(batst, "%s", stat);
+        fclose(batst);
+        FILE* batnow = fopen(BATNOW, "r");
+        fscanf(batnow, "%d", &now);
+        fclose(batnow);
+        FILE* batfull = fopen(BATFULL, "r");
+        fscanf(batfull, "%d", &full);
+        fclose(batfull);
+        int bat = 100 * now / full;
+        if (bat >= 50)
+            batcolor = "\x07";
+        else if (bat >= 15)
+            batcolor = "\x08";
+        else
+            batcolor = "\x06";
+        char* baticon = d_bar(bat);
 
-    FILE* batst = fopen(BATSTAT, "r");
-    fscanf(batst, "%s", stat);
-    fclose(batst);
-
-    FILE* batnow = fopen(BATNOW, "r");
-    fscanf(batnow, "%d", &now);
-    fclose(batnow);
-
-    FILE* batfull = fopen(BATFULL, "r");
-    fscanf(batfull, "%d", &full);
-    fclose(batfull);
-
-    int bat = 100 * now / full;
-    if (bat >= 50)
-        batcolor = "\x07";
-    else if (bat >= 15)
-        batcolor = "\x08";
-    else
-        batcolor = "\x06";
-    char* baticon = d_bar(bat);
-
-    if (strncmp(stat, "Discharging", 11)) {
-        batcolor = "\x07";
-        return smprintf("⚡ %s %i", baticon, bat);
+        if (strncmp(stat, "Discharging", 11)) {
+            batcolor = "\x07";
+            return smprintf("⚡ %s %i", baticon, bat);
+        }
+        else
+            return smprintf("%s %i", baticon, bat);
+    } else {
+        return smprintf("⚡");
     }
-    else
-        return smprintf("%s %i", baticon, bat);
 }
 
 int
 main(void)
 {
-	char *status;
-	char *avgs;
+    char *status;
+    char *avgs;
     char *tbel;
     char *dbel;
     char *mem;
     char *bat;
 
-	if (!(dpy = XOpenDisplay(NULL))) {
-		fprintf(stderr, "dwmstatus: cannot open display.\n");
-		return 1;
-	}
+    if (!(dpy = XOpenDisplay(NULL))) {
+        fprintf(stderr, "dwmstatus: cannot open display.\n");
+        return 1;
+    }
 
     /*
     { normbordercolor,      normfgcolor,        normbgcolor }, // 1 = normal (grey on black)
@@ -182,25 +183,25 @@ main(void)
     { "#282a2e",            "#b294bb",          "#282a2e" },   // B = magenta on darkgrey
     { "#282a2e",            "#8abeb7",          "#282a2e" },   // C = cyan on darkgrey
     */
-	for (;;sleep(1)) {
-		avgs = loadavg();
+    for (;;sleep(1)) {
+        avgs = loadavg();
         tbel = mktimes("%H:%M", tzbel);
         dbel = mktimes("%d-%m-%Y", tzbel);
         mem = memory();
         bat = battery();
-		status = smprintf("%s B: %s%\x01 M: %s   C: %s%\x02 %s  %s",
-				batcolor, bat, mem, avgs, dbel, tbel);
-		setstatus(status);
-		free(avgs);
-		free(tbel);
+        status = smprintf("%s B: %s%\x01 M: %s   C: %s%\x02 %s  %s",
+                batcolor, bat, mem, avgs, dbel, tbel);
+        setstatus(status);
+        free(avgs);
+        free(tbel);
         free(dbel);
         free(bat);
         free(mem);
-		free(status);
-	}
+        free(status);
+    }
 
-	XCloseDisplay(dpy);
+    XCloseDisplay(dpy);
 
-	return 0;
+    return 0;
 }
 
