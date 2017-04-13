@@ -31,3 +31,7 @@ ln -sf `pwd`/fish/config.fish ~/.config/fish/config.fish
 
 echo set up git
 ln -sf `pwd`/gitconfig ~/.gitconfig
+
+echo add default eslintrc file
+mkdir ~/workspace
+ln -s `pwd`/eslintrc.json ~/workspace/.eslintrc.json
