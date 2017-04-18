@@ -36,5 +36,4 @@ chromium &
 skypeforlinux &
 telegram-desktop &
 dwmstatus &
-robomongo &
 exec dwm
