@@ -7,7 +7,7 @@ root: ~/workspace/TruVoice/
 socket_name: default
 
 # Runs before everything. Use it to start daemons etc.
-pre: sudo systemctl start mongodb.service
+pre: sudo systemctl start mongodb.service ; robomongo &
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
