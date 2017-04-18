@@ -337,7 +337,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_signs = 0
 " js
-let g:syntastic_javascript_checkers = ['jshint', 'eslint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 
 " nerdtree settings

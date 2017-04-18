@@ -72,8 +72,16 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# completions for tmuxinator
+if [ -f ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.bash ]
+then
+    source ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.bash
+fi
+
 # Environment variables definitions
 export PATH=${PATH}:./node_modules/.bin/:../node_modules/.bin:../../node_modules/.bin:../../../node_modules/.bin:../../../../node_modules/.bin:../../../../../node_modules/.bin
+export PATH=${PATH}:~/.gem/ruby/2.4.0/bin
+export PATH=${PATH}:~/.npm-global/bin
 export NODE_ENV=development
 export EDITOR=nvim
 

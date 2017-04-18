@@ -1,13 +1,13 @@
 # ~/.tmuxinator/boozebook.yml
 
-name: TruVoice
+name: tv
 root: ~/workspace/TruVoice/
 
 # Optional tmux socket
-socket_name: TruVoice
+socket_name: default
 
 # Runs before everything. Use it to start daemons etc.
-pre: sudo service mongod start
+pre: sudo systemctl start mongodb.service
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
@@ -28,19 +28,25 @@ pre: sudo service mongod start
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t boozebook
+# post: tmux -CC attach -t tv
 
 windows:
     - nvim:
-        layout: 9593,239x65,0,0{165x65,0,0,1,73x65,166,0,0}
         # Synchronize all panes of this window, can be enabled before or after the pane commands run.
         # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
         # synchronize: after
         panes:
             - nvim .
-            - #empty
     - server:
-            layout: even-horizontal
-            panes:
-                - node app.js
-                - node webpack_dev_server.js
+        layout: e2fa,239x74,0,0{158x74,0,0,1,80x74,159,0[80x5,159,0,2,80x5,159,6,4,80x62,159,12,5]}
+        panes:
+            - NODE_ENV=dev_1_6 node debug app.js
+            - node webpack_dev_server.js
+            - cd ../survey-api/ && node app.js
+            - #empty
+    - etc:
+        layout: even-horizontal
+        panes:
+            - #empty
+            - htop
+
