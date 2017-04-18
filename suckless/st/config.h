@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char font[] = "terminus:pixelsize=14:antialias=true:autohint=true";
+static char font[] = "xos4 Terminus:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 0;
 
 /*
@@ -16,7 +16,7 @@ static int borderpx = 0;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char shell[] = "/bin/sh";
+static char shell[] = "/bin/bash";
 static char *utmp = NULL;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -108,7 +108,7 @@ static const char *colorname[] = {
 
 	/* more colors can be added after 255 to use with DefaultXX */
 	"#f8f8f8",
-    "#1F1F1F",
+    "#1d1F21",
     "#b3b3b3",
 };
 

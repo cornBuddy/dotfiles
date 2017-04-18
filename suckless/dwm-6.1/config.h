@@ -2,36 +2,19 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"terminus:pixelsize=14:antialias=true:autohint=true"
+	"xos4 Terminus:pixelsize=14:antialias=true:autohint=true"
 };
-static const char dmenufont[]       = "terminus:pixelsize=14:antialias=true:autohint=true";
+static const char dmenufont[]       = "xos4 Terminus:pixelsize=14:antialias=true:autohint=true";
 static const char normbordercolor[] = "#5e5e5e";
 static const char normbgcolor[]     = "#1d1f21";
 static const char normfgcolor[]     = "#858585";
 static const char selbordercolor[]  = "#d75f00";
 static const char selbgcolor[]      = "#1d1f21";
 static const char selfgcolor[]      = "#ffffff";
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-
-#define NUMCOLORS                   12
-static const char *colors[][3]      = {
-	/* border               fg                  bg         */
-    { normbordercolor,      normfgcolor,        normbgcolor }, // 1 = normal (grey on black)
-    { selbordercolor,       selfgcolor,         selbgcolor },  // 2 = selected (white on black)
-    { "#dc322f",            "#1d1f21",          "#f0c674" },   // 3 = urgent (black on yellow)
-    { "#282a2e",            "#282a2e",          "#1d1f21" },   // 4 = darkgrey on black (for glyphs)
-    { "#282a2e",            "#1d1f21",          "#282a2e" },   // 5 = black on darkgrey (for glyphs)
-    { "#282a2e",            "#cc6666",          "#1d1f21" },   // 6 = red on black
-    { "#282a2e",            "#b5bd68",          "#1d1f21" },   // 7 = green on black
-    { "#282a2e",            "#de935f",          "#1d1f21" },   // 8 = orange on black
-    { "#282a2e",            "#f0c674",          "#282a2e" },   // 9 = yellow on darkgrey
-    { "#282a2e",            "#81a2be",          "#282a2e" },   // A = blue on darkgrey
-    { "#282a2e",            "#b294bb",          "#282a2e" },   // B = magenta on darkgrey
-    { "#282a2e",            "#8abeb7",          "#282a2e" },   // C = cyan on darkgrey
-};
 
 /* tagging */
 static const char *tags[] = { "web", "code", "db", "mes", "etc1", "etc2", "etc3" };
@@ -48,7 +31,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.5; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */

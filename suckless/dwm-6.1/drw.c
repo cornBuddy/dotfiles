@@ -206,68 +206,6 @@ drw_setscheme(Drw *drw, ClrScheme *scheme)
 	drw->scheme = scheme;
 }
 
-int
-drw_get_width(Drw *drw, int numcolors, const char *text)
-{
-	int i;
-	Fnt *curfont = drw->fonts[0];
-	int w = drw_text(drw, 0, 0, 0, 0, text, 0) + curfont->h;
-
-	for (i = 0; i < strlen(text); i++) {
-		if (text[i] > 0 && text[i] <= numcolors) {
-			/* we found a color code
-			 * drw_text counted it as a normal character and added one character's width
-			 * we aren't going to render this character, so we remove one character's width */
-			w -= curfont->xfont->max_advance_width;
-
-			if (i == 0 || i + 1 == strlen(text)) {
-				/* we're on the first or the last character of the string
-				 * drw_text already added one character's height (divided by 2) as padding to the beginning and end
-				 * we don't want to double this padding, so we skip this character */
-				continue;
-			}
-
-			if (text[i - 1] > 0 && text[i - 1] <= numcolors) {
-				/* the previous character was also a color code
-				 * we already added padding in the previous iteration
-				 * we don't want to double this padding, so we skip this character */
-				continue;
-			}
-
-			/* we are somewhere in the middle of the string and the color has changed
-			 * we want to add one character's height (divided by 2) as padding to the end of the previous colored text
-			 * and to the beginning of the new colored text */
-			w += curfont->h;
-		}
-	}
-
-  return w;
-}
-
-void
-drw_colored_text(Drw *drw, ClrScheme *scheme, int numcolors, int x, int y, unsigned int w, unsigned int h, char *text)
-{
-	if (!drw || !drw->fontcount || !drw->scheme)
-		return;
-
-	char *buf = text, *ptr = buf, c = 1;
-	int i;
-
-	while (*ptr) {
-		for (i = 0; *ptr < 0 || *ptr > numcolors; i++, ptr++);
-		if (!*ptr)
-			break;
-		c = *ptr;
-		*ptr = 0;
-		if (i)
-			x = drw_text(drw, x, y, w, h, buf, 0) + drw->fonts[0]->h;
-		*ptr = c;
-		drw_setscheme(drw, &scheme[c-1]);
-		buf = ++ptr;
-	}
-	drw_text(drw, x, y, w, h, buf, 0);
-}
-
 void
 drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int empty, int invert)
 {
