@@ -2,6 +2,7 @@
   "extends": "eslint:recommended",
   "env": {
     "jasmine": true,
+    "mocha": true,
     "es6": true,
     "node": true
   },
@@ -18,7 +19,7 @@
     "default-case": "error",
     "dot-location": ["error", "property"],
     "dot-notation": "error",
-    "eqeqeq": ["error", "always"],
+    "eqeqeq": ["error", "smart"],
     "guard-for-in": "error",
     "no-alert": "error",
     "no-case-declarations": "error",
@@ -63,7 +64,7 @@
     "brace-style": "error",
     "eol-last": "error",
     "linebreak-style": ["error", "unix"],
-    "max-nested-callbacks": ["error", 3],
+    "max-nested-callbacks": ["error", 5],
     "max-statements-per-line": ["error", {"max": 1}],
     "new-cap": "error",
     "no-inline-comments": "error",
@@ -112,7 +113,6 @@
     "use-isnan": "error",
     "valid-jsdoc": "error",
     "valid-typeof": "error",
-    "strict": ["error", "safe"],
-    "prefer-arrow-callback": "error"
+    "strict": ["error", "safe"]
   }
 }

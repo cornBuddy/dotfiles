@@ -208,6 +208,11 @@ map 0 ^
 " disable auto visual mode with mouse
 set mouse-=a
 
+" normal mode for nvim terminal
+if has('neovim')
+    tnoremap <Esc> <C-\><C-n>
+endif
+
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
