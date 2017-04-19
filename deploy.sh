@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 echo build suckless soft
 for dir in `ls ./suckless`
 do
@@ -37,5 +39,6 @@ mkdir ~/workspace
 ln -s `pwd`/eslintrc.json ~/workspace/.eslintrc.json
 
 echo config xinit
-ln -s `pwd`/xinitrc ~/.xinitrc
-ln -s `pwd`/Xmodmap ~/.Xmodmap
+ln -sf `pwd`/xinitrc ~/.xinitrc
+mkdir -p ~/.config/xkb
+ln -sf `pwd`/xkbconfig `pwd`/.config/xkb/my
