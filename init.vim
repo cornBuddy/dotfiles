@@ -209,9 +209,7 @@ map 0 ^
 set mouse-=a
 
 " normal mode for nvim terminal
-if has('neovim')
-    tnoremap <Esc> <C-\><C-n>
-endif
+tnoremap <Esc> <C-\><C-n>
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
