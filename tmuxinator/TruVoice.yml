@@ -16,6 +16,6 @@ windows:
     - etc:
         layout: even-horizontal
         panes:
-                - #empty
+            - #empty
             - htop
 
