@@ -55,7 +55,6 @@
     "no-unused-vars": "error",
     "no-use-before-define": "error",
     "callback-return": ["error", ["callback", "cb", "next", "done"]],
-    "global-require": "error",
     "handle-callback-err": "error",
     "no-new-require": "error",
     "no-path-concat": "error",

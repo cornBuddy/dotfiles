@@ -42,3 +42,7 @@ echo config xinit
 ln -sf `pwd`/xinitrc ~/.xinitrc
 mkdir -p ~/.config/xkb
 ln -sf `pwd`/xkbconfig `pwd`/.config/xkb/my
+
+echo config dunst
+mkdir -p ~/.config/dunst
+ln -sf `pwd`/dunstrc ~/.config/dunst/
