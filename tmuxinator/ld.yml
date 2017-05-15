@@ -1,0 +1,19 @@
+name: ld
+root: ~/workspace/js/lucky-date
+windows:
+    - editor: nvim .
+    - server:
+        layout: tiled
+        panes:
+            - npm run ionic:serve
+            - NODE_ENV=development node backend/app.js
+            - CHROME_BIN=chromium-browser npm run test
+            - travis monitor --pull --push -n libnotify
+    - etc:
+        layout: even-horizontal
+        panes:
+            - node
+            - htop
+    - empty:
+        panes:
+            - # empty
