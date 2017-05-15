@@ -16,7 +16,7 @@ ln -sf `pwd`/init.vim ~/.config/nvim/
 
 echo set up tmux
 ln -sf `pwd`/tmux.conf ~/.tmux.conf
-mkdir ~/.tmuxinator
+mkdir -p ~/.tmuxinator
 ln -sf `pwd`/tmuxinator/* ~/.tmuxinator/
 
 echo set up bash
@@ -35,17 +35,17 @@ echo set up git
 ln -sf `pwd`/gitconfig ~/.gitconfig
 
 echo add default eslintrc file
-mkdir ~/workspace
-ln -s `pwd`/eslintrc.json ~/workspace/.eslintrc.json
+mkdir -p ~/workspace
+ln -sf `pwd`/eslintrc.json ~/workspace/.eslintrc.json
 
 echo config xinit
 ln -sf `pwd`/xinitrc ~/.xinitrc
 mkdir -p ~/.config/xkb
-ln -sf `pwd`/xkbconfig `pwd`/.config/xkb/my
+
+echo set up keyboark
+ln -sf `pwd`/keymaptable ~/keymaptable
+ln -sf `pwd`/xkbconfig ~/.config/xkb/my
 
 echo config dunst
 mkdir -p ~/.config/dunst
 ln -sf `pwd`/dunstrc ~/.config/dunst/
-
-echo config tern
-ln -sf `pwd`/tern-global-config ~/.tern-config
