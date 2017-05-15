@@ -7,7 +7,7 @@ windows:
         panes:
             - npm run ionic:serve
             - NODE_ENV=development node backend/app.js
-            - CHROME_BIN=chromium-browser npm run test
+            - CHROME_BIN=google-chrome-beta npm run test
             - travis monitor --pull --push -n libnotify
     - etc:
         layout: even-horizontal
