@@ -46,3 +46,6 @@ ln -sf `pwd`/xkbconfig `pwd`/.config/xkb/my
 echo config dunst
 mkdir -p ~/.config/dunst
 ln -sf `pwd`/dunstrc ~/.config/dunst/
+
+echo config tern
+ln -sf `pwd`/tern-global-config ~/.tern-config

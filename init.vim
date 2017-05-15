@@ -31,6 +31,9 @@ Plug 'scrooloose/syntastic'
 Plug 'moll/vim-node' " on-demand loading doesn't work here
 Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
+" typescript
+Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for package below
+Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 
 " colors
 Plug 'xero/sourcerer.vim'
@@ -172,9 +175,9 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
 
 " Linebreak on 500 characters
 set lbr
@@ -338,13 +341,15 @@ let g:promptline_preset = {
 
 " syntastic settings
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_signs = 0
 " js
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
+" ts
+let g:syntastic_typescript_checkers = ['tsc'] " You shouldn't use 'tsc' checker.
 
 " nerdtree settings
 map <leader>t :NERDTreeToggle<CR>
@@ -369,3 +374,6 @@ let g:ctrlp_working_path_mode = 'r'
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_map_keys = 0
 let g:tern_request_timeout = 15
+
+" tsuquyomi
+let g:tsuquyomi_disable_quickfix = 1

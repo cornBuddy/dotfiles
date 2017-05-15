@@ -84,6 +84,12 @@ export PATH=${PATH}:~/.gem/ruby/2.4.0/bin
 export PATH=${PATH}:~/.npm-global/bin
 export NODE_ENV=development
 export EDITOR=nvim
+if [ -x /usr/bin/chromium ]; then
+    export CHROME_BIN=chromium
+elif [ -x /usr/bin/chromium-browser ]; then
+    export CHROME_BIN=chromium-browser
+fi
+
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -103,3 +109,6 @@ then
 fi
 
 [ -f ~/.shell_prompt.sh ] && source ~/.shell_prompt.sh
+
+# added by travis gem
+[ -f /home/cornbuddy/.travis/travis.sh ] && source /home/cornbuddy/.travis/travis.sh
