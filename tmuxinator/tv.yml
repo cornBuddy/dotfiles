@@ -9,7 +9,7 @@ windows:
     - server:
         layout: e2fa,239x74,0,0{158x74,0,0,1,80x74,159,0[80x5,159,0,2,80x5,159,6,4,80x62,159,12,5]}
         panes:
-            - NODE_ENV=dev_1_6 node debug app.js
+            - NODE_ENV=dev_1_6 node --inspect app.js
             - node webpack_dev_server.js
             - cd ../survey-api/ && node app.js
             - #empty
