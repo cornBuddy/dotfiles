@@ -48,6 +48,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'mattn/emmet-vim', { 'for': 'html' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Chiel92/vim-autoformat'
 
 " Required:
 call plug#end()
@@ -146,6 +147,10 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" no eol symbol at the end of file
+set binary
+set noeol
+
 " Remove margin from left
 set foldcolumn=0
 
@@ -175,16 +180,16 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
 set tw=500
 
-" Show vertical line on 80 symbols
-set colorcolumn=80
+" Show vertical line on 120 symbols
+set colorcolumn=120
 
 set ai "Auto indent
 set si "Smart indent
@@ -346,11 +351,15 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 let g:syntastic_enable_signs = 0
 let g:syntastic_loc_list_height = 5
+let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
 " js
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 " ts
-let g:syntastic_typescript_checkers = ['tsc'] " You shouldn't use 'tsc' checker.
+let g:syntastic_typescript_checkers = ['tslint']
+
+" tsu
+let g:tsuquyomi_disable_quickfix = 1 " disable quickfix buffer
 
 " nerdtree settings
 map <leader>t :NERDTreeToggle<CR>
@@ -375,3 +384,7 @@ let g:ctrlp_working_path_mode = 'r'
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_map_keys = 0
 let g:tern_request_timeout = 15
+
+" autoformat
+let g:formatdef_fmt_custom_html = '"tidy -q --show-errors 0 --show-warnings 0 --indent-attributes 1"'
+let g:formatters_html = ['fmt_custom_html']
