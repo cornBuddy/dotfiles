@@ -1,0 +1,11 @@
+name: qb
+root: ~/workspace/quotebuilder/QB2/QuoteBuilder.Web
+socket_name: default
+windows:
+    - editor: nvim .
+    - server:
+        layout: ec00,240x75,0,0{120x75,0,0[120x37,0,0,0,120x37,0,38,4],119x75,121,0,1}
+        panes:
+            - npm run watch:front
+            - npm run server
+            - htop
