@@ -5,7 +5,7 @@
     default = simple
 [merge]
     tool = nvimdiff
-    conflictStyle = diff3
+    conflictStyle = merge
 [mergetool]
     prompt = true
 [mergetool "nvimdiff"]
