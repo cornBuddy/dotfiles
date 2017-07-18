@@ -303,6 +303,11 @@ endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 nnoremap <silent> <leader>q :Bclose<CR>
 
+" git bindings
+command GP execute "Gpull --rebase | Gpush"
+nnoremap <silent> <leader>gp :GP<CR>
+nnoremap <silent> <leader>s :Gstatus<CR>
+
 " airline settings
 let g:airline_powerline_fonts=1
 let g:airline_theme='distinguished'
