@@ -34,6 +34,8 @@ Plug 'leafgarland/typescript-vim'
 " typescript
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for package below
 Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+" html
+Plug 'othree/xml.vim', { 'for': 'html' }
 
 " colors
 Plug 'xero/sourcerer.vim'
@@ -303,6 +305,9 @@ endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 nnoremap <silent> <leader>q :Bclose<CR>
 
+" close window
+nnoremap <silent> <leader>c :close<CR>
+
 " git bindings
 command GP execute "Gpull --rebase | Gpush"
 nnoremap <silent> <leader>gp :GP<CR>
@@ -389,7 +394,3 @@ let g:ctrlp_working_path_mode = 'r'
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_map_keys = 0
 let g:tern_request_timeout = 15
-
-" autoformat
-let g:formatdef_fmt_custom_html = '"tidy -q --show-errors 0 --show-warnings 0 --indent-attributes 1"'
-let g:formatters_html = ['fmt_custom_html']
