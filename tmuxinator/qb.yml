@@ -4,8 +4,7 @@ socket_name: default
 windows:
     - editor: nvim .
     - server:
-        layout: ec00,240x75,0,0{120x75,0,0[120x37,0,0,0,120x37,0,38,4],119x75,121,0,1}
+        layout: even-horizontal
         panes:
-            - npm run watch:front
-            - npm run server
+            - npm run webpack-dev-server
             - htop
