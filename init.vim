@@ -33,9 +33,11 @@ Plug 'ternjs/tern_for_vim'
 Plug 'leafgarland/typescript-vim'
 " typescript
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for package below
-Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
+Plug 'Quramy/tsuquyomi'
 " html
 Plug 'othree/xml.vim', { 'for': 'html' }
+" elixir
+Plug 'elixir-lang/vim-elixir'
 
 " colors
 Plug 'xero/sourcerer.vim'
@@ -314,8 +316,8 @@ nnoremap <silent> <leader>gp :GP<CR>
 nnoremap <silent> <leader>s :Gstatus<CR>
 
 " airline settings
-let g:airline_powerline_fonts=1
-let g:airline_theme='distinguished'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'distinguished'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#show_tabs = 1
@@ -340,11 +342,39 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#format = 1
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#syntastic#enabled = 0
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#ctrlp#color_template = 'normal'
 let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
 let g:airline#extensions#promptline#enabled = 1
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'c'  : 'C',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V',
+  \ '' : 'V',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ }
+
+function! ShowLineNumber()
+    return string(line(".")) . ' / ' . string(line("$")) . ' : ' . string(col('.'))
+endfunction
+
+function! InitAirline()
+    call airline#parts#define_function('z', 'ShowLineNumber')
+    " call airline#parts#define_accent('z', 'bold')
+    let g:airline_section_x = ''
+    let g:airline_section_y = ''
+    let g:airline_section_z = airline#section#create(['z'])
+    let g:airline_section_error = ''
+    let g:airline_section_warning = ''
+endfunction
+autocmd User AirlineAfterInit call InitAirline()
 
 " promptline settings
 let g:promptline_preset = {
@@ -359,17 +389,23 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
-let g:syntastic_enable_signs = 0
+let g:syntastic_enable_signs = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
 " js
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 " ts
-let g:syntastic_typescript_checkers = ['tslint']
+let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
+" elixir
+let g:syntastic_elixir_checkers = ['elixir']
+let g:syntastic_enable_elixir_checker = 1
 
 " tsu
 let g:tsuquyomi_disable_quickfix = 1 " disable quickfix buffer
+let g:tsuquyomi_shortest_import_path = 1
+let g:tsuquyomi_use_vimproc = 1
+let g:tsuquyomi_single_quote_import = 1
 
 " nerdtree settings
 map <leader>t :NERDTreeToggle<CR>
