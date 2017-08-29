@@ -402,7 +402,7 @@ let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_enable_elixir_checker = 1
 
 " tsu
-let g:tsuquyomi_disable_quickfix = 1 " disable quickfix buffer
+let g:tsuquyomi_disable_quickfix = 1
 let g:tsuquyomi_shortest_import_path = 1
 let g:tsuquyomi_use_vimproc = 1
 let g:tsuquyomi_single_quote_import = 1
