@@ -405,6 +405,8 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 " elixir
 let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_enable_elixir_checker = 1
+" html
+let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
 
 " tsu
 let g:tsuquyomi_disable_quickfix = 1
