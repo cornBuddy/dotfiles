@@ -84,6 +84,7 @@ export PATH=${PATH}:~/.gem/ruby/2.4.0/bin
 export PATH=${PATH}:~/.npm-global/bin
 export NODE_ENV=development
 export EDITOR=nvim
+export PAGER=less
 if [ -x /usr/bin/chromium ]; then
     export CHROME_BIN=chromium
 elif [ -x /usr/bin/chromium-browser ]; then
