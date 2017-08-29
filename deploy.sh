@@ -42,7 +42,7 @@ echo config xinit
 ln -sf `pwd`/xinitrc ~/.xinitrc
 mkdir -p ~/.config/xkb
 
-echo set up keyboark
+echo set up keyboard
 ln -sf `pwd`/keymaptable ~/keymaptable
 ln -sf `pwd`/xkbconfig ~/.config/xkb/my
 
