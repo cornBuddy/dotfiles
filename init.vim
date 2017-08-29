@@ -68,6 +68,7 @@ set list
 
 " autosave on focus lost
 :au FocusLost * :wa
+set autowriteall
 
 " set 256 colors
 set t_Co=256
@@ -150,10 +151,6 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-
-" no eol symbol at the end of file
-set binary
-set noeol
 
 " Remove margin from left
 set foldcolumn=0
@@ -421,7 +418,7 @@ let g:user_emmet_mode = 'a'
 
 " ctrlp settings
 let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.git|node_modules|bower_components|jspm_packages)$',
+    \ 'dir':  '\v[\/](\.git|node_modules|bower_components|jspm_packages|deps|_build)$',
     \ 'file': '\v\.(pyc|o|dll)$',
     \ }
 let g:ctrlp_working_path_mode = 'r'
