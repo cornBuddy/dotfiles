@@ -25,12 +25,6 @@ ln -sf `pwd`/bash/bash_logout ~/.bash_logout
 ln -sf `pwd`/bash/bash_profile ~/.bash_profile
 ln -sf `pwd`/bash/bashrc ~/.bashrc
 
-echo set up fish
-mkdir -p ~/.config/fish/{completions,functions}
-ln -sf `pwd`/fish/completions/* ~/.config/fish/completions/
-ln -sf `pwd`/fish/functions/* ~/.config/fish/functions/
-ln -sf `pwd`/fish/config.fish ~/.config/fish/config.fish
-
 echo set up git
 ln -sf `pwd`/gitconfig ~/.gitconfig
 
