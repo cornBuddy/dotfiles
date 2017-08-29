@@ -363,12 +363,17 @@ let g:airline_mode_map = {
   \ }
 
 function! ShowLineNumber()
-    return string(line(".")) . ' / ' . string(line("$")) . ' : ' . string(col('.'))
+    return line(".") . ' / ' . line("$") . ' : ' . col('.')
+endfunction
+
+function! ShowFileName()
+    return expand("%:t")
 endfunction
 
 function! InitAirline()
     call airline#parts#define_function('z', 'ShowLineNumber')
-    let g:airline_section_c = '%t'
+    call airline#parts#define_function('c', 'ShowFileName')
+    let g:airline_section_c = airline#section#create(['c'])
     let g:airline_section_x = ''
     let g:airline_section_y = ''
     let g:airline_section_z = airline#section#create(['z'])
