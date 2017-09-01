@@ -26,3 +26,5 @@ alias gp='git pull --rebase ; git push'
 alias gl='git lg-specific'
 
 alias xclip='xclip -selection clipboard'
+
+alias c='clear'
