@@ -28,3 +28,5 @@ alias gl='git lg-specific'
 alias xclip='xclip -selection clipboard'
 
 alias c='clear'
+
+alias tmx='tmuxinator'

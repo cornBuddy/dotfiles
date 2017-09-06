@@ -405,6 +405,8 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 " elixir
 let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_enable_elixir_checker = 1
+let g:syntastic_elixir_elixir_exe = 'elixirc'
+let g:syntastic_elixir_elixir_args = '--warnings-as-errors'
 " html
 let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
 
@@ -427,11 +429,24 @@ let g:indentLine_color_term = 240
 let g:user_emmet_mode = 'a'
 
 " ctrlp settings
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.git|node_modules|bower_components|jspm_packages|deps|_build)$',
-    \ 'file': '\v\.(pyc|o|dll)$',
-    \ }
-let g:ctrlp_working_path_mode = 'r'
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command =
+    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+else
+  " Fall back to using git ls-files if Ag is not available
+  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+endif
+
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_switch_buffer = 'e'
+
+noremap <C-b> :CtrlPBuffer<CR>
+let g:ctrlp_dont_split = 'NERD_tree_2'
 
 " tern
 let g:tern_show_argument_hints = 'on_hold'
