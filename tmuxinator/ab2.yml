@@ -1,6 +1,7 @@
 name: ab2
 root: ~/workspace/asai2_bot
 socket_name: default
+pre: sudo systemctl start mariadb.service
 windows:
     - editor: nvim .
     - server:
