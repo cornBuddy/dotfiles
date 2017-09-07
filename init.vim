@@ -29,6 +29,10 @@ Plug 'tpope/vim-fugitive'
 
 " languages and framevorks
 Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
+" autocmd! BufWritePost * Neomake
+" autocmd! BufReadPost * Neomake
+" let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 " javascript
 Plug 'moll/vim-node' " on-demand loading doesn't work here
 Plug 'ternjs/tern_for_vim'
@@ -405,10 +409,9 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 " elixir
 let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_enable_elixir_checker = 1
-let g:syntastic_elixir_elixir_exe = 'elixirc'
-let g:syntastic_elixir_elixir_args = '--warnings-as-errors'
 " html
 let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
+" let g:syntastic_mode_map = { 'mode': 'passive'  }
 
 " tsu
 let g:tsuquyomi_disable_quickfix = 1
@@ -459,3 +462,7 @@ let g:diminactive_use_syntax = 1
 " tmux navigator
 " Write all buffers before navigating from Vim to tmux pane
 let g:tmux_navigator_save_on_switch = 2
+
+" neomake
+let g:neomake_open_list = 1
+let g:neomake_list_height = 5
