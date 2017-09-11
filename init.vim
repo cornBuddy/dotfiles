@@ -1,6 +1,10 @@
-"Plug Scripts-----------------------------
+" With a map leader it's possible to do extra key combinations
+let mapleader = ","
+let g:mapleader = ","
+
+" ********** PLUGINS **********
 if &compatible
-  set nocompatible               " Be iMproved
+  set nocompatible
 endif
 
 " Required:
@@ -27,17 +31,6 @@ let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <Leader>1 <Plug>AirlineSelectTab1
-nmap <Leader>2 <Plug>AirlineSelectTab2
-nmap <Leader>3 <Plug>AirlineSelectTab3
-nmap <Leader>4 <Plug>AirlineSelectTab4
-nmap <Leader>5 <Plug>AirlineSelectTab5
-nmap <Leader>6 <Plug>AirlineSelectTab6
-nmap <Leader>7 <Plug>AirlineSelectTab7
-nmap <Leader>8 <Plug>AirlineSelectTab8
-nmap <Leader>9 <Plug>AirlineSelectTab9
-nmap <C-Left> <Plug>AirlineSelectPrevTab
-nmap <C-Right> <Plug>AirlineSelectNextTab
 let g:airline#extensions#tabline#buffer_min_count = 1
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -79,6 +72,19 @@ function! InitAirline()
     let g:airline_section_warning = ''
 endfunction
 autocmd User AirlineAfterInit call InitAirline()
+" bingings
+nmap <Leader>1 <Plug>AirlineSelectTab1
+nmap <Leader>2 <Plug>AirlineSelectTab2
+nmap <Leader>3 <Plug>AirlineSelectTab3
+nmap <Leader>4 <Plug>AirlineSelectTab4
+nmap <Leader>5 <Plug>AirlineSelectTab5
+nmap <Leader>6 <Plug>AirlineSelectTab6
+nmap <Leader>7 <Plug>AirlineSelectTab7
+nmap <Leader>8 <Plug>AirlineSelectTab8
+nmap <Leader>9 <Plug>AirlineSelectTab9
+nmap <C-Left> <Plug>AirlineSelectPrevTab
+nmap <C-Right> <Plug>AirlineSelectNextTab
+" -----------------------------------------------------------------------------
 
 Plug 'vim-airline/vim-airline-themes'
 
@@ -123,10 +129,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'tpope/vim-fugitive'
-" git bindings
 command! GP execute "Gpull --rebase | Gpush"
-nnoremap <silent> <leader>gp :GP<CR>
-nnoremap <silent> <leader>s :Gstatus<CR>
+nmap <silent> <leader>gp :GP<CR>
+noremap <silent> <leader>s :Gstatus<CR>
 " -----------------------------------------------------------------------------
 
 " languages and framevorks
@@ -147,17 +152,8 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_enable_elixir_checker = 1
 " html
-let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
-" let g:syntastic_mode_map = { 'mode': 'passive'  }
-"------------------------------------------------------------------------------
-
-Plug 'neomake/neomake'
-" autocmd! BufWritePost * Neomake
-" autocmd! BufReadPost * Neomake
-" let g:neomake_elixir_enabled_makers = ['mix', 'credo']
-" neomake
-let g:neomake_open_list = 1
-let g:neomake_list_height = 5
+" let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
+let g:syntastic_mode_map = { 'mode': 'passive'  }
 "------------------------------------------------------------------------------
 
 " javascript
@@ -204,6 +200,28 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'Chiel92/vim-autoformat'
 
+Plug 'neomake/neomake'
+autocmd! BufWritePost,BufEnter * Neomake
+" elixir
+let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+" js
+let g:neomake_javascript_eslint_maker = {
+    \ 'exe': 'eslint_d',
+    \ 'args': [],
+    \ 'errorformat': '%f: line %l\, col %c\, %m',
+    \ }
+let g:neomake_javascript_enabled_makers = ['eslint']
+" ts
+let ts_maker = { 'name': 'tsuquyomi' }
+function! ts_maker.get_list_entries(jobinfo) abort
+    return tsuquyomi#createFixlist()
+endfunction
+let g:neomake_typescript_enabled_makers = [ts_maker]
+" etc
+let g:neomake_open_list = 2
+let g:neomake_list_height = 5
+"------------------------------------------------------------------------------
+
 " colors
 Plug 'xero/sourcerer.vim'
 Plug 'crusoexia/vim-monokai'
@@ -228,6 +246,7 @@ let g:promptline_preset = {
     \ }
 " -----------------------------------------------------------------------------
 
+" ********** SETTINGS **********
 " Required:
 filetype plugin indent on
 
@@ -250,14 +269,7 @@ set history=100
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" With a map leader it's possible to do extra key combinations
-let mapleader = ","
-let g:mapleader = ","
-
 set nonumber " set line numbers
-
-" Fast saving
-nmap <leader>w :wa!<cr>
 
 " Set 10 lines to the cursor - when moving vertically using j/k
 set so=10
@@ -298,8 +310,6 @@ set smartcase
 " Highlight search results
 set hlsearch
 
-" Turn off hlsearch on current contest
-:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -388,18 +398,13 @@ set laststatus=2
 " Hide default status line
 set noshowmode
 
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
 " disable auto visual mode with mouse
 set mouse-=a
-
-" normal mode for nvim terminal
-tnoremap <Esc> <C-\><C-n>
 
 " turn off wrapping
 set nowrap
 
+" ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -479,7 +484,13 @@ function! s:Bclose(bang, buffer)
   execute wcurrent.'wincmd w'
 endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
-nnoremap <silent> <leader>q :Bclose<CR>
 
-" close window
+" ********** MAPPINGS **********
 nnoremap <silent> <leader>c :close<CR>
+nnoremap <silent> <leader>q :Bclose<CR>
+nmap <leader>w :wa!<cr>
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+" Remap VIM 0 to first non-blank character
+map 0 ^
+" normal mode for nvim terminal
+tnoremap <Esc> <C-\><C-n>
