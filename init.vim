@@ -203,7 +203,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'neomake/neomake'
 autocmd! BufWritePost,BufEnter * Neomake
 " elixir
-let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+let g:neomake_elixir_enabled_makers = ['credo']
 " js
 let g:neomake_javascript_eslint_maker = {
     \ 'exe': 'eslint_d',
