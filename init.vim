@@ -52,6 +52,10 @@ Plug 'marcus/vim-mustang'
 Plug 'goatslacker/mango.vim'
 Plug 'mhinz/vim-janah'
 Plug 'w0ng/vim-hybrid'
+Plug 'Drogglbecher/vim-moonscape'
+Plug 'yuttie/hydrangea-vim'
+Plug 'JarrodCTaylor/spartan'
+Plug 'wolverian/minimal'
 
 " text working
 Plug 'Yggdroot/indentLine'
@@ -164,7 +168,7 @@ set foldcolumn=0
 syntax enable
 try
     set background=dark
-    colorscheme hybrid
+    colorscheme spartan " nice one, red light is annoying
 catch
 endtry
 
@@ -196,6 +200,10 @@ set tw=500
 
 " Show vertical line on 80 symbols
 set colorcolumn=80
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+set ruler
+highlight CursorLine ctermbg=235 guibg=#2c2d27
+highlight CursorColumn ctermbg=235 guibg=#2c2d27
 
 set ai "Auto indent
 set si "Smart indent
@@ -435,7 +443,7 @@ let g:user_emmet_mode = 'a'
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command =
-    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -457,7 +465,7 @@ let g:tern_map_keys = 0
 let g:tern_request_timeout = 15
 
 " diminactive
-let g:diminactive_use_syntax = 1
+" let g:diminactive_use_syntax = 1
 
 " tmux navigator
 " Write all buffers before navigating from Vim to tmux pane
