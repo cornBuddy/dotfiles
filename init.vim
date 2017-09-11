@@ -203,7 +203,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'neomake/neomake'
 autocmd! BufWritePost,BufEnter * Neomake
 " elixir
-let g:neomake_elixir_enabled_makers = ['credo']
+let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 " js
 let g:neomake_javascript_enabled_makers = ['eslint_d']
 " ts
@@ -215,6 +215,14 @@ let g:neomake_typescript_enabled_makers = [ts_maker]
 " etc
 let g:neomake_open_list = 2
 let g:neomake_list_height = 5
+augroup my_neomake_highlights
+    au!
+    autocmd ColorScheme *
+      \ hi link NeomakeError SpellBad |
+      \ hi link NeomakeWarning SpellCap
+augroup END
+let g:neomake_highlight_lines = 1
+let g:neomake_highlight_columns = 1
 "------------------------------------------------------------------------------
 
 " colors
