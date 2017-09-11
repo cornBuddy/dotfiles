@@ -12,38 +12,206 @@ Plug 'junegunn/vim-plug'
 
 " utilities
 Plug 'easymotion/vim-easymotion'
+
+Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for tsu
+
 Plug 'bling/vim-airline'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'distinguished'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <Leader>1 <Plug>AirlineSelectTab1
+nmap <Leader>2 <Plug>AirlineSelectTab2
+nmap <Leader>3 <Plug>AirlineSelectTab3
+nmap <Leader>4 <Plug>AirlineSelectTab4
+nmap <Leader>5 <Plug>AirlineSelectTab5
+nmap <Leader>6 <Plug>AirlineSelectTab6
+nmap <Leader>7 <Plug>AirlineSelectTab7
+nmap <Leader>8 <Plug>AirlineSelectTab8
+nmap <Leader>9 <Plug>AirlineSelectTab9
+nmap <C-Left> <Plug>AirlineSelectPrevTab
+nmap <C-Right> <Plug>AirlineSelectNextTab
+let g:airline#extensions#tabline#buffer_min_count = 1
+let g:airline#extensions#tabline#tab_min_count = 2
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#format = 1
+let g:airline#extensions#syntastic#enabled = 0
+let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#ctrlp#color_template = 'normal'
+let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
+let g:airline#extensions#promptline#enabled = 1
+let g:airline_mode_map = {
+  \ '__' : '-',
+  \ 'n'  : 'N',
+  \ 'i'  : 'I',
+  \ 'R'  : 'R',
+  \ 'c'  : 'C',
+  \ 'v'  : 'V',
+  \ 'V'  : 'V',
+  \ '' : 'V',
+  \ 's'  : 'S',
+  \ 'S'  : 'S',
+  \ '' : 'S',
+  \ }
+function! ShowLineNumber()
+    return line(".") . ' / ' . line("$") . ' : ' . col('.')
+endfunction
+function! ShowFileName()
+    return expand("%:t")
+endfunction
+function! InitAirline()
+    call airline#parts#define_function('z', 'ShowLineNumber')
+    call airline#parts#define_function('c', 'ShowFileName')
+    let g:airline_section_c = airline#section#create(['c'])
+    let g:airline_section_x = ''
+    let g:airline_section_y = ''
+    let g:airline_section_z = airline#section#create(['z'])
+    let g:airline_section_error = ''
+    let g:airline_section_warning = ''
+endfunction
+autocmd User AirlineAfterInit call InitAirline()
+
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'edkolev/promptline.vim' " bash promtline
+" promptline settings
+let g:promptline_preset = {
+    \'a' : [ promptline#slices#vcs_branch() ],
+    \'b' : [ promptline#slices#git_status() ],
+    \'c' : [ promptline#slices#cwd() ],
+    \'warn' : [ promptline#slices#last_exit_code() ],
+    \ }
+" -----------------------------------------------------------------------------
+
 Plug 'blueyed/vim-diminactive' " highlight inactive window
+" diminactive
+" let g:diminactive_use_syntax = 1
+" -----------------------------------------------------------------------------
+
 Plug 'christoomey/vim-tmux-navigator'
+" tmux navigator
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+" -----------------------------------------------------------------------------
 
 " file working
 Plug 'kien/ctrlp.vim'
+" ctrlp settings
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command =
+    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+else
+  " Fall back to using git ls-files if Ag is not available
+  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+endif
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_switch_buffer = 'e'
+noremap <C-b> :CtrlPBuffer<CR>
+let g:ctrlp_dont_split = 'NERD_tree_2'
+map <leader>t :NERDTreeToggle<CR>
+"------------------------------------------------------------------------------
+
 Plug 'scrooloose/nerdtree'
+map <leader>t :NERDTreeToggle<CR>
+"------------------------------------------------------------------------------
 
 " version control
 Plug 'Xuyuanp/nerdtree-git-plugin'
+
 Plug 'airblade/vim-gitgutter'
+
 Plug 'tpope/vim-fugitive'
+" git bindings
+command GP execute "Gpull --rebase | Gpush"
+nnoremap <silent> <leader>gp :GP<CR>
+nnoremap <silent> <leader>s :Gstatus<CR>
+" -----------------------------------------------------------------------------
 
 " languages and framevorks
 Plug 'scrooloose/syntastic'
+" syntastic settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_loc_list_height = 5
+" js
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
+" ts
+let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
+" elixir
+let g:syntastic_elixir_checkers = ['elixir']
+let g:syntastic_enable_elixir_checker = 1
+" html
+let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
+" let g:syntastic_mode_map = { 'mode': 'passive'  }
+"------------------------------------------------------------------------------
+
 Plug 'neomake/neomake'
 " autocmd! BufWritePost * Neomake
 " autocmd! BufReadPost * Neomake
 " let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+" neomake
+let g:neomake_open_list = 1
+let g:neomake_list_height = 5
+"------------------------------------------------------------------------------
+
 " javascript
 Plug 'moll/vim-node' " on-demand loading doesn't work here
+
 Plug 'ternjs/tern_for_vim'
+let g:tern_show_argument_hints = 'on_hold'
+let g:tern_map_keys = 0
+let g:tern_request_timeout = 15
+" -----------------------------------------------------------------------------
+
 Plug 'leafgarland/typescript-vim'
-" typescript
-Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for package below
+
+
 Plug 'Quramy/tsuquyomi'
-" html
+" tsu
+let g:tsuquyomi_disable_quickfix = 1
+let g:tsuquyomi_shortest_import_path = 1
+let g:tsuquyomi_use_vimproc = 1
+let g:tsuquyomi_single_quote_import = 1
+" -----------------------------------------------------------------------------
+
 Plug 'othree/xml.vim', { 'for': 'html' }
-" elixir
+
 Plug 'elixir-lang/vim-elixir'
+
+" text working
+Plug 'Yggdroot/indentLine'
+" indentline settings
+let g:indentLine_leadingSpaceEnabled = 0
+let g:indentLine_char = '|'
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
+let g:indentLine_color_term = 240
+" -----------------------------------------------------------------------------
+
+Plug 'mattn/emmet-vim', { 'for': 'html' }
+" emmet settings
+let g:user_emmet_mode = 'a'
+" -----------------------------------------------------------------------------
+
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'editorconfig/editorconfig-vim'
+
+Plug 'Chiel92/vim-autoformat'
 
 " colors
 Plug 'xero/sourcerer.vim'
@@ -56,13 +224,6 @@ Plug 'Drogglbecher/vim-moonscape'
 Plug 'yuttie/hydrangea-vim'
 Plug 'JarrodCTaylor/spartan'
 Plug 'wolverian/minimal'
-
-" text working
-Plug 'Yggdroot/indentLine'
-Plug 'mattn/emmet-vim', { 'for': 'html' }
-Plug 'jiangmiao/auto-pairs'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'Chiel92/vim-autoformat'
 
 " Required:
 call plug#end()
@@ -323,154 +484,5 @@ nnoremap <silent> <leader>q :Bclose<CR>
 " close window
 nnoremap <silent> <leader>c :close<CR>
 
-" git bindings
-command GP execute "Gpull --rebase | Gpush"
-nnoremap <silent> <leader>gp :GP<CR>
-nnoremap <silent> <leader>s :Gstatus<CR>
 
-" airline settings
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'distinguished'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#show_tab_type = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <Leader>1 <Plug>AirlineSelectTab1
-nmap <Leader>2 <Plug>AirlineSelectTab2
-nmap <Leader>3 <Plug>AirlineSelectTab3
-nmap <Leader>4 <Plug>AirlineSelectTab4
-nmap <Leader>5 <Plug>AirlineSelectTab5
-nmap <Leader>6 <Plug>AirlineSelectTab6
-nmap <Leader>7 <Plug>AirlineSelectTab7
-nmap <Leader>8 <Plug>AirlineSelectTab8
-nmap <Leader>9 <Plug>AirlineSelectTab9
-nmap <C-Left> <Plug>AirlineSelectPrevTab
-nmap <C-Right> <Plug>AirlineSelectNextTab
-let g:airline#extensions#tabline#buffer_min_count = 1
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#branch#format = 1
-let g:airline#extensions#syntastic#enabled = 0
-let g:airline#extensions#hunks#enabled = 1
-let g:airline#extensions#ctrlp#color_template = 'normal'
-let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
-let g:airline#extensions#promptline#enabled = 1
-let g:airline_mode_map = {
-  \ '__' : '-',
-  \ 'n'  : 'N',
-  \ 'i'  : 'I',
-  \ 'R'  : 'R',
-  \ 'c'  : 'C',
-  \ 'v'  : 'V',
-  \ 'V'  : 'V',
-  \ '' : 'V',
-  \ 's'  : 'S',
-  \ 'S'  : 'S',
-  \ '' : 'S',
-  \ }
 
-function! ShowLineNumber()
-    return line(".") . ' / ' . line("$") . ' : ' . col('.')
-endfunction
-
-function! ShowFileName()
-    return expand("%:t")
-endfunction
-
-function! InitAirline()
-    call airline#parts#define_function('z', 'ShowLineNumber')
-    call airline#parts#define_function('c', 'ShowFileName')
-    let g:airline_section_c = airline#section#create(['c'])
-    let g:airline_section_x = ''
-    let g:airline_section_y = ''
-    let g:airline_section_z = airline#section#create(['z'])
-    let g:airline_section_error = ''
-    let g:airline_section_warning = ''
-endfunction
-autocmd User AirlineAfterInit call InitAirline()
-
-" promptline settings
-let g:promptline_preset = {
-    \'a' : [ promptline#slices#vcs_branch() ],
-    \'b' : [ promptline#slices#git_status() ],
-    \'c' : [ promptline#slices#cwd() ],
-    \'warn' : [ promptline#slices#last_exit_code() ],
-    \ }
-
-" syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_loc_list_height = 5
-" js
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-" ts
-let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
-" elixir
-let g:syntastic_elixir_checkers = ['elixir']
-let g:syntastic_enable_elixir_checker = 1
-" html
-let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
-" let g:syntastic_mode_map = { 'mode': 'passive'  }
-
-" tsu
-let g:tsuquyomi_disable_quickfix = 1
-let g:tsuquyomi_shortest_import_path = 1
-let g:tsuquyomi_use_vimproc = 1
-let g:tsuquyomi_single_quote_import = 1
-
-" nerdtree settings
-map <leader>t :NERDTreeToggle<CR>
-
-" indentline settings
-let g:indentLine_leadingSpaceEnabled = 0
-let g:indentLine_char = '|'
-let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
-let g:indentLine_color_term = 240
-
-" emmet settings
-let g:user_emmet_mode = 'a'
-
-" ctrlp settings
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command =
-    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-else
-  " Fall back to using git ls-files if Ag is not available
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-endif
-
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_switch_buffer = 'e'
-
-noremap <C-b> :CtrlPBuffer<CR>
-let g:ctrlp_dont_split = 'NERD_tree_2'
-
-" tern
-let g:tern_show_argument_hints = 'on_hold'
-let g:tern_map_keys = 0
-let g:tern_request_timeout = 15
-
-" diminactive
-" let g:diminactive_use_syntax = 1
-
-" tmux navigator
-" Write all buffers before navigating from Vim to tmux pane
-let g:tmux_navigator_save_on_switch = 2
-
-" neomake
-let g:neomake_open_list = 1
-let g:neomake_list_height = 5
