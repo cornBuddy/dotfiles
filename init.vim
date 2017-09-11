@@ -15,6 +15,8 @@ Plug 'easymotion/vim-easymotion'
 
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for tsu
 
+Plug 'edkolev/promptline.vim' " bash promtline
+
 Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'distinguished'
@@ -80,16 +82,6 @@ autocmd User AirlineAfterInit call InitAirline()
 
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'edkolev/promptline.vim' " bash promtline
-" promptline settings
-let g:promptline_preset = {
-    \'a' : [ promptline#slices#vcs_branch() ],
-    \'b' : [ promptline#slices#git_status() ],
-    \'c' : [ promptline#slices#cwd() ],
-    \'warn' : [ promptline#slices#last_exit_code() ],
-    \ }
-" -----------------------------------------------------------------------------
-
 Plug 'blueyed/vim-diminactive' " highlight inactive window
 " diminactive
 " let g:diminactive_use_syntax = 1
@@ -119,7 +111,6 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_switch_buffer = 'e'
 noremap <C-b> :CtrlPBuffer<CR>
 let g:ctrlp_dont_split = 'NERD_tree_2'
-map <leader>t :NERDTreeToggle<CR>
 "------------------------------------------------------------------------------
 
 Plug 'scrooloose/nerdtree'
@@ -133,7 +124,7 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'tpope/vim-fugitive'
 " git bindings
-command GP execute "Gpull --rebase | Gpush"
+command! GP execute "Gpull --rebase | Gpush"
 nnoremap <silent> <leader>gp :GP<CR>
 nnoremap <silent> <leader>s :Gstatus<CR>
 " -----------------------------------------------------------------------------
@@ -227,6 +218,15 @@ Plug 'wolverian/minimal'
 
 " Required:
 call plug#end()
+
+" promptline settings
+let g:promptline_preset = {
+    \'a' : [ promptline#slices#vcs_branch() ],
+    \'b' : [ promptline#slices#git_status() ],
+    \'c' : [ promptline#slices#cwd() ],
+    \'warn' : [ promptline#slices#last_exit_code() ],
+    \ }
+" -----------------------------------------------------------------------------
 
 " Required:
 filetype plugin indent on
