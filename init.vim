@@ -205,12 +205,7 @@ autocmd! BufWritePost,BufEnter * Neomake
 " elixir
 let g:neomake_elixir_enabled_makers = ['credo']
 " js
-let g:neomake_javascript_eslint_maker = {
-    \ 'exe': 'eslint_d',
-    \ 'args': [],
-    \ 'errorformat': '%f: line %l\, col %c\, %m',
-    \ }
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint_d']
 " ts
 let ts_maker = { 'name': 'tsuquyomi' }
 function! ts_maker.get_list_entries(jobinfo) abort
