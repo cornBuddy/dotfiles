@@ -483,6 +483,3 @@ nnoremap <silent> <leader>q :Bclose<CR>
 
 " close window
 nnoremap <silent> <leader>c :close<CR>
-
-
-
