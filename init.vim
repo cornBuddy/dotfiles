@@ -212,6 +212,8 @@ function! ts_maker.get_list_entries(jobinfo) abort
     return tsuquyomi#createFixlist()
 endfunction
 let g:neomake_typescript_enabled_makers = [ts_maker]
+" html
+let g:neomake_html_enabled_makers = []
 " etc
 let g:neomake_open_list = 2
 let g:neomake_list_height = 5
