@@ -19,4 +19,4 @@
 [alias]
     lg = !"git lg-specific --all"
     lg-specific = log --abbrev-commit --decorate --stat --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)%C(reset)%n'
-    lg-graph = log --graph --pretty=format:'%C(bold yellow)%h%C(reset) by %C(bold)%an%C(reset) [%ar] - %C(white)%s%C(reset)'
+    lg-graph = log --graph --pretty=format:'%C(bold yellow)%h%C(reset) by %C(bold)%an%C(reset) [%ar] - %C(white)%s%C(reset) %C(bold green)%d%C(reset)'
