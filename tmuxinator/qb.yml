@@ -6,5 +6,5 @@ windows:
     - server:
         layout: even-horizontal
         panes:
-            - npm run webpack-dev-server
+            - npm run pkg:refresh ; npm run build:vendor ; npm run webpack-dev-server
             - htop

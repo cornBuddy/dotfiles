@@ -249,6 +249,8 @@ let g:promptline_preset = {
     \'c' : [ promptline#slices#cwd() ],
     \'warn' : [ promptline#slices#last_exit_code() ],
     \ }
+" neomake
+call neomake#configure#automake('rw', 1000)
 " -----------------------------------------------------------------------------
 
 " ********** SETTINGS **********
