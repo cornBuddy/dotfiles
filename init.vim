@@ -4,7 +4,7 @@ let g:mapleader = ","
 
 " ********** PLUGINS **********
 if &compatible
-  set nocompatible
+    set nocompatible
 endif
 
 " Required:
@@ -43,18 +43,18 @@ let g:airline#extensions#ctrlp#color_template = 'normal'
 let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
 let g:airline#extensions#promptline#enabled = 1
 let g:airline_mode_map = {
-  \ '__' : '-',
-  \ 'n'  : 'N',
-  \ 'i'  : 'I',
-  \ 'R'  : 'R',
-  \ 'c'  : 'C',
-  \ 'v'  : 'V',
-  \ 'V'  : 'V',
-  \ '' : 'V',
-  \ 's'  : 'S',
-  \ 'S'  : 'S',
-  \ '' : 'S',
-  \ }
+            \ '__' : '-',
+            \ 'n'  : 'N',
+            \ 'i'  : 'I',
+            \ 'R'  : 'R',
+            \ 'c'  : 'C',
+            \ 'v'  : 'V',
+            \ 'V'  : 'V',
+            \ '' : 'V',
+            \ 's'  : 'S',
+            \ 'S'  : 'S',
+            \ '' : 'S',
+            \ }
 function! ShowLineNumber()
     return line(".") . ' / ' . line("$") . ' : ' . col('.')
 endfunction
@@ -103,15 +103,15 @@ let g:tmux_navigator_save_on_switch = 2
 Plug 'kien/ctrlp.vim'
 " ctrlp settings
 if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command =
-    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command =
+                \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
 else
-  " Fall back to using git ls-files if Ag is not available
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+    " Fall back to using git ls-files if Ag is not available
+    let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 endif
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_switch_buffer = 'e'
@@ -220,8 +220,8 @@ let g:neomake_list_height = 5
 augroup my_neomake_highlights
     au!
     autocmd ColorScheme *
-      \ hi link NeomakeError SpellBad |
-      \ hi link NeomakeWarning SpellCap
+                \ hi link NeomakeError SpellBad |
+                \ hi link NeomakeWarning SpellCap
 augroup END
 let g:neomake_highlight_lines = 1
 let g:neomake_highlight_columns = 1
@@ -244,11 +244,11 @@ call plug#end()
 
 " promptline settings
 let g:promptline_preset = {
-    \'a' : [ promptline#slices#vcs_branch() ],
-    \'b' : [ promptline#slices#git_status() ],
-    \'c' : [ promptline#slices#cwd() ],
-    \'warn' : [ promptline#slices#last_exit_code() ],
-    \ }
+            \'a' : [ promptline#slices#vcs_branch() ],
+            \'b' : [ promptline#slices#git_status() ],
+            \'c' : [ promptline#slices#cwd() ],
+            \'warn' : [ promptline#slices#last_exit_code() ],
+            \ }
 " neomake
 call neomake#configure#automake('rw', 1000)
 " -----------------------------------------------------------------------------
@@ -392,9 +392,9 @@ set formatoptions-=cro
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
 
 " Remember info about open buffers on close
 set viminfo^=%
@@ -411,30 +411,33 @@ set mouse-=a
 " turn off wrapping
 set nowrap
 
+" update chdir with current buffer
+set autochdir
+
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
 endfunc
 autocmd BufWrite * :call DeleteTrailingWS()
 
 " Delete buffer while keeping window layout (don't close buffer's windows).
 " Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
 if v:version < 700 || exists('loaded_bclose') || &cp
-  finish
+    finish
 endif
 let loaded_bclose = 1
 if !exists('bclose_multiple')
-  let bclose_multiple = 1
+    let bclose_multiple = 1
 endif
 
 " Display an error message.
 function! s:Warn(msg)
-  echohl ErrorMsg
-  echomsg a:msg
-  echohl NONE
+    echohl ErrorMsg
+    echomsg a:msg
+    echohl NONE
 endfunction
 
 " Command ':Bclose' executes ':bd' to delete buffer in current window.
@@ -443,52 +446,52 @@ endfunction
 " Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
 " An optional argument can specify which buffer to close (name or number).
 function! s:Bclose(bang, buffer)
-  if empty(a:buffer)
-    let btarget = bufnr('%')
-  elseif a:buffer =~ '^\d\+$'
-    let btarget = bufnr(str2nr(a:buffer))
-  else
-    let btarget = bufnr(a:buffer)
-  endif
-  if btarget < 0
-    call s:Warn('No matching buffer for '.a:buffer)
-    return
-  endif
-  if empty(a:bang) && getbufvar(btarget, '&modified')
-    call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
-    return
-  endif
-  " Numbers of windows that view target buffer which we will delete.
-  let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
-  if !g:bclose_multiple && len(wnums) > 1
-    call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
-    return
-  endif
-  let wcurrent = winnr()
-  for w in wnums
-    execute w.'wincmd w'
-    let prevbuf = bufnr('#')
-    if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
-      buffer #
+    if empty(a:buffer)
+        let btarget = bufnr('%')
+    elseif a:buffer =~ '^\d\+$'
+        let btarget = bufnr(str2nr(a:buffer))
     else
-      bprevious
+        let btarget = bufnr(a:buffer)
     endif
-    if btarget == bufnr('%')
-      " Numbers of listed buffers which are not the target to be deleted.
-      let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
-      " Listed, not target, and not displayed.
-      let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
-      " Take the first buffer, if any (could be more intelligent).
-      let bjump = (bhidden + blisted + [-1])[0]
-      if bjump > 0
-        execute 'buffer '.bjump
-      else
-        execute 'enew'.a:bang
-      endif
+    if btarget < 0
+        call s:Warn('No matching buffer for '.a:buffer)
+        return
     endif
-  endfor
-  execute 'bdelete'.a:bang.' '.btarget
-  execute wcurrent.'wincmd w'
+    if empty(a:bang) && getbufvar(btarget, '&modified')
+        call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
+        return
+    endif
+    " Numbers of windows that view target buffer which we will delete.
+    let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
+    if !g:bclose_multiple && len(wnums) > 1
+        call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
+        return
+    endif
+    let wcurrent = winnr()
+    for w in wnums
+        execute w.'wincmd w'
+        let prevbuf = bufnr('#')
+        if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
+            buffer #
+        else
+            bprevious
+        endif
+        if btarget == bufnr('%')
+            " Numbers of listed buffers which are not the target to be deleted.
+            let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val != btarget')
+            " Listed, not target, and not displayed.
+            let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
+            " Take the first buffer, if any (could be more intelligent).
+            let bjump = (bhidden + blisted + [-1])[0]
+            if bjump > 0
+                execute 'buffer '.bjump
+            else
+                execute 'enew'.a:bang
+            endif
+        endif
+    endfor
+    execute 'bdelete'.a:bang.' '.btarget
+    execute wcurrent.'wincmd w'
 endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
