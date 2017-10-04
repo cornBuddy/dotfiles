@@ -317,7 +317,6 @@ set smartcase
 " Highlight search results
 set hlsearch
 
-
 " Makes search act like search in modern browsers
 set incsearch
 
@@ -410,9 +409,6 @@ set mouse-=a
 
 " turn off wrapping
 set nowrap
-
-" update chdir with current buffer
-set autochdir
 
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
