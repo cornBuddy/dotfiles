@@ -346,7 +346,7 @@ set foldcolumn=0
 syntax enable
 try
     set background=dark
-    colorscheme spartan " nice one, red light is annoying
+    colorscheme spartan
 catch
 endtry
 
