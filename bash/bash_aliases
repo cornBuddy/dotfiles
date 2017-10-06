@@ -3,9 +3,6 @@ alias tree='tree -I "jspm_packages|node_modules|bower_components|deps"'
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -18,12 +15,19 @@ alias l='ls -CF'
 # some git aliases
 alias gs='git status'
 alias ga='git add'
-alias gb='git branch'
 alias gc='git commit -m'
 alias gd='git diff'
 alias go='git checkout'
 alias gp='git pull --rebase ; git push'
-alias gl='git lg-specific'
+alias gl='git log-graph'
+git() {
+    if [[ $@ == "log-review" ]]; then
+        BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+        command git log-specific -p --walk-reflogs "${BRANCH}"
+    else
+        command git $@
+    fi
+}
 
 alias xclip='xclip -selection clipboard'
 
