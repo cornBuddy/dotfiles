@@ -22,6 +22,10 @@ alias gp='git pull --rebase ; git push'
 alias gl='git log-graph'
 git() {
     if [[ $1 == "log-review" ]]; then
+        CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+        command git checkout $2
+        command git pull --rebase
+        command git checkout $CURRENT_BRANCH
         command git log-specific $2 -p -U2000 --walk-reflogs $2
     else
         command git $@

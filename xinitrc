@@ -38,7 +38,6 @@ fi
 
 xautolock -time 10 -locker slock &
 dwmstatus &
-google-chrome-beta &
 skypeforlinux &
 telegram-desktop &
 exec awesome
