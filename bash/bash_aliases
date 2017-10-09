@@ -26,7 +26,8 @@ git() {
         command git checkout $2
         command git pull --rebase
         command git checkout $CURRENT_BRANCH
-        command git log-specific $2 -p -U2000 --walk-reflogs $2
+        command git --no-pager log-specific $2 -p -U2000 --walk-reflogs $2 -- > "$2.review"
+        $EDITOR "$2.review"
     else
         command git $@
     fi
