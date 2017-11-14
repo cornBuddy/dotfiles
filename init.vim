@@ -207,11 +207,11 @@ let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 " js
 let g:neomake_javascript_enabled_makers = ['eslint_d']
 " ts
-let ts_maker = { 'name': 'tsuquyomi' }
-function! ts_maker.get_list_entries(jobinfo) abort
+let tsu = { 'name': 'tsuquyomi' }
+function! tsu.get_list_entries(jobinfo) abort
     return tsuquyomi#createFixlist()
 endfunction
-let g:neomake_typescript_enabled_makers = [ts_maker]
+let g:neomake_typescript_enabled_makers = ['tslint']
 " html
 let g:neomake_html_enabled_makers = []
 " etc

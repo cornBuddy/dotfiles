@@ -81,7 +81,7 @@ fi
 # Environment variables definitions
 export PATH=${PATH}:./node_modules/.bin/:../node_modules/.bin:../../node_modules/.bin:../../../node_modules/.bin:../../../../node_modules/.bin:../../../../../node_modules/.bin
 export PATH=${PATH}:~/.gem/ruby/2.4.0/bin
-export PATH=${PATH}:~/.npm-global/bin
+# export PATH=${PATH}:~/.npm-global/bin
 export NODE_ENV=development
 export EDITOR=nvim
 export PAGER=less
@@ -113,3 +113,4 @@ fi
 
 # added by travis gem
 [ -f /home/cornbuddy/.travis/travis.sh ] && source /home/cornbuddy/.travis/travis.sh
+source /usr/share/nvm/init-nvm.sh
