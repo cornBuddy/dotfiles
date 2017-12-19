@@ -19,8 +19,6 @@ const char* BATSTAT = "/sys/devices/soc0/7000d400.spi/spi_master/spi32766/spi327
 const char* BATFULL = "/sys/devices/soc0/7000d400.spi/spi_master/spi32766/spi32766.0/cros-ec-i2c-tunnel.2/i2c-6/6-000b/power_supply/sbs-6-000b/charge_full";
 const char* BATNOW = "/sys/devices/soc0/7000d400.spi/spi_master/spi32766/spi32766.0/cros-ec-i2c-tunnel.2/i2c-6/6-000b/power_supply/sbs-6-000b/charge_now";
 
-char *batcolor = "\x07";
-
 static Display *dpy;
 
 char *
@@ -135,16 +133,9 @@ battery(void)
         fscanf(batfull, "%d", &full);
         fclose(batfull);
         int bat = 100 * now / full;
-        if (bat >= 50)
-            batcolor = "\x07";
-        else if (bat >= 15)
-            batcolor = "\x08";
-        else
-            batcolor = "\x06";
         char* baticon = d_bar(bat);
 
         if (strncmp(stat, "Discharging", 11)) {
-            batcolor = "\x07";
             return smprintf("⚡ %s %i", baticon, bat);
         }
         else
@@ -168,29 +159,14 @@ main(void)
         fprintf(stderr, "dwmstatus: cannot open display.\n");
         return 1;
     }
-
-    /*
-    { normbordercolor,      normfgcolor,        normbgcolor }, // 1 = normal (grey on black)
-    { selbordercolor,       selfgcolor,         selbgcolor },  // 2 = selected (white on black)
-    { "#dc322f",            "#1d1f21",          "#f0c674" },   // 3 = urgent (black on yellow)
-    { "#282a2e",            "#282a2e",          "#1d1f21" },   // 4 = darkgrey on black (for glyphs)
-    { "#282a2e",            "#1d1f21",          "#282a2e" },   // 5 = black on darkgrey (for glyphs)
-    { "#282a2e",            "#cc6666",          "#1d1f21" },   // 6 = red on black                      BAT DANGEROUS
-    { "#282a2e",            "#b5bd68",          "#1d1f21" },   // 7 = green on black                    BAT OK
-    { "#282a2e",            "#de935f",          "#1d1f21" },   // 8 = orange on black                   BAT WARNING
-    { "#282a2e",            "#f0c674",          "#282a2e" },   // 9 = yellow on darkgrey
-    { "#282a2e",            "#81a2be",          "#282a2e" },   // A = blue on darkgrey
-    { "#282a2e",            "#b294bb",          "#282a2e" },   // B = magenta on darkgrey
-    { "#282a2e",            "#8abeb7",          "#282a2e" },   // C = cyan on darkgrey
-    */
     for (;;sleep(1)) {
         avgs = loadavg();
         tbel = mktimes("%H:%M", tzbel);
         dbel = mktimes("%d-%m-%Y", tzbel);
         mem = memory();
         bat = battery();
-        status = smprintf("%s B: %s%\x01 M: %s   C: %s%\x02 %s  %s",
-                batcolor, bat, mem, avgs, dbel, tbel);
+        status = smprintf(" B: %s%  M: %s  C: %s%  %s  %s",
+                bat, mem, avgs, dbel, tbel);
         setstatus(status);
         free(avgs);
         free(tbel);
