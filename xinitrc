@@ -40,4 +40,4 @@ xautolock -time 10 -locker slock &
 dwmstatus &
 skypeforlinux &
 telegram-desktop &
-exec awesome
+exec dwm
