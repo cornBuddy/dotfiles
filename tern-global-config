@@ -3,9 +3,6 @@
   "libs": [
     "browser"
   ],
-  "loadEagerly": [
-    "path/to/your/js/**/*.js"
-  ],
   "dontLoad": [
     "node_modules/**"
   ],
@@ -15,6 +12,9 @@
     "node": {},
     "modules": {},
     "commonjs": {},
-    "node_resolve": {}
+    "doc_comment": {
+      "fullDocs": true,
+      "strong": true
+    }
   }
 }
