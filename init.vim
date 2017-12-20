@@ -207,10 +207,6 @@ let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 " js
 let g:neomake_javascript_enabled_makers = ['eslint_d']
 " ts
-let tsu = { 'name': 'tsuquyomi' }
-function! tsu.get_list_entries(jobinfo) abort
-    return tsuquyomi#createFixlist()
-endfunction
 let g:neomake_typescript_enabled_makers = ['tslint']
 " html
 let g:neomake_html_enabled_makers = []
@@ -223,8 +219,25 @@ augroup my_neomake_highlights
                 \ hi link NeomakeError SpellBad |
                 \ hi link NeomakeWarning SpellCap
 augroup END
+" signs
 let g:neomake_highlight_lines = 1
 let g:neomake_highlight_columns = 1
+let g:neomake_error_sign = {
+    \ 'text': 'E>',
+    \ 'texthl': 'NeomakeErrorSign',
+    \ }
+let g:neomake_warning_sign = {
+    \ 'text': 'W>',
+    \ 'texthl': 'NeomakeWarningSign',
+    \ }
+let g:neomake_info_sign = {
+    \ 'text': 'I>',
+    \ 'texthl': 'NeomakeInfoSign',
+    \ }
+let g:neomake_message_sign = {
+    \ 'text': 'M>',
+    \ 'texthl': 'NeomakeMessageSign',
+    \ }
 "------------------------------------------------------------------------------
 
 " colors
