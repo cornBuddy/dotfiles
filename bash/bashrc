@@ -85,6 +85,8 @@ export PATH=${PATH}:~/.gem/ruby/2.4.0/bin
 export NODE_ENV=development
 export EDITOR=nvim
 export PAGER=less
+export MONGO_DB_USER=api-user
+export MONGO_DB_PASS=OIbdsOIdosfh345ohiweoirh
 if [ -x /usr/bin/chromium ]; then
     export CHROME_BIN=chromium
 elif [ -x /usr/bin/chromium-browser ]; then
