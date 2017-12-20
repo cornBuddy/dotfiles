@@ -180,13 +180,19 @@ Plug 'othree/xml.vim', { 'for': 'html' }
 
 Plug 'elixir-lang/vim-elixir'
 
-" text working
+" coding
 Plug 'Yggdroot/indentLine'
 " indentline settings
 let g:indentLine_leadingSpaceEnabled = 0
 let g:indentLine_char = '|'
 let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 let g:indentLine_color_term = 240
+" -----------------------------------------------------------------------------
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'html']
+}
 " -----------------------------------------------------------------------------
 
 Plug 'mattn/emmet-vim', { 'for': 'html' }
