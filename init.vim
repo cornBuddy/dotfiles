@@ -190,9 +190,9 @@ let g:indentLine_color_term = 240
 " -----------------------------------------------------------------------------
 
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'html']
-}
+    \ 'do': 'yarn install',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'html'],
+    \ }
 " -----------------------------------------------------------------------------
 
 Plug 'mattn/emmet-vim', { 'for': 'html' }
