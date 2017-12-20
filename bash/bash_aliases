@@ -20,20 +20,6 @@ alias gd='git diff'
 alias go='git checkout'
 alias gp='git pull --rebase ; git push'
 alias gl='git log-graph'
-git() {
-    if [[ $1 == "review-branch" ]]; then
-        command git fetch
-        CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-        command git checkout $2
-        command git pull --rebase
-        command git checkout $CURRENT_BRANCH
-        BASE_NAME="$(basename $2)"
-        command git --no-pager log-specific $2 -p -U2000 --walk-reflogs $2 -- > "$BASE_NAME.diff"
-        command $EDITOR "$BASE_NAME.diff"
-    else
-        command git $@
-    fi
-}
 
 alias xclip='xclip -selection clipboard'
 
