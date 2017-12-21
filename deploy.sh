@@ -23,6 +23,7 @@ echo set up bash
 ln -sf `pwd`/bash/bash_aliases ~/.bash_aliases
 ln -sf `pwd`/bash/bash_logout ~/.bash_logout
 ln -sf `pwd`/bash/bash_profile ~/.bash_profile
+ln -sf `pwd`/bash/bash_private_profile ~/.bash_private_profile
 ln -sf `pwd`/bash/bashrc ~/.bashrc
 
 echo set up git

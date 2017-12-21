@@ -223,7 +223,7 @@ augroup my_neomake_highlights
     au!
     autocmd ColorScheme *
                 \ hi link NeomakeError SpellBad |
-                \ hi link NeomakeWarning SpellCap
+                \ hi link NeomakeWarning airline_warning_inactive
 augroup END
 " signs
 let g:neomake_highlight_lines = 1

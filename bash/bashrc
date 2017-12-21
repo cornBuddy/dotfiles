@@ -72,6 +72,11 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# private exports
+if [ -f ~/.bash_private_profile ]; then
+    source ~/.bash_private_profile
+fi
+
 # completions for tmuxinator
 if [ -f ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.bash ]
 then

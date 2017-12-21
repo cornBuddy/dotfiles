@@ -1,20 +1,20 @@
 name: srdr
 root: ~/workspace/srdr
 socket_name: default
-pre_window:
-    - export MONGO_DB_USER=api-user
-    - export MONGO_DB_PASS=OIbdsOIdosfh345ohiweoirh
 windows:
-    - ui:
-        root: ~/workspace/srdr/ui
-        panes: nvim .
-    - api:
+    - vim:
         root: ~/workspace/srdr/api
         panes: nvim .
-    - server:
+    - srv:
         layout: e45d,240x75,0,0{120x75,0,0[120x37,0,0,5,120x37,0,38,10],119x75,121,0,6}
         panes:
             - cd ui ; npm start
             - cd api ; npm start
             - htop
-    - bash: # empty
+    - db:
+        layout: even-horizontal
+        panes:
+            >
+                mongo --host mongo --port 27017 --username $MONGO_DB_USER
+                --password $MONGO_DB_PASS --authenticationDatabase admin
+            - # bash
