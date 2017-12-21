@@ -17,6 +17,13 @@ Plug 'junegunn/vim-plug'
 " utilities
 Plug 'easymotion/vim-easymotion'
 
+Plug 'mhinz/vim-startify'
+let g:startify_session_dir = '~/.local/share/nvim/sessions'
+let g:startify_list_order = ['sessions', 'dir', 'bookmarks', 'commands',
+    \ 'files']
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 1
+
 Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for tsu
 
 Plug 'edkolev/promptline.vim' " bash promtline
