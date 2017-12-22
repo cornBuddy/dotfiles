@@ -44,7 +44,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#format = 1
-let g:airline#extensions#syntastic#enabled = 0
 let g:airline#extensions#hunks#enabled = 1
 let g:airline#extensions#ctrlp#color_template = 'normal'
 let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
@@ -142,27 +141,6 @@ noremap <silent> <leader>s :Gstatus<CR>
 " -----------------------------------------------------------------------------
 
 " languages and framevorks
-Plug 'scrooloose/syntastic'
-" syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_loc_list_height = 5
-" js
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
-" ts
-let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
-" elixir
-let g:syntastic_elixir_checkers = ['elixir']
-let g:syntastic_enable_elixir_checker = 1
-" html
-" let g:syntastic_mode_map = { 'passive_filetypes': ['html']  }
-let g:syntastic_mode_map = { 'mode': 'passive'  }
-"------------------------------------------------------------------------------
-
 " javascript
 Plug 'moll/vim-node' " on-demand loading doesn't work here
 
@@ -173,7 +151,6 @@ let g:tern_request_timeout = 15
 " -----------------------------------------------------------------------------
 
 Plug 'leafgarland/typescript-vim'
-
 
 Plug 'Quramy/tsuquyomi'
 " tsu
@@ -198,8 +175,24 @@ let g:indentLine_color_term = 240
 
 Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'html'],
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json']
     \ }
+" max line length that prettier will wrap on
+let g:prettier#config#print_width = 120
+" number of spaces per indentation level
+let g:prettier#config#tab_width = 4
+" use tabs over spaces
+let g:prettier#config#use_tabs = 'false'
+" print semicolons
+let g:prettier#config#semi = 'true'
+" single quotes over double quotes
+let g:prettier#config#single_quote = 'true'
+" none|es5|all
+let g:prettier#config#trailing_comma = 'all'
+" cli-override|file-override|prefer-file
+let g:prettier#config#config_precedence = 'prefer-file'
+" print spaces between brackets
+let g:prettier#config#bracket_spacing = 'true'
 " -----------------------------------------------------------------------------
 
 Plug 'mattn/emmet-vim', { 'for': 'html' }
