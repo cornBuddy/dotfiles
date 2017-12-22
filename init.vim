@@ -193,6 +193,9 @@ let g:prettier#config#trailing_comma = 'all'
 let g:prettier#config#config_precedence = 'prefer-file'
 " print spaces between brackets
 let g:prettier#config#bracket_spacing = 'true'
+" autoformat
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.ts,*.css,*.less,*.scss,*.json, PrettierAsync
 " -----------------------------------------------------------------------------
 
 Plug 'mattn/emmet-vim', { 'for': 'html' }
