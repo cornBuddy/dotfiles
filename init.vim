@@ -179,7 +179,7 @@ Plug 'prettier/vim-prettier', {
     \ }
 " autoformat
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.ts,*.css,*.less,*.scss,*.json, PrettierAsync
+autocmd BufWritePre *.js,*.ts,*.css,*.less,*.scss PrettierAsync
 " -----------------------------------------------------------------------------
 
 Plug 'mattn/emmet-vim', { 'for': 'html' }
