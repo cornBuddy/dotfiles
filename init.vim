@@ -173,13 +173,10 @@ let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 let g:indentLine_color_term = 240
 " -----------------------------------------------------------------------------
 
-Plug 'prettier/vim-prettier', {
-    \ 'do': 'yarn install',
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json']
-    \ }
+Plug 'sbdchd/neoformat'
 " autoformat
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.ts,*.css,*.less,*.scss PrettierAsync
+autocmd BufWritePre *.js,*.ts Neoformat
 " -----------------------------------------------------------------------------
 
 Plug 'mattn/emmet-vim', { 'for': 'html' }
