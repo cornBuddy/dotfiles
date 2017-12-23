@@ -177,22 +177,6 @@ Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json']
     \ }
-" max line length that prettier will wrap on
-let g:prettier#config#print_width = 120
-" number of spaces per indentation level
-let g:prettier#config#tab_width = 4
-" use tabs over spaces
-let g:prettier#config#use_tabs = 'false'
-" print semicolons
-let g:prettier#config#semi = 'true'
-" single quotes over double quotes
-let g:prettier#config#single_quote = 'true'
-" none|es5|all
-let g:prettier#config#trailing_comma = 'all'
-" cli-override|file-override|prefer-file
-let g:prettier#config#config_precedence = 'prefer-file'
-" print spaces between brackets
-let g:prettier#config#bracket_spacing = 'true'
 " autoformat
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.ts,*.css,*.less,*.scss,*.json, PrettierAsync

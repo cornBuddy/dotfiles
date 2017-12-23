@@ -4,15 +4,21 @@ socket_name: default
 windows:
     - vim:
         root: ~/workspace/srdr/api
-        panes: nvim .
+        panes: nvim
     - srv:
-        layout: e45d,240x75,0,0{120x75,0,0[120x37,0,0,5,120x37,0,38,10],119x75,121,0,6}
+        layout: a526,240x75,0,0[240x24,0,0,5,240x50,0,25{79x50,0,25[79x25,0,25,4,79x24,0,51,12],79x50,80,25[79x25,80,25,2,79x24,80,51,13],80x50,160,25[80x25,160,25,11,80x24,160,51,14]}]
         panes:
-            - cd ui ; npm start
-            - cd api ; npm start
             - htop
+            - cd api ; npm start
+            - cd api
+            - cd ui ; npm start
+            - cd ui
+            - cd admin
+            - cd admin
     - db:
         layout: even-horizontal
         panes:
             - mongo --host mongo --port 27017 --username $MONGO_DB_USER --password $MONGO_DB_PASS --authenticationDatabase admin
+    - bash:
+        panes:
             - # bash
