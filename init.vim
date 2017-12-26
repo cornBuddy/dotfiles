@@ -417,6 +417,12 @@ set mouse-=a
 " turn off wrapping
 set nowrap
 
+if executable('ag')
+    " Note we extract the column as well as the file and line number
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
+endif
+
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
