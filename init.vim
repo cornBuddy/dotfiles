@@ -203,11 +203,15 @@ let g:neomake_html_enabled_makers = []
 " etc
 let g:neomake_open_list = 2
 let g:neomake_list_height = 5
+" link custom colors to neomake
 augroup my_neomake_highlights
     au!
     autocmd ColorScheme *
+                \ hi myWarn ctermbg=166 ctermfg=255 cterm=underline |
+                \ hi myWarnSign ctermfg=166 |
                 \ hi link NeomakeError SpellBad |
-                \ hi link NeomakeWarning airline_warning_inactive
+                \ hi link NeomakeWarning myWarn |
+                \ hi link NeomakeWarningSign myWarnSign
 augroup END
 " signs
 let g:neomake_highlight_lines = 1
