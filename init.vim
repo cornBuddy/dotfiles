@@ -188,8 +188,6 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'Chiel92/vim-autoformat'
-
 Plug 'neomake/neomake'
 autocmd! BufWritePost,BufEnter * Neomake
 " elixir
