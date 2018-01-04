@@ -31,6 +31,7 @@ ln -sf `pwd`/zsh/zshenv ~/.zshenv
 ln -sf `pwd`/zsh/zshrc ~/.zshrc
 ln -sf `pwd`/zsh/zsh_aliases ~/.zsh_aliases
 ln -sf `pwd`/zsh/zshenv_private ~/.zshenv_private
+ln -sf `pwd`/zsh/zsh_prompt ~/.zsh_prompt
 ln -sf `pwd`/zsh/zlogout ~/.zlogout
 
 echo set up git
