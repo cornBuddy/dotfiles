@@ -26,6 +26,13 @@ ln -sf `pwd`/bash/bash_profile ~/.bash_profile
 ln -sf `pwd`/bash/bash_private_profile ~/.bash_private_profile
 ln -sf `pwd`/bash/bashrc ~/.bashrc
 
+echo set up zsh
+ln -sf `pwd`/zsh/zshenv ~/.zshenv
+ln -sf `pwd`/zsh/zshrc ~/.zshrc
+ln -sf `pwd`/zsh/zsh_aliases ~/.zsh_aliases
+ln -sf `pwd`/zsh/zshenv_private ~/.zshenv_private
+ln -sf `pwd`/zsh/zlogout ~/.zlogout
+
 echo set up git
 ln -sf `pwd`/gitconfig ~/.gitconfig
 

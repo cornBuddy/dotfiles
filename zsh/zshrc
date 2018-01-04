@@ -1,0 +1,19 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.zsh-history
+HISTSIZE=100
+SAVEHIST=100
+unsetopt beep
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/cornbuddy/.zshrc'
+
+autoload -Uz compinit
+compinit
+
+[ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
+[ -f ~/.zshenv_private ] && source ~/.zshenv_private
+if [ -f ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.zsh ]
+then
+    source ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.zsh
+fi

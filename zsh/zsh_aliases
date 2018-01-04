@@ -27,3 +27,4 @@ alias c='clear'
 alias tmx='tmuxinator'
 
 alias tree='tree -I "jspm_packages|node_modules|bower_components|deps"'
+
