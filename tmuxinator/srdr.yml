@@ -3,22 +3,17 @@ root: ~/workspace/srdr
 socket_name: default
 windows:
     - vim:
-        root: ~/workspace/srdr/api
+        root: ~/workspace/srdr/admin
         panes: nvim
     - srv:
-        layout: d3c2,240x75,0,0[240x20,0,0,1,240x54,0,21{79x54,0,21[79x15,0,21,4,79x38,0,37,5],79x54,80,21[79x15,80,21,6,79x38,80,37,7],80x54,160,21[80x15,160,21,8,80x38,160,37,9]}]
+        layout: tiled
         panes:
-            - htop
             - cd api ; npm start
-            - cd api
-            - cd ui ; npm start
             - cd ui
             - cd admin
+            - cd api
+            - cd ui
             - cd admin
-    - db:
-        layout: even-horizontal
-        panes:
-            - mongo --host mongo --port 27017 --username $MONGO_DB_USER --password $MONGO_DB_PASS --authenticationDatabase admin
-    - bash:
-        panes:
-            - # bash
+            - htop
+    - db: mongo --host mongo --port 27017 --username $MONGO_DB_USER --password $MONGO_DB_PASS --authenticationDatabase admin
+    - bash: # bash
