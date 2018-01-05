@@ -19,6 +19,7 @@ Plug 'easymotion/vim-easymotion'
 
 Plug 'mhinz/vim-startify'
 let g:startify_session_dir = '~/.local/share/nvim/sessions'
+" let g:startify_session_dir = expand('$DOTFILES_PATH') . '/nvim-sessions'
 let g:startify_list_order = ['sessions', 'dir', 'bookmarks', 'commands',
     \ 'files']
 let g:startify_session_persistence = 1
@@ -189,7 +190,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'neomake/neomake'
-autocmd! BufWritePost,BufEnter * Neomake
 " elixir
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 " js
@@ -255,7 +255,12 @@ let g:promptline_preset = {
             \'warn' : [ promptline#slices#last_exit_code() ],
             \ }
 " neomake
-call neomake#configure#automake('rw', 1000)
+  call neomake#configure#automake({
+  \ 'TextChanged': {},
+  \ 'InsertLeave': {},
+  \ 'BufWritePost': {'delay': 0},
+  \ 'BufWinEnter': {},
+  \ }, 0)
 " -----------------------------------------------------------------------------
 
 " ********** SETTINGS **********
