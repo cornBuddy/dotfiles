@@ -77,15 +77,9 @@ if [ -f ~/.bash_private_profile ]; then
     source ~/.bash_private_profile
 fi
 
-# completions for tmuxinator
-if [ -f ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.bash ]
-then
-    source ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.bash
-fi
-
 # Environment variables definitions
 export PATH=${PATH}:./node_modules/.bin/:../node_modules/.bin:../../node_modules/.bin:../../../node_modules/.bin:../../../../node_modules/.bin:../../../../../node_modules/.bin
-export PATH=${PATH}:~/.gem/ruby/2.4.0/bin
+export PATH="$PATH:$HOME/.rvm/bin"
 # export PATH=${PATH}:~/.npm-global/bin
 export NODE_ENV=development
 export EDITOR=nvim
@@ -119,3 +113,6 @@ fi
 # added by travis gem
 [ -f /home/cornbuddy/.travis/travis.sh ] && source /home/cornbuddy/.travis/travis.sh
 source /usr/share/nvm/init-nvm.sh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
