@@ -118,6 +118,23 @@ Plug 'ludovicchabant/vim-gutentags' " {{{
 let g:gutentags_ctags_executable = 'ag-ctags'
 " }}}
 
+Plug 'majutsushi/tagbar' " {{{
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_typescript = {
+    \ 'ctagstype': 'typescript',
+    \ 'kinds': [
+        \ 'c:classes',
+        \ 'n:modules',
+        \ 'f:functions',
+        \ 'v:variables',
+        \ 'v:varlambdas',
+        \ 'm:members',
+        \ 'i:interfaces',
+        \ 'e:enums',
+    \ ]
+\ }
+" }}}
+
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'airblade/vim-gitgutter'
