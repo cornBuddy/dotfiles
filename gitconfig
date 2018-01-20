@@ -1,3 +1,5 @@
+[core]
+    excludesfile = $HOME/.global_ignore
 [user]
     name = Heorhi Sakovich
     email = heorhi.sakovich@gmail.com

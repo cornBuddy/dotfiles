@@ -8,7 +8,7 @@ bindkey -v
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/cornbuddy/.zshrc'
 
-autoload -Uz compinit
+autoload -Uz compinit promptinit
 compinit
 promptinit
 

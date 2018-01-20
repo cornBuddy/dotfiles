@@ -25,8 +25,6 @@ let g:startify_list_order = ['sessions', 'dir', 'bookmarks', 'commands',
 let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 1
 
-Plug 'Shougo/vimproc.vim', {'do' : 'make'} " dependency for tsu
-
 Plug 'edkolev/promptline.vim' " bash promtline
 
 Plug 'bling/vim-airline'
@@ -130,6 +128,20 @@ Plug 'scrooloose/nerdtree'
 map <leader>t :NERDTreeToggle<CR>
 "------------------------------------------------------------------------------
 
+Plug 'mileszs/ack.vim'
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+cnoreabbrev Ack Ack!
+"------------------------------------------------------------------------------
+
+Plug 'fntlnz/atags.vim'
+let g:atags_build_commands_list = [
+    \ 'ag -g "" | ctags -L - --fields=+l ',
+    \ ]
+" autocmd BufWritePost * call atags#generate()
+"------------------------------------------------------------------------------
+
 " version control
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -142,27 +154,35 @@ noremap <silent> <leader>s :Gstatus<CR>
 " -----------------------------------------------------------------------------
 
 " languages and framevorks
+" common
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+" Required for operations modifying multiple buffers like rename.
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio'],
+    \ }
+let g:LanguageClient_changeThrottle = 0.3
+let g:LanguageClient_diagnosticsEnable = 0
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent> <F10> :call LanguageClient_textDocument_references() <bar> :lopen <CR>
+" -----------------------------------------------------------------------------
+
 " javascript
 Plug 'moll/vim-node' " on-demand loading doesn't work here
 
-Plug 'ternjs/tern_for_vim'
-let g:tern_show_argument_hints = 'on_hold'
-let g:tern_map_keys = 0
-let g:tern_request_timeout = 15
-" -----------------------------------------------------------------------------
-
+" typescript
 Plug 'leafgarland/typescript-vim'
 
-Plug 'Quramy/tsuquyomi'
-" tsu
-let g:tsuquyomi_disable_quickfix = 1
-let g:tsuquyomi_shortest_import_path = 1
-let g:tsuquyomi_use_vimproc = 1
-let g:tsuquyomi_single_quote_import = 1
-" -----------------------------------------------------------------------------
-
+" html
 Plug 'othree/xml.vim', { 'for': 'html' }
 
+" elixir
 Plug 'elixir-lang/vim-elixir'
 
 " coding
@@ -195,7 +215,7 @@ let g:neomake_elixir_enabled_makers = ['mix', 'credo']
 " js
 let g:neomake_javascript_enabled_makers = ['eslint_d']
 " ts
-let g:neomake_typescript_enabled_makers = ['tslint']
+let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
 " html
 let g:neomake_html_enabled_makers = []
 " etc
@@ -255,12 +275,7 @@ let g:promptline_preset = {
             \'warn' : [ promptline#slices#last_exit_code() ],
             \ }
 " neomake
-  call neomake#configure#automake({
-  \ 'TextChanged': {},
-  \ 'InsertLeave': {},
-  \ 'BufWritePost': {'delay': 0},
-  \ 'BufWinEnter': {},
-  \ }, 0)
+call neomake#configure#automake('rw', 1000)
 " -----------------------------------------------------------------------------
 
 " ********** SETTINGS **********
@@ -422,7 +437,7 @@ set nowrap
 
 if executable('ag')
     " Note we extract the column as well as the file and line number
-    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepprg=ag\ --vimgrep
     set grepformat=%f:%l:%c%m
 endif
 
