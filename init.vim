@@ -497,6 +497,7 @@ nnoremap <silent> <leader>c :close<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
 nnoremap <leader>w :wa!<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+map <C-f> :Ack<Space>
 " Remap VIM 0 to first non-blank character
 map 0 ^
 " normal mode for nvim terminal
