@@ -2,6 +2,8 @@
 HISTFILE=~/.zsh-history
 HISTSIZE=100
 SAVEHIST=100
+# 10ms for key sequences
+KEYTIMEOUT=1
 unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
