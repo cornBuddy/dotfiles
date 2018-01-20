@@ -15,6 +15,3 @@ promptinit
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zshenv_private ] && source ~/.zshenv_private
 [ -f ~/.zsh_prompt ] && source ~/.zsh_prompt
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
