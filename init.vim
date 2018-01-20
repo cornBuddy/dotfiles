@@ -90,7 +90,9 @@ nmap <C-Right> <Plug>AirlineSelectNextTab
 
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'blueyed/vim-diminactive'
+Plug 'blueyed/vim-diminactive' " {{{
+let g:diminactive_enable_focus = 1
+" }}}
 
 Plug 'christoomey/vim-tmux-navigator' " {{{
 let g:tmux_navigator_save_on_switch = 2
@@ -178,8 +180,9 @@ let g:indent_guides_auto_colors = 0
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'ctrlp']
 let g:indent_guides_default_mapping = 0
 let g:indent_guides_guide_size = 1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
+let g:indent_guides_start_level = 2
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
 " }}}
 
 Plug 'sbdchd/neoformat' " {{{
@@ -294,12 +297,6 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-"Always show current position
-set ruler
-
-" highlight line
-set cursorline
-
 " Height of the command bar
 set cmdheight=1
 
@@ -375,11 +372,12 @@ set lbr
 set tw=500
 
 " Show vertical line on 80 symbols
-set colorcolumn=80
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
 set ruler
-highlight CursorLine ctermbg=235 guibg=#2c2d27
-highlight CursorColumn ctermbg=235 guibg=#2c2d27
+set cursorline
+set colorcolumn=80
+highlight ColorColumn ctermbg=235
+highlight CursorLine ctermbg=235
+highlight CursorColumn ctermbg=235
 
 set ai "Auto indent
 set si "Smart indent
@@ -507,16 +505,13 @@ tnoremap <Esc> <C-\><C-n>
 " always show sign column
 autocmd BufEnter * sign define dummy
 autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
-
 " autosave on focus lost
 autocmd FocusLost * :wa
 set autowriteall
-
 " delete trailing spaces
 autocmd BufWrite * :call DeleteTrailingWS()
