@@ -57,23 +57,6 @@ let g:airline_mode_map = {
     \ 'S'  : 'S',
     \ '' : 'S',
     \ }
-function! ShowLineNumber()
-    return line(".") . ' / ' . line("$") . ' : ' . col('.')
-endfunction
-function! ShowFileName()
-    return expand("%:t")
-endfunction
-function! InitAirline()
-    call airline#parts#define_function('z', 'ShowLineNumber')
-    call airline#parts#define_function('c', 'ShowFileName')
-    let g:airline_section_c = airline#section#create(['c'])
-    let g:airline_section_x = ''
-    let g:airline_section_y = ''
-    let g:airline_section_z = airline#section#create(['z'])
-    let g:airline_section_error = ''
-    let g:airline_section_warning = ''
-endfunction
-autocmd User AirlineAfterInit call InitAirline()
 " bingings
 nmap <Leader>1 <Plug>AirlineSelectTab1
 nmap <Leader>2 <Plug>AirlineSelectTab2
@@ -131,11 +114,8 @@ endif
 cnoreabbrev Ack Ack!
 " }}}
 
-Plug 'fntlnz/atags.vim' " {{{
-let g:atags_build_commands_list = [
-    \ 'ag -g "" | ctags -L - --fields=+l ',
-    \ ]
-" autocmd BufWritePost * call atags#generate()
+Plug 'ludovicchabant/vim-gutentags' " {{{
+let g:gutentags_ctags_executable = 'ag-ctags'
 " }}}
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -250,7 +230,28 @@ Plug 'wolverian/minimal'
 " Required:
 call plug#end()
 
-" promptline settings
+" airline settings
+function! ShowLineNumber()
+    return line(".") . ' / ' . line("$") . ' : ' . col('.')
+endfunction
+function! ShowFileName()
+    return expand("%:t")
+endfunction
+function! ShowIsTagsAreGenerating()
+    return gutentags#statusline('[Generating...]')
+endfunction
+function! InitAirline()
+    call airline#parts#define_function('z', 'ShowLineNumber')
+    call airline#parts#define_function('c', 'ShowFileName')
+    call airline#parts#define_function('x', 'ShowIsTagsAreGenerating')
+    let g:airline_section_c = airline#section#create(['c'])
+    let g:airline_section_x = airline#section#create(['x'])
+    let g:airline_section_y = ''
+    let g:airline_section_z = airline#section#create(['z'])
+    let g:airline_section_error = ''
+    let g:airline_section_warning = ''
+endfunction
+autocmd User AirlineAfterInit call InitAirline()
 let g:promptline_preset = {
     \'a' : [ promptline#slices#vcs_branch() ],
     \'b' : [ promptline#slices#git_status() ],
