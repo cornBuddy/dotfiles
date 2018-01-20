@@ -1,4 +1,3 @@
-" With a map leader it's possible to do extra key combinations
 let mapleader = ","
 let g:mapleader = ","
 
@@ -10,24 +9,22 @@ endif
 " Required:
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Let Plug manage Plug
-" Required:
 Plug 'junegunn/vim-plug'
 
-" utilities
 Plug 'easymotion/vim-easymotion'
 
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify' " {{{
 let g:startify_session_dir = '~/.local/share/nvim/sessions'
 " let g:startify_session_dir = expand('$DOTFILES_PATH') . '/nvim-sessions'
 let g:startify_list_order = ['sessions', 'dir', 'bookmarks', 'commands',
     \ 'files']
 let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 1
+" }}}
 
-Plug 'edkolev/promptline.vim' " bash promtline
+Plug 'edkolev/promptline.vim'
 
-Plug 'bling/vim-airline'
+Plug 'bling/vim-airline' " {{{
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'distinguished'
 let g:airline#extensions#tabline#enabled = 1
@@ -89,23 +86,17 @@ nmap <Leader>8 <Plug>AirlineSelectTab8
 nmap <Leader>9 <Plug>AirlineSelectTab9
 nmap <C-Left> <Plug>AirlineSelectPrevTab
 nmap <C-Right> <Plug>AirlineSelectNextTab
-" -----------------------------------------------------------------------------
+" }}}
 
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'blueyed/vim-diminactive' " highlight inactive window
-" diminactive
-" let g:diminactive_use_syntax = 1
-" -----------------------------------------------------------------------------
+Plug 'blueyed/vim-diminactive'
 
-Plug 'christoomey/vim-tmux-navigator'
-" tmux navigator
-" Write all buffers before navigating from Vim to tmux pane
+Plug 'christoomey/vim-tmux-navigator' " {{{
 let g:tmux_navigator_save_on_switch = 2
-" -----------------------------------------------------------------------------
+" }}}
 
-" file working
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim' " {{{
 " ctrlp settings
 if executable('ag')
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -125,43 +116,40 @@ let g:ctrlp_dont_split = 'NERD_tree_2'
 let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_types = ['fil']
 let g:ctrlp_extensions = ['tag']
-"------------------------------------------------------------------------------
+" }}}
 
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' " {{{
 map <leader>t :NERDTreeToggle<CR>
-"------------------------------------------------------------------------------
+" }}}
 
-Plug 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim' " {{{
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 cnoreabbrev Ack Ack!
-"------------------------------------------------------------------------------
+" }}}
 
-Plug 'fntlnz/atags.vim'
+Plug 'fntlnz/atags.vim' " {{{
 let g:atags_build_commands_list = [
     \ 'ag -g "" | ctags -L - --fields=+l ',
     \ ]
 " autocmd BufWritePost * call atags#generate()
-"------------------------------------------------------------------------------
+" }}}
 
-" version control
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' " {{{
 command! GP execute "Gpull --rebase | Gpush"
 nmap <silent> <leader>gp :GP<CR>
 noremap <silent> <leader>s :Gstatus<CR>
-" -----------------------------------------------------------------------------
+" }}}
 
-" languages and framevorks
-" common
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
-    \ }
+    \ } " {{{
 " Required for operations modifying multiple buffers like rename.
 set hidden
 let g:LanguageClient_serverCommands = {
@@ -174,22 +162,17 @@ nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 nnoremap <silent> <F10> :call LanguageClient_textDocument_references() <bar> :lopen <CR>
-" -----------------------------------------------------------------------------
+" }}}
 
-" javascript
 Plug 'moll/vim-node' " on-demand loading doesn't work here
 
-" typescript
 Plug 'leafgarland/typescript-vim'
 
-" html
 Plug 'othree/xml.vim', { 'for': 'html' }
 
-" elixir
 Plug 'elixir-lang/vim-elixir'
 
-" coding
-Plug 'nathanaelkane/vim-indent-guides'
+Plug 'nathanaelkane/vim-indent-guides' " {{{
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'ctrlp']
@@ -197,36 +180,29 @@ let g:indent_guides_default_mapping = 0
 let g:indent_guides_guide_size = 1
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
-" -----------------------------------------------------------------------------
+" }}}
 
-Plug 'sbdchd/neoformat'
-" autoformat
+Plug 'sbdchd/neoformat' " {{{
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.ts Neoformat
-" -----------------------------------------------------------------------------
+" }}}
 
-Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'mattn/emmet-vim', { 'for': 'html' } " {{{
 " emmet settings
 let g:user_emmet_mode = 'a'
-" -----------------------------------------------------------------------------
+" }}}
 
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'neomake/neomake'
-" elixir
+Plug 'neomake/neomake' " {{{
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
-" js
 let g:neomake_javascript_enabled_makers = ['eslint_d']
-" ts
 let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
-" html
 let g:neomake_html_enabled_makers = []
-" etc
 let g:neomake_open_list = 2
 let g:neomake_list_height = 5
-" link custom colors to neomake
 augroup my_neomake_highlights
     au!
     autocmd ColorScheme *
@@ -236,7 +212,6 @@ augroup my_neomake_highlights
         \ hi link NeomakeWarning myWarn |
         \ hi link NeomakeWarningSign myWarnSign
 augroup END
-" signs
 let g:neomake_highlight_lines = 1
 let g:neomake_highlight_columns = 1
 let g:neomake_error_sign = {
@@ -255,7 +230,7 @@ let g:neomake_message_sign = {
     \ 'text': 'M>',
     \ 'texthl': 'NeomakeMessageSign',
     \ }
-"------------------------------------------------------------------------------
+" }}}
 
 " colors
 Plug 'xero/sourcerer.vim'
@@ -293,9 +268,6 @@ set encoding=utf8
 set listchars=tab:▷⋅,trail:⋅
 set list
 
-" autosave on focus lost
-:au FocusLost * :wa
-set autowriteall
 
 " set 256 colors
 set t_Co=256
@@ -379,9 +351,6 @@ try
 catch
 endtry
 
-" higlight background
-" highlight Normal ctermbg=238
-
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
@@ -419,12 +388,6 @@ set wrap "Wrap lines
 " turn off continuation of comments
 set formatoptions-=cro
 
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-
 " Remember info about open buffers on close
 set viminfo^=%
 
@@ -449,10 +412,6 @@ if executable('ag')
     set grepformat=%f:%l:%c%m
 endif
 
-" always show sign column
-autocmd BufEnter * sign define dummy
-autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
@@ -460,7 +419,6 @@ func! DeleteTrailingWS()
     %s/\s\+$//ge
     exe "normal `z"
 endfunc
-autocmd BufWrite * :call DeleteTrailingWS()
 
 " Delete buffer while keeping window layout (don't close buffer's windows).
 " Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
@@ -537,9 +495,27 @@ command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>'
 " ********** MAPPINGS **********
 nnoremap <silent> <leader>c :close<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
-nmap <leader>w :wa!<cr>
-:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <leader>w :wa!<cr>
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " Remap VIM 0 to first non-blank character
 map 0 ^
 " normal mode for nvim terminal
 tnoremap <Esc> <C-\><C-n>
+
+" ********** HOOKS **********
+" always show sign column
+autocmd BufEnter * sign define dummy
+autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+" autosave on focus lost
+autocmd FocusLost * :wa
+set autowriteall
+
+" delete trailing spaces
+autocmd BufWrite * :call DeleteTrailingWS()
