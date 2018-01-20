@@ -15,10 +15,6 @@ promptinit
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zshenv_private ] && source ~/.zshenv_private
 [ -f ~/.zsh_prompt ] && source ~/.zsh_prompt
-if [ -f ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.zsh ]
-then
-    source ~/.gem/ruby/2.4.0/gems/tmuxinator-0.9.0/completion/tmuxinator.zsh
-fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
