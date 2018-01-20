@@ -48,18 +48,18 @@ let g:airline#extensions#ctrlp#color_template = 'normal'
 let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
 let g:airline#extensions#promptline#enabled = 1
 let g:airline_mode_map = {
-            \ '__' : '-',
-            \ 'n'  : 'N',
-            \ 'i'  : 'I',
-            \ 'R'  : 'R',
-            \ 'c'  : 'C',
-            \ 'v'  : 'V',
-            \ 'V'  : 'V',
-            \ '' : 'V',
-            \ 's'  : 'S',
-            \ 'S'  : 'S',
-            \ '' : 'S',
-            \ }
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
 function! ShowLineNumber()
     return line(".") . ' / ' . line("$") . ' : ' . col('.')
 endfunction
@@ -105,12 +105,12 @@ let g:tmux_navigator_save_on_switch = 2
 " -----------------------------------------------------------------------------
 
 " file working
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp settings
 if executable('ag')
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command =
-                \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
+        \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
 else
@@ -118,10 +118,13 @@ else
     let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 endif
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'e'
 noremap <C-b> :CtrlPBuffer<CR>
 let g:ctrlp_dont_split = 'NERD_tree_2'
+let g:ctrlp_switch_buffer = 'et'
+let g:ctrlp_types = ['fil']
+let g:ctrlp_extensions = ['tag']
 "------------------------------------------------------------------------------
 
 Plug 'scrooloose/nerdtree'
@@ -186,12 +189,14 @@ Plug 'othree/xml.vim', { 'for': 'html' }
 Plug 'elixir-lang/vim-elixir'
 
 " coding
-Plug 'Yggdroot/indentLine'
-" indentline settings
-let g:indentLine_leadingSpaceEnabled = 0
-let g:indentLine_char = '|'
-let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
-let g:indentLine_color_term = 240
+Plug 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'ctrlp']
+let g:indent_guides_default_mapping = 0
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
 " -----------------------------------------------------------------------------
 
 Plug 'sbdchd/neoformat'
@@ -225,11 +230,11 @@ let g:neomake_list_height = 5
 augroup my_neomake_highlights
     au!
     autocmd ColorScheme *
-                \ hi myWarn ctermbg=166 ctermfg=255 cterm=underline |
-                \ hi myWarnSign ctermfg=166 |
-                \ hi link NeomakeError SpellBad |
-                \ hi link NeomakeWarning myWarn |
-                \ hi link NeomakeWarningSign myWarnSign
+        \ hi myWarn ctermbg=166 ctermfg=255 cterm=underline |
+        \ hi myWarnSign ctermfg=166 |
+        \ hi link NeomakeError SpellBad |
+        \ hi link NeomakeWarning myWarn |
+        \ hi link NeomakeWarningSign myWarnSign
 augroup END
 " signs
 let g:neomake_highlight_lines = 1
@@ -269,11 +274,11 @@ call plug#end()
 
 " promptline settings
 let g:promptline_preset = {
-            \'a' : [ promptline#slices#vcs_branch() ],
-            \'b' : [ promptline#slices#git_status() ],
-            \'c' : [ promptline#slices#cwd() ],
-            \'warn' : [ promptline#slices#last_exit_code() ],
-            \ }
+    \'a' : [ promptline#slices#vcs_branch() ],
+    \'b' : [ promptline#slices#git_status() ],
+    \'c' : [ promptline#slices#cwd() ],
+    \'warn' : [ promptline#slices#last_exit_code() ],
+    \ }
 " neomake
 call neomake#configure#automake('rw', 1000)
 " -----------------------------------------------------------------------------
@@ -416,9 +421,9 @@ set formatoptions-=cro
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-            \ if line("'\"") > 0 && line("'\"") <= line("$") |
-            \   exe "normal! g`\"" |
-            \ endif
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 
 " Remember info about open buffers on close
 set viminfo^=%
@@ -428,6 +433,9 @@ set laststatus=2
 
 " Hide default status line
 set noshowmode
+
+" disable autohide quotes in json-vim
+set conceallevel=0
 
 " disable auto visual mode with mouse
 set mouse-=a
@@ -440,6 +448,10 @@ if executable('ag')
     set grepprg=ag\ --vimgrep
     set grepformat=%f:%l:%c%m
 endif
+
+" always show sign column
+autocmd BufEnter * sign define dummy
+autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
