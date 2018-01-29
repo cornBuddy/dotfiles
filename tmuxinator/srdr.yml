@@ -3,13 +3,13 @@ root: ~/workspace/srdr
 socket_name: default
 windows:
     - src:
-        layout: 4565,240x75,0,0{165x75,0,0,0,74x75,166,0[74x37,166,0,5,74x37,166,38,6]}
+        layout: 7152,240x75,0,0{165x75,0,0,12,74x75,166,0[74x43,166,0,15,74x31,166,44,16]}
         panes:
             - nvim
             - # bash
-            - # bash
+            - node
     - htop:
-        layout: d78e,240x75,0,0[240x48,0,0,1,240x26,0,49{119x26,0,49,7,120x26,120,49,8}]
+        layout: 28cb,240x75,0,0[240x46,0,0,1,240x28,0,47{119x28,0,47,5,120x28,120,47,6}]
         panes:
             - htop
             - cd api ; NODE_TLS_REJECT_UNAUTHORIZED="0" npm start
