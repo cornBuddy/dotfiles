@@ -37,10 +37,6 @@ ln -sf `pwd`/zsh/zlogout ~/.zlogout
 echo set up git
 ln -sf `pwd`/gitconfig ~/.gitconfig
 
-echo add default eslintrc file
-mkdir -p ~/workspace
-ln -sf `pwd`/eslintrc.json ~/workspace/.eslintrc.json
-
 echo config xinit
 ln -sf `pwd`/xinitrc ~/.xinitrc
 mkdir -p ~/.config/xkb
@@ -53,5 +49,6 @@ echo config dunst
 mkdir -p ~/.config/dunst
 ln -sf `pwd`/dunstrc ~/.config/dunst/
 
-echo tern config
-ln -sf `pwd`/tern-global-config ~/.tern-config
+echo alacritty config
+mkdir -p ~/.config/alacritty
+ln -sf `pwd`/alacritty.yml ~/.config/alacritty

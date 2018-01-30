@@ -26,9 +26,9 @@ static const Rule rules[] = {
 	 */
 	/* class              instance    title       tags mask     isfloating   monitor */
 	{ "chromium",         NULL,       NULL,       0,            0,           -1 },
-	{ "robomongo",        NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "robo3t",           NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "Telegram",         NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "skypeforlinux",    NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "Skype",            NULL,       NULL,       1 << 3,       0,           -1 },
 };
 
 /* layout(s) */
@@ -57,7 +57,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", "-e", "tmux", NULL };
+static const char *termcmd[]  = { "alacritty", "-e", "tmux", NULL };
 static const char *slock[] = { "slock", NULL };
 
 static Key keys[] = {
