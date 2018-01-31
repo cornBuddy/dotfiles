@@ -10,9 +10,10 @@ bindkey -v
 # The following lines were added by compinstall
 zstyle :compinstall filename '~/.zshrc'
 
-autoload -Uz compinit promptinit
+autoload -Uz compinit
 compinit
-promptinit
+
+bindkey -v '^?' backward-delete-char
 
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zshenv_private ] && source ~/.zshenv_private
