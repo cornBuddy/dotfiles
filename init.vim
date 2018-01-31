@@ -1,7 +1,7 @@
 let mapleader = ","
 let g:mapleader = ","
 
-" ********** PLUGINS **********
+" ********** PLUGINS ********** {{{
 if &compatible
     set nocompatible
 endif
@@ -167,8 +167,6 @@ Plug 'moll/vim-node' " on-demand loading doesn't work here
 
 Plug 'leafgarland/typescript-vim'
 
-Plug 'othree/xml.vim', { 'for': 'html' }
-
 Plug 'elixir-lang/vim-elixir'
 
 Plug 'nathanaelkane/vim-indent-guides' " {{{
@@ -188,7 +186,6 @@ autocmd BufWritePre *.js,*.ts Neoformat
 " }}}
 
 Plug 'mattn/emmet-vim', { 'for': 'html' } " {{{
-" emmet settings
 let g:user_emmet_mode = 'a'
 " }}}
 
@@ -232,6 +229,8 @@ let g:neomake_message_sign = {
     \ }
 " }}}
 
+Plug 'ap/vim-css-color'
+
 " colors
 Plug 'xero/sourcerer.vim'
 Plug 'crusoexia/vim-monokai'
@@ -245,7 +244,7 @@ Plug 'JarrodCTaylor/spartan'
 Plug 'wolverian/minimal'
 
 " Required:
-call plug#end()
+call plug#end() " }}}
 
 " airline settings
 function! ShowLineNumber()
