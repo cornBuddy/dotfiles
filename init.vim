@@ -96,11 +96,11 @@ else
 endif
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'e'
-noremap <C-b> :CtrlPBuffer<CR>
 let g:ctrlp_dont_split = 'NERD_tree_2'
 let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_types = ['fil']
+let g:ctrlp_types = ['fil', 'buf']
 let g:ctrlp_extensions = ['tag']
+map <C-b> :CtrlPBuffer<CR>
 " }}}
 
 Plug 'scrooloose/nerdtree' " {{{
@@ -111,7 +111,7 @@ Plug 'mileszs/ack.vim' " {{{
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
-cnoreabbrev Ack Ack!
+map <C-f> :Ack!<Space>
 " }}}
 
 Plug 'ludovicchabant/vim-gutentags' " {{{
@@ -140,30 +140,27 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'tpope/vim-fugitive' " {{{
-command! GP execute "Gpull --rebase | Gpush"
-nmap <silent> <leader>gp :GP<CR>
-noremap <silent> <leader>s :Gstatus<CR>
+nmap <silent> <leader>gp :Gpush<CR>
+noremap <silent> <leader>gs :Gstatus<CR>
 " }}}
 
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ } " {{{
-" Required for operations modifying multiple buffers like rename.
-set hidden
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'typescript': ['javascript-typescript-stdio'],
-    \ }
-let g:LanguageClient_changeThrottle = 0.3
-let g:LanguageClient_diagnosticsEnable = 0
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> <F10> :call LanguageClient_textDocument_references() <bar> :lopen <CR>
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp' " {{{
+let g:lsp_async_completion = 1
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio'] },
+        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..')) },
+        \ 'whitelist': ['javascript', 'javascript.jsx']
+        \ })
+    autocmd FileType javascript setlocal omnifunc=lsp#complete
+endif
+nnoremap <silent> K :LspHover<CR>
+nnoremap <silent> gd :LspDefinition<CR>
+nnoremap <silent> <F2> :LspRename<CR>
+nnoremap <silent> <F10> :LspReferences<CR>
 " }}}
-
-Plug 'moll/vim-node' " on-demand loading doesn't work here
 
 Plug 'leafgarland/typescript-vim'
 
@@ -182,7 +179,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
 
 Plug 'sbdchd/neoformat' " {{{
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.ts Neoformat
+autocmd BufWritePre *.ts Neoformat
 " }}}
 
 Plug 'mattn/emmet-vim', { 'for': 'html' } " {{{
@@ -195,6 +192,13 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'neomake/neomake' " {{{
 let g:neomake_elixir_enabled_makers = ['mix', 'credo']
+let g:neomake_javascript_eslint_d_maker = {
+    \ 'exe': 'eslint_d',
+    \ 'args': ['%:p', '-f', 'compact', '--no-ignore', '%:p'],
+    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+    \ '%W%f: line %l\, col %c\, Warning - %m'
+    \ }
+let g:neomake_sh_enabled_makers = ['shellcheck']
 let g:neomake_javascript_enabled_makers = ['eslint_d']
 let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
 let g:neomake_html_enabled_makers = []
@@ -275,7 +279,12 @@ let g:promptline_preset = {
     \'warn' : [ promptline#slices#last_exit_code() ],
     \ }
 " neomake
-call neomake#configure#automake('rw', 1000)
+  call neomake#configure#automake({
+    \ 'TextChanged': {},
+    \ 'InsertLeave': {},
+    \ 'BufWritePost': {'delay': 0},
+    \ 'BufWinEnter': {},
+    \ }, 500)
 " -----------------------------------------------------------------------------
 
 " ********** SETTINGS **********
@@ -287,7 +296,6 @@ set encoding=utf8
 
 set listchars=tab:▷⋅,trail:⋅
 set list
-
 
 " set 256 colors
 set t_Co=256
@@ -512,7 +520,6 @@ nnoremap <silent> <leader>c :close<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
 nnoremap <leader>w :wa!<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-map <C-f> :Ack<Space>
 " Remap VIM 0 to first non-blank character
 map 0 ^
 " normal mode for nvim terminal
