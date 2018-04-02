@@ -137,7 +137,11 @@ let g:tagbar_type_typescript = {
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify' " {{{
+let g:signify_vcs_lis = ['git']
+let g:signify_sign_change = '~'
+let g:signify_realtime = 1
+" }}}
 
 Plug 'tpope/vim-fugitive' " {{{
 nmap <silent> <leader>gp :Gpush<CR>
@@ -279,12 +283,7 @@ let g:promptline_preset = {
     \'warn' : [ promptline#slices#last_exit_code() ],
     \ }
 " neomake
-  call neomake#configure#automake({
-    \ 'TextChanged': {},
-    \ 'InsertLeave': {},
-    \ 'BufWritePost': {'delay': 0},
-    \ 'BufWinEnter': {},
-    \ }, 500)
+  call neomake#configure#automake('w')
 " -----------------------------------------------------------------------------
 
 " ********** SETTINGS **********
@@ -527,8 +526,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " ********** HOOKS **********
 " always show sign column
-autocmd BufEnter * sign define dummy
-autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+set signcolumn=yes
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
