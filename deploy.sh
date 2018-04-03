@@ -10,14 +10,15 @@ do
 done
 
 echo set up nvim
-mkdir -p ~/.config/nvim/after/ftplugin/
-ln -sf `pwd`/ftplugin/* ~/.config/nvim/after/ftplugin/
+mkdir -p ~/.config/nvim/after
+[ -d ~/.config/nvim/after/ftplugin ] && rm -rf ~/.config/nvim/after/ftplugin
+ln -sf `pwd`/ftplugin ~/.config/nvim/after/ftplugin
 ln -sf `pwd`/init.vim ~/.config/nvim/
 
 echo set up tmux
 ln -sf `pwd`/tmux.conf ~/.tmux.conf
-mkdir -p ~/.tmuxinator
-ln -sf `pwd`/tmuxinator/* ~/.tmuxinator/
+rm -rf ~/.tmuxinator
+ln -sf `pwd`/tmuxinator ~/.tmuxinator
 
 echo set up bash
 ln -sf `pwd`/bash/bash_aliases ~/.bash_aliases
@@ -42,7 +43,6 @@ ln -sf `pwd`/xinitrc ~/.xinitrc
 mkdir -p ~/.config/xkb
 
 echo set up keyboard
-ln -sf `pwd`/keymaptable ~/keymaptable
 ln -sf `pwd`/xkbconfig ~/.config/xkb/my
 
 echo config dunst
