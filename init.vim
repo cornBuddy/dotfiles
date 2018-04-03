@@ -116,6 +116,7 @@ map <C-f> :Ack!<Space>
 
 Plug 'ludovicchabant/vim-gutentags' " {{{
 let g:gutentags_ctags_executable = 'ag-ctags'
+let g:gutentags_ctags_tagfile = '.git/tags'
 " }}}
 
 Plug 'majutsushi/tagbar' " {{{
