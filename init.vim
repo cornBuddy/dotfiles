@@ -161,6 +161,15 @@ if executable('typescript-language-server')
         \ })
     autocmd FileType javascript setlocal omnifunc=lsp#complete
 endif
+if executable('dockerfile-language-server-nodejs')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'dockerfile-language-server-nodejs',
+        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'dockerfile-language-server-nodejs --stdio'] },
+        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..')) },
+        \ 'whitelist': ['Dockerfile']
+        \ })
+    autocmd FileType javascript setlocal omnifunc=lsp#complete
+endif
 nnoremap <silent> K :LspHover<CR>
 nnoremap <silent> gd :LspDefinition<CR>
 nnoremap <silent> <F2> :LspRename<CR>
@@ -168,6 +177,8 @@ nnoremap <silent> <F10> :LspReferences<CR>
 " }}}
 
 Plug 'leafgarland/typescript-vim'
+
+Plug 'ekalinin/Dockerfile.vim'
 
 Plug 'elixir-lang/vim-elixir'
 
@@ -204,7 +215,11 @@ let g:neomake_javascript_eslint_d_maker = {
     \ '%W%f: line %l\, col %c\, Warning - %m'
     \ }
 let g:neomake_sh_enabled_makers = ['shellcheck']
-let g:neomake_javascript_enabled_makers = ['eslint_d']
+if executable('eslint')
+    let g:neomake_javascript_enabled_makers = ['eslint']
+else
+    let g:neomake_javascript_enabled_makers = ['eslint_d']
+endif
 let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
 let g:neomake_html_enabled_makers = []
 let g:neomake_open_list = 2
@@ -515,6 +530,22 @@ function! s:Bclose(bang, buffer)
 endfunction
 command! -bang -complete=buffer -nargs=? Bclose call s:Bclose('<bang>', '<args>')
 
+function! MaximizeToggle()
+    if exists("s:maximize_session")
+        exec "source " . s:maximize_session
+        call delete(s:maximize_session)
+        unlet s:maximize_session
+        let &hidden=s:maximize_hidden_save
+        unlet s:maximize_hidden_save
+    else
+        let s:maximize_hidden_save = &hidden
+        let s:maximize_session = tempname()
+        set hidden
+        exec "mksession! " . s:maximize_session
+        only
+    endif
+endfunction
+
 " ********** MAPPINGS **********
 nnoremap <silent> <leader>c :close<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
@@ -524,6 +555,7 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 map 0 ^
 " normal mode for nvim terminal
 tnoremap <Esc> <C-\><C-n>
+nnoremap <C-W>z :call MaximizeToggle()<CR>
 
 " ********** HOOKS **********
 " always show sign column
