@@ -15,9 +15,9 @@
 #include <X11/Xlib.h>
 
 char *tzbel = "Europe/Minsk";
-const char* BATSTAT = "/sys/devices/soc0/7000d400.spi/spi_master/spi32766/spi32766.0/cros-ec-i2c-tunnel.2/i2c-6/6-000b/power_supply/sbs-6-000b/status";
-const char* BATFULL = "/sys/devices/soc0/7000d400.spi/spi_master/spi32766/spi32766.0/cros-ec-i2c-tunnel.2/i2c-6/6-000b/power_supply/sbs-6-000b/charge_full";
-const char* BATNOW = "/sys/devices/soc0/7000d400.spi/spi_master/spi32766/spi32766.0/cros-ec-i2c-tunnel.2/i2c-6/6-000b/power_supply/sbs-6-000b/charge_now";
+const char* BATSTAT = "/sys/class/power_supply/BAT0/status";
+const char* BATFULL = "/sys/class/power_supply/BAT0/energy_full";
+const char* BATNOW = "/sys/class/power_supply/BAT0/energy_now";
 
 static Display *dpy;
 
@@ -132,14 +132,14 @@ battery(void)
         FILE* batfull = fopen(BATFULL, "r");
         fscanf(batfull, "%d", &full);
         fclose(batfull);
-        int bat = 100 * now / full;
+        double bat = 100 * ((double)now / full);
         char* baticon = d_bar(bat);
 
         if (strncmp(stat, "Discharging", 11)) {
-            return smprintf("⚡ %s %i", baticon, bat);
+            return smprintf("⚡ %s %.0f", baticon, bat);
         }
         else
-            return smprintf("%s %i", baticon, bat);
+            return smprintf("%s %.0f", baticon, bat);
     } else {
         return smprintf("⚡");
     }

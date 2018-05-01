@@ -5,19 +5,17 @@ set -e
 echo build suckless soft
 for dir in ./suckless/*
 do
-    sudo make install -C "./suckless/${dir}"
-    sudo make clean -C "./suckless/${dir}"
+    sudo make install -C "${dir}"
+    sudo make clean -C "${dir}"
 done
 
 echo set up nvim
-mkdir -p ~/.config/nvim/after
-[ -d ~/.config/nvim/after/ftplugin ] && rm -rf ~/.config/nvim/after/ftplugin
-ln -sf "$(pwd)/ftplugin ~/.config/nvim/after/ftplugin"
-ln -sf "$(pwd)/init.vim ~/.config/nvim/"
+mkdir -p ~/.config/nvim/after/
+ln -sf "$(pwd)/ftplugin/" "$HOME/.config/nvim/after/ftplugin" 
+ln -sf "$(pwd)/init.vim" "$HOME/.config/nvim/"
 
 echo set up tmux
 ln -sf "$(pwd)/tmux.conf" ~/.tmux.conf
-rm -rf ~/.tmuxinator
 ln -sf "$(pwd)/tmuxinator" ~/.tmuxinator
 
 echo set up bash
@@ -44,10 +42,7 @@ mkdir -p ~/.config/xkb
 
 echo set up keyboard
 ln -sf "$(pwd)/xkbconfig" ~/.config/xkb/my
-
-echo config dunst
-mkdir -p ~/.config/dunst
-ln -sf "$(pwd)/dunstrc" ~/.config/dunst/
+sudo ln -sf "$(pwd)/10-libinput.conf" /etc/X11/xorg.conf.d/
 
 echo alacritty config
 mkdir -p ~/.config/alacritty
