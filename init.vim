@@ -15,70 +15,18 @@ Plug 'easymotion/vim-easymotion'
 
 Plug 'mhinz/vim-startify' " {{{
 let g:startify_session_dir = '~/.local/share/nvim/sessions'
-" let g:startify_session_dir = expand('$DOTFILES_PATH') . '/nvim-sessions'
+let g:startify_session_dir = expand('$DOTFILES_PATH') . '/nvim-sessions'
 let g:startify_list_order = ['sessions', 'dir', 'bookmarks', 'commands',
     \ 'files']
 let g:startify_session_persistence = 1
 let g:startify_change_to_vcs_root = 1
 " }}}
 
-Plug 'edkolev/promptline.vim'
-
-Plug 'bling/vim-airline' " {{{
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'distinguished'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#show_tabs = 1
-let g:airline#extensions#tabline#tab_nr_type = 2 " splits and tab number
-let g:airline#extensions#tabline#show_tab_nr = 1
-let g:airline#extensions#tabline#show_tab_type = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffer_min_count = 1
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#branch#format = 1
-let g:airline#extensions#hunks#enabled = 1
-let g:airline#extensions#ctrlp#color_template = 'normal'
-let g:airline#extensions#promptline#snapshot_file = "~/.shell_prompt.sh"
-let g:airline#extensions#promptline#enabled = 1
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-" bingings
-nmap <Leader>1 <Plug>AirlineSelectTab1
-nmap <Leader>2 <Plug>AirlineSelectTab2
-nmap <Leader>3 <Plug>AirlineSelectTab3
-nmap <Leader>4 <Plug>AirlineSelectTab4
-nmap <Leader>5 <Plug>AirlineSelectTab5
-nmap <Leader>6 <Plug>AirlineSelectTab6
-nmap <Leader>7 <Plug>AirlineSelectTab7
-nmap <Leader>8 <Plug>AirlineSelectTab8
-nmap <Leader>9 <Plug>AirlineSelectTab9
-nmap <C-Left> <Plug>AirlineSelectPrevTab
-nmap <C-Right> <Plug>AirlineSelectNextTab
-" }}}
-
-Plug 'vim-airline/vim-airline-themes'
-
 Plug 'blueyed/vim-diminactive' " {{{
 let g:diminactive_enable_focus = 1
 " }}}
 
 Plug 'ctrlpvim/ctrlp.vim' " {{{
-" ctrlp settings
 if executable('ag')
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command =
@@ -97,10 +45,6 @@ let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_types = ['fil', 'buf']
 let g:ctrlp_extensions = ['tag']
 map <C-b> :CtrlPBuffer<CR>
-" }}}
-
-Plug 'scrooloose/nerdtree' " {{{
-map <leader>t :NERDTreeToggle<CR>
 " }}}
 
 Plug 'mileszs/ack.vim' " {{{
@@ -131,8 +75,6 @@ let g:tagbar_type_typescript = {
     \ ]
 \ }
 " }}}
-
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'mhinz/vim-signify' " {{{
 let g:signify_vcs_lis = ['git']
@@ -176,8 +118,6 @@ Plug 'leafgarland/typescript-vim'
 
 Plug 'ekalinin/Dockerfile.vim'
 
-Plug 'elixir-lang/vim-elixir'
-
 Plug 'nathanaelkane/vim-indent-guides' " {{{
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -187,56 +127,11 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 " }}}
 
-Plug 'sbdchd/neoformat' " {{{
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.ts Neoformat
-" }}}
-
 Plug 'mattn/emmet-vim', { 'for': 'html' } " {{{
 let g:user_emmet_mode = 'a'
 " }}}
 
-Plug 'jiangmiao/auto-pairs'
-
 Plug 'editorconfig/editorconfig-vim'
-
-Plug 'neomake/neomake' " {{{
-let g:neomake_elixir_enabled_makers = ['mix', 'credo']
-let g:neomake_javascript_eslint_d_maker = {
-    \ 'exe': 'eslint_d',
-    \ 'args': ['%:p', '-f', 'compact', '--no-ignore', '%:p'],
-    \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-    \ '%W%f: line %l\, col %c\, Warning - %m'
-    \ }
-let g:neomake_sh_enabled_makers = ['shellcheck']
-if executable('eslint')
-    let g:neomake_javascript_enabled_makers = ['eslint']
-else
-    let g:neomake_javascript_enabled_makers = ['eslint_d']
-endif
-let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
-let g:neomake_html_enabled_makers = []
-let g:neomake_open_list = 2
-let g:neomake_list_height = 5
-let g:neomake_highlight_lines = 1
-let g:neomake_highlight_columns = 1
-let g:neomake_error_sign = {
-    \ 'text': 'E>',
-    \ 'texthl': 'NeomakeErrorSign',
-    \ }
-let g:neomake_warning_sign = {
-    \ 'text': 'W>',
-    \ 'texthl': 'NeomakeWarningSign',
-    \ }
-let g:neomake_info_sign = {
-    \ 'text': 'I>',
-    \ 'texthl': 'NeomakeInfoSign',
-    \ }
-let g:neomake_message_sign = {
-    \ 'text': 'M>',
-    \ 'texthl': 'NeomakeMessageSign',
-    \ }
-" }}}
 
 Plug 'ap/vim-css-color'
 
@@ -246,36 +141,6 @@ Plug 'JarrodCTaylor/spartan'
 " Required:
 call plug#end() " }}}
 
-" airline settings
-function! ShowLineNumber()
-    return line(".") . ' / ' . line("$") . ' : ' . col('.')
-endfunction
-function! ShowFileName()
-    return expand("%:t")
-endfunction
-function! ShowIsTagsAreGenerating()
-    return gutentags#statusline('[Generating...]')
-endfunction
-function! InitAirline()
-    call airline#parts#define_function('z', 'ShowLineNumber')
-    call airline#parts#define_function('c', 'ShowFileName')
-    call airline#parts#define_function('x', 'ShowIsTagsAreGenerating')
-    let g:airline_section_c = airline#section#create(['c'])
-    let g:airline_section_x = airline#section#create(['x'])
-    let g:airline_section_y = ''
-    let g:airline_section_z = airline#section#create(['z'])
-    let g:airline_section_error = ''
-    let g:airline_section_warning = ''
-endfunction
-autocmd User AirlineAfterInit call InitAirline()
-let g:promptline_preset = {
-    \'a' : [ promptline#slices#vcs_branch() ],
-    \'b' : [ promptline#slices#git_status() ],
-    \'c' : [ promptline#slices#cwd() ],
-    \'warn' : [ promptline#slices#last_exit_code() ],
-    \ }
-" neomake
-  call neomake#configure#automake('w')
 " -----------------------------------------------------------------------------
 filetype plugin indent on
 
@@ -322,9 +187,6 @@ set tw=500
 set ruler
 set cursorline
 set colorcolumn=80
-highlight ColorColumn ctermbg=235
-highlight CursorLine ctermbg=235
-highlight CursorColumn ctermbg=235
 set autoindent
 set viminfo^=%
 set laststatus=2
@@ -336,18 +198,21 @@ if executable('ag')
     set grepprg=ag\ --vimgrep
     set grepformat=%f:%l:%c%m
 endif
-" ********** COLOR **********
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
-augroup my_neomake_highlights
-    au!
-    autocmd ColorScheme *
-        \ hi myWarn ctermbg=166 ctermfg=255 cterm=underline |
-        \ hi myWarnSign ctermfg=166 |
-        \ hi link NeomakeError SpellBad |
-        \ hi link NeomakeWarning myWarn |
-        \ hi link NeomakeWarningSign myWarnSign
-augroup END
+set paste
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+" ********** COLORS **********
+highlight ColorColumn ctermbg=235
+highlight myWarn ctermbg=166 ctermfg=255 cterm=underline
+highlight myWarnSign ctermfg=166 ctermbg=236
+
+highlight link CursorLine ColorColumn
+highlight link CursorColumn ColorColumn
+highlight link IndentGuidesOdd  ColorColumn
+highlight link IndentGuidesEven ColorColumn
 
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
@@ -453,6 +318,7 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 map 0 ^
 " normal mode for nvim terminal
 nnoremap <C-w>z :call MaximizeToggle()<CR>
+map <silent> <leader>t :Lexplore<CR>
 
 " ********** HOOKS **********
 " always show sign column
