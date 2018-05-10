@@ -37,8 +37,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 xautolock -time 10 -locker slock &
-# chromium &
+chromium &
 dwmstatus &
-# skypeforlinux &
-# telegram-desktop &
+skypeforlinux &
+telegram-desktop &
+udiskie &
+xbacklight -set 30
 exec dwm
