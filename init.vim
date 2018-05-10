@@ -194,15 +194,19 @@ set noshowmode
 set conceallevel=0
 set mouse-=a
 set nowrap
-if executable('ag')
-    set grepprg=ag\ --vimgrep
-    set grepformat=%f:%l:%c%m
-endif
 set paste
+set signcolumn=yes
+set autowriteall
+
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
+
+if executable('ag')
+    set grepprg=ag\ --vimgrep
+    set grepformat=%f:%l:%c%m
+endif
 
 " ********** COLORS **********
 highlight ColorColumn ctermbg=235
@@ -314,22 +318,15 @@ endfunction
 nnoremap <silent> <leader>q :Bclose<CR>
 nnoremap <leader>w :wa!<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-" Remap VIM 0 to first non-blank character
 map 0 ^
-" normal mode for nvim terminal
 nnoremap <C-w>z :call MaximizeToggle()<CR>
-map <silent> <leader>t :Lexplore<CR>
+nnoremap <silent> <leader>t :Lexplore<CR>
 
 " ********** HOOKS **********
-" always show sign column
-set signcolumn=yes
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
-" autosave on focus lost
 autocmd FocusLost * :wa
-set autowriteall
-" delete trailing spaces
 autocmd BufWrite * :call DeleteTrailingWS()
