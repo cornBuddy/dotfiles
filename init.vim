@@ -79,7 +79,7 @@ let g:tagbar_type_typescript = {
 Plug 'mhinz/vim-signify' " {{{
 let g:signify_vcs_lis = ['git']
 let g:signify_sign_change = '~'
-let g:signify_realtime = 1
+let g:signify_disable_by_default = 1
 " }}}
 
 Plug 'tpope/vim-fugitive' " {{{
@@ -195,7 +195,7 @@ set conceallevel=0
 set mouse-=a
 set nowrap
 set paste
-set signcolumn=yes
+" set signcolumn=yes
 set autowriteall
 
 let g:netrw_liststyle = 3

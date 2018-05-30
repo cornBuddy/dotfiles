@@ -39,7 +39,6 @@ fi
 xautolock -time 10 -locker slock &
 chromium &
 dwmstatus &
-skypeforlinux &
 telegram-desktop &
 udiskie &
 xbacklight -set 30

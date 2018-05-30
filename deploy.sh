@@ -40,9 +40,10 @@ echo config xinit
 ln -sf "$(pwd)/xinitrc" ~/.xinitrc
 mkdir -p ~/.config/xkb
 
-echo set up keyboard
+echo set up peripheral devices
 ln -sf "$(pwd)/xkbconfig" ~/.config/xkb/my
 sudo ln -sf $(pwd)/xorg/* /etc/X11/xorg.conf.d
+sudo ln -sf $(pwd)/logind.conf /etc/systemd/logind.conf
 
 echo alacritty config
 mkdir -p ~/.config/alacritty
