@@ -38,6 +38,7 @@ fi
 
 xautolock -time 10 -locker slock &
 xss-lock --ignore-sleep -- xautolock -locknow &
+xset -dpms
 chromium &
 dwmstatus &
 telegram-desktop &
