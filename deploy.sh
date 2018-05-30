@@ -43,7 +43,12 @@ mkdir -p ~/.config/xkb
 echo set up peripheral devices
 ln -sf "$(pwd)/xkbconfig" ~/.config/xkb/my
 sudo ln -sf $(pwd)/xorg/* /etc/X11/xorg.conf.d
-sudo ln -sf $(pwd)/logind.conf /etc/systemd/logind.conf
+
+echo configuring systemd
+sudo ln -sf $(pwd)/systemd/logind.conf /etc/systemd/logind.conf
+sudo ln -sf $(pwd)/systemd/lock@.service /etc/systemd/system/lock@.service
+sudo systemctl daemon-reload
+sudo systemctl enable "lock@$USER.service"
 
 echo alacritty config
 mkdir -p ~/.config/alacritty
