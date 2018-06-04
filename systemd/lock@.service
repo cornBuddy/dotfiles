@@ -1,0 +1,14 @@
+[Unit]
+Description=Lock X session using xautolock for user %i
+Before=sleep.target
+Before=suspend.target
+
+[Service]
+User=%i
+Environment=DISPLAY=:0
+ExecStartPre=/usr/bin/xset dpms force suspend
+ExecStart=/usr/bin/xautolock -locknow
+
+[Install]
+WantedBy=sleep.target
+WantedBy=suspend.target
