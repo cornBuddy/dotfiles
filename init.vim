@@ -77,10 +77,6 @@ Plug 'blueyed/vim-diminactive' " {{{
 let g:diminactive_enable_focus = 1
 " }}}
 
-Plug 'christoomey/vim-tmux-navigator' " {{{
-let g:tmux_navigator_save_on_switch = 2
-" }}}
-
 Plug 'ctrlpvim/ctrlp.vim' " {{{
 " ctrlp settings
 if executable('ag')
@@ -189,8 +185,6 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'ctrlp']
 let g:indent_guides_default_mapping = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
 " }}}
 
 Plug 'sbdchd/neoformat' " {{{
@@ -224,15 +218,6 @@ let g:neomake_typescript_enabled_makers = ['tsc', 'tslint']
 let g:neomake_html_enabled_makers = []
 let g:neomake_open_list = 2
 let g:neomake_list_height = 5
-augroup my_neomake_highlights
-    au!
-    autocmd ColorScheme *
-        \ hi myWarn ctermbg=166 ctermfg=255 cterm=underline |
-        \ hi myWarnSign ctermfg=166 |
-        \ hi link NeomakeError SpellBad |
-        \ hi link NeomakeWarning myWarn |
-        \ hi link NeomakeWarningSign myWarnSign
-augroup END
 let g:neomake_highlight_lines = 1
 let g:neomake_highlight_columns = 1
 let g:neomake_error_sign = {
@@ -256,16 +241,7 @@ let g:neomake_message_sign = {
 Plug 'ap/vim-css-color'
 
 " colors
-Plug 'xero/sourcerer.vim'
-Plug 'crusoexia/vim-monokai'
-Plug 'marcus/vim-mustang'
-Plug 'goatslacker/mango.vim'
-Plug 'mhinz/vim-janah'
-Plug 'w0ng/vim-hybrid'
-Plug 'Drogglbecher/vim-moonscape'
-Plug 'yuttie/hydrangea-vim'
 Plug 'JarrodCTaylor/spartan'
-Plug 'wolverian/minimal'
 
 " Required:
 call plug#end() " }}}
@@ -301,154 +277,77 @@ let g:promptline_preset = {
 " neomake
   call neomake#configure#automake('w')
 " -----------------------------------------------------------------------------
-
-" ********** SETTINGS **********
-" Required:
 filetype plugin indent on
 
-" Set utf8 as standard encoding and en_US as the standard language
+" ********** SETTINGS **********
 set encoding=utf8
-
 set listchars=tab:▷⋅,trail:⋅
 set list
-
-" set 256 colors
 set t_Co=256
-
-" Sets how many lines of history VIM has to remember
 set history=100
-
-" Set to auto read when a file is changed from the outside
 set autoread
-
-set nonumber " set line numbers
-
-" Set 10 lines to the cursor - when moving vertically using j/k
-set so=10
-
-" Turn on the WiLd menu
+set nonumber
+set scrolloff=10
 set wildmenu
-
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-else
-    set wildignore+=.git\*,.hg\*,.svn\*
-endif
-
-" Height of the command bar
+set wildignore=*.o,*~,*.pyc,.git\*,.hg\*,.svn\*
 set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-" Ignore case when searching
+set hidden
 set ignorecase
-
-" When searching try to be smart about cases
 set smartcase
-
-" Highlight search results
 set hlsearch
-
-" Makes search act like search in modern browsers
 set incsearch
-
-" Don't redraw while executing macros (good performance config)
 set lazyredraw
-
-" For regular expressions turn magic on
 set magic
-
-" Show matching brackets when text indicator is over them
 set showmatch
-
-" How many tenths of a second to blink when matching brackets
 set mat=2
-
-" No annoying sound on errors
 set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-
-" Remove margin from left
 set foldcolumn=0
-
-" Enable syntax highlighting
 syntax enable
-try
-    set background=dark
-    colorscheme spartan
-catch
-endtry
-
-" Use Unix as the standard file type
+set background=dark
+colorscheme spartan
 set ffs=unix,dos,mac
-
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
 set backupcopy=yes
-
-" Use spaces instead of tabs
 set expandtab
-
-" Be smart when using tabs ;)
 set smarttab
-
-" 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
-
-" Linebreak on 500 characters
 set lbr
 set tw=500
-
-" Show vertical line on 80 symbols
 set ruler
 set cursorline
 set colorcolumn=80
 highlight ColorColumn ctermbg=235
 highlight CursorLine ctermbg=235
 highlight CursorColumn ctermbg=235
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-" turn off continuation of comments
-set formatoptions-=cro
-
-" Remember info about open buffers on close
+set autoindent
 set viminfo^=%
-
-" Always show the status line
 set laststatus=2
-
-" Hide default status line
 set noshowmode
-
-" disable autohide quotes in json-vim
 set conceallevel=0
-
-" disable auto visual mode with mouse
 set mouse-=a
-
-" turn off wrapping
 set nowrap
-
 if executable('ag')
-    " Note we extract the column as well as the file and line number
     set grepprg=ag\ --vimgrep
     set grepformat=%f:%l:%c%m
 endif
+" ********** COLOR **********
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=236
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236
+augroup my_neomake_highlights
+    au!
+    autocmd ColorScheme *
+        \ hi myWarn ctermbg=166 ctermfg=255 cterm=underline |
+        \ hi myWarnSign ctermfg=166 |
+        \ hi link NeomakeError SpellBad |
+        \ hi link NeomakeWarning myWarn |
+        \ hi link NeomakeWarningSign myWarnSign
+augroup END
 
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
@@ -547,15 +446,13 @@ function! MaximizeToggle()
 endfunction
 
 " ********** MAPPINGS **********
-nnoremap <silent> <leader>c :close<CR>
 nnoremap <silent> <leader>q :Bclose<CR>
 nnoremap <leader>w :wa!<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " Remap VIM 0 to first non-blank character
 map 0 ^
 " normal mode for nvim terminal
-tnoremap <Esc> <C-\><C-n>
-nnoremap <C-W>z :call MaximizeToggle()<CR>
+nnoremap <C-w>z :call MaximizeToggle()<CR>
 
 " ********** HOOKS **********
 " always show sign column

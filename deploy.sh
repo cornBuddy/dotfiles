@@ -11,7 +11,7 @@ done
 
 echo set up nvim
 mkdir -p ~/.config/nvim/after/
-ln -sf "$(pwd)/ftplugin/" "$HOME/.config/nvim/after/ftplugin" 
+ln -sf "$(pwd)/ftplugin/" "$HOME/.config/nvim/after/ftplugin"
 ln -sf "$(pwd)/init.vim" "$HOME/.config/nvim/"
 
 echo set up tmux
@@ -42,11 +42,11 @@ mkdir -p ~/.config/xkb
 
 echo set up keyboard
 ln -sf "$(pwd)/xkbconfig" ~/.config/xkb/my
-sudo ln -sf "$(pwd)/10-libinput.conf" /etc/X11/xorg.conf.d/
+sudo ln -sf $(pwd)/xorg/* /etc/X11/xorg.conf.d
 
 echo alacritty config
 mkdir -p ~/.config/alacritty
 ln -sf "$(pwd)/alacritty.yml" ~/.config/alacritty
 
 echo setup scripts
-sudo ln -sf $(pwd)/scripts/* /usr/bin
+sudo ln -sf "$(pwd)/scripts" /usr/bin/scripts
