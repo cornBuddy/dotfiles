@@ -44,4 +44,5 @@ dwmstatus &
 telegram-desktop &
 udiskie &
 xbacklight -set 30
+systemctl --user import-environment DISPLAY
 exec dwm
