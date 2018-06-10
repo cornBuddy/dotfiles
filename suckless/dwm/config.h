@@ -63,9 +63,9 @@ static const char *dmenucmd[] = {
 };
 static const char *termcmd[]  = { "alacritty", "-e", "tmux", NULL };
 static const char *slock[] = { "slock", NULL };
-static const char *ainc[] = { "pamixer", "--increase", "2", NULL };
-static const char *adec[] = { "pamixer", "--decrease", "2", NULL };
-static const char *atoggle[] = { "pamixer", "--toggle-mute", NULL };
+static const char *ainc[] = { "amixer", "sset", "Master", "2+", NULL };
+static const char *adec[] = { "amixer", "sset", "Master", "2-", NULL };
+static const char *atoggle[] = { "amixer", "sset", "Master", "toggle", NULL };
 static const char *bup[] = { "xbacklight", "-inc", "10", NULL };
 static const char *bdown[] = { "xbacklight", "-dec", "10", NULL };
 
