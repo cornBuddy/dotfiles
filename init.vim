@@ -13,14 +13,7 @@ Plug 'junegunn/vim-plug'
 
 Plug 'easymotion/vim-easymotion'
 
-Plug 'mhinz/vim-startify' " {{{
-let g:startify_session_dir = '~/.local/share/nvim/sessions'
-let g:startify_session_dir = expand('$DOTFILES_PATH') . '/nvim-sessions'
-let g:startify_list_order = ['sessions', 'dir', 'bookmarks', 'commands',
-    \ 'files']
-let g:startify_session_persistence = 1
-let g:startify_change_to_vcs_root = 1
-" }}}
+Plug 'w0rp/ale'
 
 Plug 'blueyed/vim-diminactive' " {{{
 let g:diminactive_enable_focus = 1
