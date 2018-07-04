@@ -1,0 +1,1 @@
+bash /usr/bin/tdm
