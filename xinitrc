@@ -36,10 +36,13 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
+xbacklight -set 30
 xset -dpms
+xss-lock -- slock &
+
 chromium &
 dwmstatus &
 telegram-desktop &
+skypeforlinux &
 udiskie &
-xbacklight -set 30
 exec dwm
