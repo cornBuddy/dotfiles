@@ -146,36 +146,19 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc,.git\*,.hg\*,.svn\*
 set cmdheight=1
 set hidden
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
+set ignorecase smartcase hlsearch incsearch magic showmatch
 set lazyredraw
-set magic
-set showmatch
 set mat=2
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
+set noerrorbells novisualbell t_vb= tm=500
 set foldcolumn=0
 syntax enable
 set background=dark
 colorscheme spartan
 set ffs=unix,dos,mac
-set nobackup
-set nowb
-set noswapfile
-set backupcopy=yes
-set expandtab
-set smarttab
-set shiftwidth=4
-set tabstop=4
-set lbr
-set tw=500
-set ruler
-set cursorline
-set colorcolumn=80
+set nobackup nowb noswapfile backupcopy=yes
+set shiftwidth=4 tabstop=4 expandtab
+set lbr tw=500
+set ruler cursorline colorcolumn=80
 set autoindent
 set viminfo^=%
 set laststatus=2
@@ -184,7 +167,6 @@ set conceallevel=0
 set mouse-=a
 set nowrap
 set paste
-" set signcolumn=yes
 set autowriteall
 
 let g:netrw_liststyle = 3
