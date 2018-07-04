@@ -11,6 +11,12 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'junegunn/vim-plug'
 
+Plug 'scrooloose/nerdtree' " {{{
+map <leader>t :NERDTreeToggle<CR>
+" }}}
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 Plug 'easymotion/vim-easymotion'
 
 Plug 'w0rp/ale'
@@ -286,7 +292,6 @@ nnoremap <leader>w :wa!<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 map 0 ^
 nnoremap <C-w>z :call MaximizeToggle()<CR>
-nnoremap <silent> <leader>t :Lexplore<CR>
 
 " ********** HOOKS **********
 " Return to last edit position when opening files (You want this!)
