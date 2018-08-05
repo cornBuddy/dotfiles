@@ -130,6 +130,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'ap/vim-css-color'
 
+Plug 'pearofducks/ansible-vim'
+
 " colors
 Plug 'JarrodCTaylor/spartan'
 

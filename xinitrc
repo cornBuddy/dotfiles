@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# TODO: move this stuff to tdm config
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -24,7 +26,7 @@ if [ -f "$usermodmap" ]; then
 fi
 
 if [ -f ~/.config/xkb/my ]; then
-    xkbcomp ~/.config/xkb/my $DISPLAY
+    xkbcomp "$HOME/.config/xkb/my" "$DISPLAY"
 fi
 
 # start some nice programs
