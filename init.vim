@@ -174,7 +174,6 @@ set noshowmode
 set conceallevel=0
 set mouse-=a
 set nowrap
-set paste
 set autowriteall
 
 let g:netrw_liststyle = 3
@@ -303,3 +302,4 @@ autocmd BufReadPost *
     \ endif
 autocmd FocusLost * :wa
 autocmd BufWrite * :call DeleteTrailingWS()
+au InsertLeave * set nopaste
