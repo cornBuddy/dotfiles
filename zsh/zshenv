@@ -8,3 +8,4 @@ export EDITOR=nvim
 export PAGER=less
 export DOTFILES_PATH=~/.dotfiles
 
+export PATH="/opt/chefdk/embedded/bin:$PATH"

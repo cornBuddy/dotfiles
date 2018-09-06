@@ -18,3 +18,4 @@ bindkey -v '^?' backward-delete-char
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zshenv_private ] && source ~/.zshenv_private
 [ -f ~/.zsh_prompt ] && source ~/.zsh_prompt
+eval "$(chef shell-init zsh)"
