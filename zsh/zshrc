@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh-history
-HISTSIZE=100
-SAVEHIST=100
+HISTSIZE=1000
+SAVEHIST=1000
 # 10ms for key sequences
 KEYTIMEOUT=1
 unsetopt beep
@@ -19,3 +19,7 @@ bindkey -v '^?' backward-delete-char
 [ -f ~/.zshenv_private ] && source ~/.zshenv_private
 [ -f ~/.zsh_prompt ] && source ~/.zsh_prompt
 eval "$(chef shell-init zsh)"
+
+if [ -x "$(which aws_zsh_completer.sh)" ] ; then
+    source $(which aws_zsh_completer.sh)
+fi
