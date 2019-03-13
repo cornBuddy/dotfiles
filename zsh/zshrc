@@ -18,8 +18,11 @@ bindkey -v '^?' backward-delete-char
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
 [ -f ~/.zshenv_private ] && source ~/.zshenv_private
 [ -f ~/.zsh_prompt ] && source ~/.zsh_prompt
-eval "$(chef shell-init zsh)"
 
 if [ -x "$(which aws_zsh_completer.sh)" ] ; then
     source $(which aws_zsh_completer.sh)
+fi
+
+if [ -f /opt/google-cloud-sdk/completion.zsh.inc ] ; then
+    source /opt/google-cloud-sdk/completion.zsh.inc
 fi
