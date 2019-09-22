@@ -1,0 +1,40 @@
+---
+
+- name: Install neovim
+  pacman:
+    state: latest
+    name:
+      - neovim
+      - git
+      - the_silver_searcher
+  become: true
+
+- name: Create plug dirs
+  shell: "mkdir -p {{ item.path }}"
+  loop:
+    - path: "{{ neovim_config_path }}/after/ftplugin"
+    - path: "{{ neovim_plug_dir }}"
+
+- name: Install plug
+  get_url:
+    url: "{{ neovim_plug_url }}"
+    dest: "{{ neovim_plug_dir }}/plug.vim"
+    force: true
+
+- name: Configure
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: true
+  loop:
+    - src: init.vim
+      dest: "{{ neovim_config_path }}/init.vim"
+    - src: ftplugin
+      dest: "{{ neovim_config_path }}/after"
+  notify:
+    - install plugins
+
+- name: Update plugins
+  shell: >-
+    nvim --headless +PlugUpgrade +qa
+    && nvim --headless +PlugUpdate +qa

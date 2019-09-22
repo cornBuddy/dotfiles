@@ -53,34 +53,6 @@ endif
 map <C-f> :Ack!<Space>
 " }}}
 
-Plug 'ludovicchabant/vim-gutentags' " {{{
-let g:gutentags_ctags_executable = 'ag-ctags'
-let g:gutentags_ctags_tagfile = '.git/tags'
-" }}}
-
-Plug 'majutsushi/tagbar' " {{{
-nmap <F8> :TagbarToggle<CR>
-let g:tagbar_type_typescript = {
-    \ 'ctagstype': 'typescript',
-    \ 'kinds': [
-        \ 'c:classes',
-        \ 'n:modules',
-        \ 'f:functions',
-        \ 'v:variables',
-        \ 'v:varlambdas',
-        \ 'm:members',
-        \ 'i:interfaces',
-        \ 'e:enums',
-    \ ]
-\ }
-" }}}
-
-Plug 'mhinz/vim-signify' " {{{
-let g:signify_vcs_lis = ['git']
-let g:signify_sign_change = '~'
-let g:signify_disable_by_default = 1
-" }}}
-
 Plug 'tpope/vim-fugitive' " {{{
 nmap <silent> <leader>gp :Gpush<CR>
 noremap <silent> <leader>gs :Gstatus<CR>
@@ -120,10 +92,6 @@ let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'ctrlp']
 let g:indent_guides_default_mapping = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
-" }}}
-
-Plug 'mattn/emmet-vim', { 'for': 'html' } " {{{
-let g:user_emmet_mode = 'a'
 " }}}
 
 Plug 'editorconfig/editorconfig-vim'

@@ -9,11 +9,6 @@ do
     sudo make clean -C "${dir}"
 done
 
-echo set up nvim
-mkdir -p ~/.config/nvim/after/
-ln -sf "$(pwd)/ftplugin/" "$HOME/.config/nvim/after/ftplugin"
-ln -sf "$(pwd)/init.vim" "$HOME/.config/nvim/"
-
 echo set up tmux
 ln -sf "$(pwd)/tmux.conf" ~/.tmux.conf
 ln -sf "$(pwd)/tmuxinator" ~/.tmuxinator
@@ -44,6 +39,3 @@ sudo ln -sf $(pwd)/systemd/logind.conf /etc/systemd/logind.conf
 echo alacritty config
 mkdir -p ~/.config/alacritty
 ln -sf "$(pwd)/alacritty.yml" ~/.config/alacritty
-
-echo setup scripts
-sudo ln -sf "$(pwd)/scripts" /usr/bin/scripts

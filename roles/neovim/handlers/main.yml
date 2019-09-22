@@ -1,0 +1,4 @@
+---
+
+- name: install plugins
+  shell: nvim --headless +PlugInstall +qa
