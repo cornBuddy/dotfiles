@@ -1,4 +1,0 @@
-#!/bin/sh
-
-files=$(ag -l --no-color | sed -e "s,^,$(pwd)/,")
-ctags -f .git/tags $files
