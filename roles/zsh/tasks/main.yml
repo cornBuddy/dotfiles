@@ -13,15 +13,12 @@
   git:
     dest: "{{ zsh_oh_my_zsh_path }}"
     repo: "{{ zsh_oh_my_zsh_repo }}"
+    force: true
 
 - name: Configure
   template:
-    src: "{{ item.scr }}"
+    src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   loop:
     - src: zshrc.j2
       dest: "{{ lookup('env', 'HOME') }}/.zshrc"
-    - src: zshenv.j2
-      dest: "{{ lookup('env', 'HOME') }}/.zshenv"
-    - src: zlogout.j2
-      dest: "{{ lookup('env', 'HOME') }}/.zlogout"
