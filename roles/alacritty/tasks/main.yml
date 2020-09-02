@@ -1,0 +1,18 @@
+---
+
+- name: Install alacritty
+  pacman:
+    name:
+      - alacritty
+    state: latest
+  become: true
+
+- name: Create config dir
+  file:
+    path: "{{ alacritty_config_dir }}"
+    state: directory
+
+- name: Copy config file
+  copy:
+    src: alacritty.yml
+    dest: "{{ alacritty_config_dir }}/alacritty.yml"

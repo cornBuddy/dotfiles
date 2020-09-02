@@ -10,7 +10,9 @@
   become: true
 
 - name: Create plug dirs
-  shell: "mkdir -p {{ item.path }}"
+  file:
+    path: "{{ item.path }}"
+    state: directory
   loop:
     - path: "{{ neovim_config_path }}/after/ftplugin"
     - path: "{{ neovim_plug_dir }}"

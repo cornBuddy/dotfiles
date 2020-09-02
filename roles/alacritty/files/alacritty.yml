@@ -1,0 +1,450 @@
+---
+
+font:
+  normal:
+    family: Terminus
+  bold:
+    family: Terminus
+  italic:
+    family: Terminus
+  size: 7
+  offset:
+    x: 0
+    'y': 0
+  glyph_offset:
+    x: 0
+    'y': 0
+schemes:
+  solarized_dark:
+    primary:
+      background: '0x002b36'
+      foreground: '0x839496'
+    cursor:
+      text: '0x002b36'
+      cursor: '0x839496'
+    normal:
+      black: '0x073642'
+      red: '0xdc322f'
+      green: '0x859900'
+      yellow: '0xb58900'
+      blue: '0x268bd2'
+      magenta: '0xd33682'
+      cyan: '0x2aa198'
+      white: '0xeee8d5'
+    bright:
+      black: '0x002b36'
+      red: '0xcb4b16'
+      green: '0x586e75'
+      yellow: '0x657b83'
+      blue: '0x839496'
+      magenta: '0x6c71c4'
+      cyan: '0x93a1a1'
+      white: '0xfdf6e3'
+  ayu_dark:
+    primary:
+      background: '0x0A0E14'
+      foreground: '0xB3B1AD'
+    normal:
+      black: '0x01060E'
+      red: '0xEA6C73'
+      green: '0x91B362'
+      yellow: '0xF9AF4F'
+      blue: '0x53BDFA'
+      magenta: '0xFAE994'
+      cyan: '0x90E1C6'
+      white: '0xC7C7C7'
+    bright:
+      black: '0x686868'
+      red: '0xF07178'
+      green: '0xC2D94C'
+      yellow: '0xFFB454'
+      blue: '0x59C2FF'
+      magenta: '0xFFEE99'
+      cyan: '0x95E6CB'
+      white: '0xFFFFFF'
+  darktooth:
+    primary:
+      background: '0x282828'
+      foreground: '0xfdf4c1'
+    normal:
+      black: '0x282828'
+      red: '0x9d0006'
+      green: '0x79740e'
+      yellow: '0xb57614'
+      blue: '0x076678'
+      magenta: '0x8f3f71'
+      cyan: '0x00a7af'
+      white: '0xfdf4c1'
+    bright:
+      black: '0x32302f'
+      red: '0xfb4933'
+      green: '0xb8bb26'
+      yellow: '0xfabd2f'
+      blue: '0x83a598'
+      magenta: '0xd3869b'
+      cyan: '0x3fd7e5'
+      white: '0xffffc8'
+    dim:
+      black: '0x1d2021'
+      red: '0x421e1e'
+      green: '0x232b0f'
+      yellow: '0x4d3b27'
+      blue: '0x2b3c44'
+      magenta: '0x4e3d45'
+      cyan: '0x205161'
+      white: '0xf4e8ba'
+  iceberg:
+    primary:
+      background: '0x161821'
+      foreground: '0xd2d4de'
+    normal:
+      black: '0x161821'
+      red: '0xe27878'
+      green: '0xb4be82'
+      yellow: '0xe2a478'
+      blue: '0x84a0c6'
+      magenta: '0xa093c7'
+      cyan: '0x89b8c2'
+      white: '0xc6c8d1'
+    bright:
+      black: '0x6b7089'
+      red: '0xe98989'
+      green: '0xc0ca8e'
+      yellow: '0xe9b189'
+      blue: '0x91acd1'
+      magenta: '0xada0d3'
+      cyan: '0x95c4ce'
+      white: '0xd2d4de'
+  material: &ref_0
+    primary:
+      background: '0x1e282d'
+      foreground: '0xc4c7d1'
+    normal:
+      black: '0x666666'
+      red: '0xeb606b'
+      green: '0xc3e88d'
+      yellow: '0xf7eb95'
+      blue: '0x80cbc4'
+      magenta: '0xff2f90'
+      cyan: '0xaeddff'
+      white: '0xffffff'
+    bright:
+      black: '0xff262b'
+      red: '0xeb606b'
+      green: '0xc3e88d'
+      yellow: '0xf7eb95'
+      blue: '0x7dc6bf'
+      magenta: '0x6c71c4'
+      cyan: '0x35434d'
+      white: '0xffffff'
+colors: *ref_0
+mouse:
+  url:
+    launcher: xdg-open
+cursor:
+  style: Block
+  unfocused_hollow: true
+live_config_reload: true
+key_bindings:
+  - key: V
+    mods: Control|Shift
+    action: Paste
+  - key: C
+    mods: Control|Shift
+    action: Copy
+  - key: Paste
+    action: Paste
+  - key: Copy
+    action: Copy
+  - key: Q
+    mods: Command
+    action: Quit
+  - key: W
+    mods: Command
+    action: Quit
+  - key: Insert
+    mods: Shift
+    action: PasteSelection
+  - key: Key0
+    mods: Control
+    action: ResetFontSize
+  - key: Equals
+    mods: Control
+    action: IncreaseFontSize
+  - key: Subtract
+    mods: Control
+    action: DecreaseFontSize
+  - key: L
+    mods: Control
+    action: ClearLogNotice
+  - key: L
+    mods: Control
+    chars: "\f"
+  - key: Home
+    chars: "\eOH"
+    mode: AppCursor
+  - key: Home
+    chars: "\e[H"
+    mode: ~AppCursor
+  - key: End
+    chars: "\eOF"
+    mode: AppCursor
+  - key: End
+    chars: "\e[F"
+    mode: ~AppCursor
+  - key: PageUp
+    mods: Shift
+    chars: "\e[5;2~"
+  - key: PageUp
+    mods: Control
+    chars: "\e[5;5~"
+  - key: PageUp
+    chars: "\e[5~"
+  - key: PageDown
+    mods: Shift
+    chars: "\e[6;2~"
+  - key: PageDown
+    mods: Control
+    chars: "\e[6;5~"
+  - key: PageDown
+    chars: "\e[6~"
+  - key: Tab
+    mods: Shift
+    chars: "\e[Z"
+  - key: Back
+    chars: "\x7F"
+  - key: Back
+    mods: Alt
+    chars: "\e\x7F"
+  - key: Insert
+    chars: "\e[2~"
+  - key: Delete
+    chars: "\e[3~"
+  - key: Left
+    mods: Shift
+    chars: "\e[1;2D"
+  - key: Left
+    mods: Control
+    chars: "\e[1;5D"
+  - key: Left
+    mods: Alt
+    chars: "\e[1;3D"
+  - key: Left
+    chars: "\e[D"
+    mode: ~AppCursor
+  - key: Left
+    chars: "\eOD"
+    mode: AppCursor
+  - key: Right
+    mods: Shift
+    chars: "\e[1;2C"
+  - key: Right
+    mods: Control
+    chars: "\e[1;5C"
+  - key: Right
+    mods: Alt
+    chars: "\e[1;3C"
+  - key: Right
+    chars: "\e[C"
+    mode: ~AppCursor
+  - key: Right
+    chars: "\eOC"
+    mode: AppCursor
+  - key: Up
+    mods: Shift
+    chars: "\e[1;2A"
+  - key: Up
+    mods: Control
+    chars: "\e[1;5A"
+  - key: Up
+    mods: Alt
+    chars: "\e[1;3A"
+  - key: Up
+    chars: "\e[A"
+    mode: ~AppCursor
+  - key: Up
+    chars: "\eOA"
+    mode: AppCursor
+  - key: Down
+    mods: Shift
+    chars: "\e[1;2B"
+  - key: Down
+    mods: Control
+    chars: "\e[1;5B"
+  - key: Down
+    mods: Alt
+    chars: "\e[1;3B"
+  - key: Down
+    chars: "\e[B"
+    mode: ~AppCursor
+  - key: Down
+    chars: "\eOB"
+    mode: AppCursor
+  - key: F1
+    chars: "\eOP"
+  - key: F2
+    chars: "\eOQ"
+  - key: F3
+    chars: "\eOR"
+  - key: F4
+    chars: "\eOS"
+  - key: F5
+    chars: "\e[15~"
+  - key: F6
+    chars: "\e[17~"
+  - key: F7
+    chars: "\e[18~"
+  - key: F8
+    chars: "\e[19~"
+  - key: F9
+    chars: "\e[20~"
+  - key: F10
+    chars: "\e[21~"
+  - key: F11
+    chars: "\e[23~"
+  - key: F12
+    chars: "\e[24~"
+  - key: F1
+    mods: Shift
+    chars: "\e[1;2P"
+  - key: F2
+    mods: Shift
+    chars: "\e[1;2Q"
+  - key: F3
+    mods: Shift
+    chars: "\e[1;2R"
+  - key: F4
+    mods: Shift
+    chars: "\e[1;2S"
+  - key: F5
+    mods: Shift
+    chars: "\e[15;2~"
+  - key: F6
+    mods: Shift
+    chars: "\e[17;2~"
+  - key: F7
+    mods: Shift
+    chars: "\e[18;2~"
+  - key: F8
+    mods: Shift
+    chars: "\e[19;2~"
+  - key: F9
+    mods: Shift
+    chars: "\e[20;2~"
+  - key: F10
+    mods: Shift
+    chars: "\e[21;2~"
+  - key: F11
+    mods: Shift
+    chars: "\e[23;2~"
+  - key: F12
+    mods: Shift
+    chars: "\e[24;2~"
+  - key: F1
+    mods: Control
+    chars: "\e[1;5P"
+  - key: F2
+    mods: Control
+    chars: "\e[1;5Q"
+  - key: F3
+    mods: Control
+    chars: "\e[1;5R"
+  - key: F4
+    mods: Control
+    chars: "\e[1;5S"
+  - key: F5
+    mods: Control
+    chars: "\e[15;5~"
+  - key: F6
+    mods: Control
+    chars: "\e[17;5~"
+  - key: F7
+    mods: Control
+    chars: "\e[18;5~"
+  - key: F8
+    mods: Control
+    chars: "\e[19;5~"
+  - key: F9
+    mods: Control
+    chars: "\e[20;5~"
+  - key: F10
+    mods: Control
+    chars: "\e[21;5~"
+  - key: F11
+    mods: Control
+    chars: "\e[23;5~"
+  - key: F12
+    mods: Control
+    chars: "\e[24;5~"
+  - key: F1
+    mods: Alt
+    chars: "\e[1;6P"
+  - key: F2
+    mods: Alt
+    chars: "\e[1;6Q"
+  - key: F3
+    mods: Alt
+    chars: "\e[1;6R"
+  - key: F4
+    mods: Alt
+    chars: "\e[1;6S"
+  - key: F5
+    mods: Alt
+    chars: "\e[15;6~"
+  - key: F6
+    mods: Alt
+    chars: "\e[17;6~"
+  - key: F7
+    mods: Alt
+    chars: "\e[18;6~"
+  - key: F8
+    mods: Alt
+    chars: "\e[19;6~"
+  - key: F9
+    mods: Alt
+    chars: "\e[20;6~"
+  - key: F10
+    mods: Alt
+    chars: "\e[21;6~"
+  - key: F11
+    mods: Alt
+    chars: "\e[23;6~"
+  - key: F12
+    mods: Alt
+    chars: "\e[24;6~"
+  - key: F1
+    mods: Super
+    chars: "\e[1;3P"
+  - key: F2
+    mods: Super
+    chars: "\e[1;3Q"
+  - key: F3
+    mods: Super
+    chars: "\e[1;3R"
+  - key: F4
+    mods: Super
+    chars: "\e[1;3S"
+  - key: F5
+    mods: Super
+    chars: "\e[15;3~"
+  - key: F6
+    mods: Super
+    chars: "\e[17;3~"
+  - key: F7
+    mods: Super
+    chars: "\e[18;3~"
+  - key: F8
+    mods: Super
+    chars: "\e[19;3~"
+  - key: F9
+    mods: Super
+    chars: "\e[20;3~"
+  - key: F10
+    mods: Super
+    chars: "\e[21;3~"
+  - key: F11
+    mods: Super
+    chars: "\e[23;3~"
+  - key: F12
+    mods: Super
+    chars: "\e[24;3~"

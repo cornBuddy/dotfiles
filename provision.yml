@@ -4,3 +4,4 @@
   roles:
     - role: zsh
     - role: neovim
+    - role: alacritty
