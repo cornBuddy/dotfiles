@@ -25,8 +25,8 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
-if [ -f ~/.config/xkb/my ]; then
-    xkbcomp "$HOME/.config/xkb/my" "$DISPLAY"
+if [ -f {{ x11_xkbcomp_config_path }} ]; then
+    xkbcomp "{{ x11_xkbcomp_config_path }}" "$DISPLAY"
 fi
 
 # start some nice programs

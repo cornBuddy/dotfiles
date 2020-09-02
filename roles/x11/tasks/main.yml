@@ -6,6 +6,7 @@
     name:
       - xorg-server
       - xorg-xinit
+      - xorg-xkbcomp
       - xf86-video-nouveau
   become: true
 
@@ -41,3 +42,5 @@
   loop:
     - src: xinitrc.j2
       dest: "{{ x11_xinitrc_path }}"
+    - src: xkbconf.j2
+      dest: "{{ x11_xkbcomp_config_path }}"
