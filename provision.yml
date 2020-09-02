@@ -2,8 +2,8 @@
 
 - hosts: localhost
   roles:
-    - role: zsh
-    - role: neovim
-    - role: tmux
-    - role: xorg
-    - role: alacritty
+    # - role: zsh
+    # - role: neovim
+    # - role: tmux
+    - role: x11
+    # - role: alacritty

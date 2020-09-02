@@ -1,0 +1,43 @@
+---
+
+- name: Install xorg
+  pacman:
+    state: latest
+    name:
+      - xorg-server
+      - xorg-xinit
+      - xf86-video-nouveau
+  become: true
+
+- name: Install suckless deps
+  pacman:
+    state: latest
+    name:
+      - make
+  become: true
+
+- name: Get suckess soft locations
+  find:
+    paths: "{{ x11_suckless_base_dir }}"
+    file_type: directory
+  register: content
+
+- set_fact:
+    x11_suckless_soft_dirs: >-
+      {{ content.files | map(attribute='path') | list }}
+
+- debug: var=x11_suckless_soft_dirs
+
+- name: Install suckless soft
+  shell: >-
+    make install -C {{ item }} && make clean -C {{ item }}
+  loop: "{{ x11_suckless_soft_dirs }}"
+  become: true
+
+- name: Configure
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: xinitrc.j2
+      dest: "{{ x11_xinitrc_path }}"

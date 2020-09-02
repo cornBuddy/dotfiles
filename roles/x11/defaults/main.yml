@@ -1,0 +1,4 @@
+---
+
+x11_xinitrc_path: "{{ lookup('env', 'HOME') }}/.xinitrc"
+x11_suckless_base_dir: "{{ playbook_dir }}/suckless"
