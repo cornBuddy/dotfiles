@@ -1,0 +1,5 @@
+---
+
+tmux_config_path: "{{ lookup('env', 'HOME') }}/.tmux.conf"
+tmux_plugins_dir: "{{ lookup('env', 'HOME') }}/.tmux/plugins"
+tmux_tpm_git_url: https://github.com/tmux-plugins/tpm

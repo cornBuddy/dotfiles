@@ -1,0 +1,19 @@
+---
+
+- name: Download tpm
+  git:
+    dest: "{{ tmux_plugins_dir }}/tpm"
+    repo: "{{ tmux_tpm_git_url }}"
+    force: true
+
+- name: Install tmux
+  pacman:
+    name:
+      - tmux
+    state: latest
+  become: true
+
+- name: Configure
+  template:
+    src: tmux.conf.j2
+    dest: "{{ tmux_config_path }}"

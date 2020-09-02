@@ -5,3 +5,4 @@
     - role: zsh
     - role: neovim
     - role: alacritty
+    - role: tmux

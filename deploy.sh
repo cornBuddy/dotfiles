@@ -9,10 +9,6 @@ do
     sudo make clean -C "${dir}"
 done
 
-echo set up tmux
-ln -sf "$(pwd)/tmux.conf" ~/.tmux.conf
-ln -sf "$(pwd)/tmuxinator" ~/.tmuxinator
-
 echo config xinit
 ln -sf "$(pwd)/xinitrc" ~/.xinitrc
 mkdir -p ~/.config/xkb
