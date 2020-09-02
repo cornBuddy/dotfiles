@@ -19,6 +19,11 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    mode: 0755
   loop:
     - src: zshrc.j2
       dest: "{{ lookup('env', 'HOME') }}/.zshrc"
+    - src: zshenv.j2
+      dest: "{{ lookup('env', 'HOME') }}/.zshenv"
+    - src: zsh_aliases.j2
+      dest: "{{ lookup('env', 'HOME') }}/.zsh_aliases"

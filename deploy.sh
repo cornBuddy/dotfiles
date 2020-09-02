@@ -13,14 +13,6 @@ echo set up tmux
 ln -sf "$(pwd)/tmux.conf" ~/.tmux.conf
 ln -sf "$(pwd)/tmuxinator" ~/.tmuxinator
 
-echo set up zsh
-ln -sf "$(pwd)/zsh/zshenv" ~/.zshenv
-ln -sf "$(pwd)/zsh/zshrc" ~/.zshrc
-ln -sf "$(pwd)/zsh/zsh_aliases" ~/.zsh_aliases
-ln -sf "$(pwd)/zsh/zsh_prompt" ~/.zsh_prompt
-ln -sf "$(pwd)/zsh/zlogout" ~/.zlogout
-ln -sf "$(pwd)/zsh/zprofile" ~/.zprofile
-
 echo set up git
 ln -sf "$(pwd)/gitconfig" ~/.gitconfig
 
@@ -34,7 +26,3 @@ sudo ln -sf $(pwd)/xorg/* /etc/X11/xorg.conf.d
 
 echo configuring systemd
 sudo ln -sf $(pwd)/systemd/logind.conf /etc/systemd/logind.conf
-
-echo alacritty config
-mkdir -p ~/.config/alacritty
-ln -sf "$(pwd)/alacritty.yml" ~/.config/alacritty
