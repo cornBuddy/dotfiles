@@ -3,7 +3,6 @@
 - name: Install zsh
   pacman:
     name:
-      - git
       - zsh
       - zsh-completions
     state: latest

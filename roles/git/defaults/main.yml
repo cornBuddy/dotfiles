@@ -1,0 +1,3 @@
+---
+
+git_main_config_path: "{{ lookup('env', 'HOME') }}/.gitconfig"

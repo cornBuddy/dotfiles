@@ -13,9 +13,6 @@ echo set up tmux
 ln -sf "$(pwd)/tmux.conf" ~/.tmux.conf
 ln -sf "$(pwd)/tmuxinator" ~/.tmuxinator
 
-echo set up git
-ln -sf "$(pwd)/gitconfig" ~/.gitconfig
-
 echo config xinit
 ln -sf "$(pwd)/xinitrc" ~/.xinitrc
 mkdir -p ~/.config/xkb

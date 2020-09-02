@@ -1,0 +1,13 @@
+---
+
+- name: Install git
+  pacman:
+    name:
+      - git
+    state: latest
+  become: true
+
+- name: Configure
+  template:
+    src: gitconfig.j2
+    dest: "{{ git_main_config_path }}"
