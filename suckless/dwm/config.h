@@ -3,9 +3,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "xos4 Terminus:pixelsize=14:antialias=true:autohint=true"
+    "Terminus:pixelsize=14:antialias=true:autohint=true"
 };
-static const char dmenufont[]       = "xos4 Terminus:pixelsize=14:antialias=true:autohint=true";
+static const char dmenufont[]       = "Terminus:pixelsize=14:antialias=true:autohint=true";
 static const char normbordercolor[] = "#5e5e5e";
 static const char normbgcolor[]     = "#1d1f21";
 static const char normfgcolor[]     = "#858585";

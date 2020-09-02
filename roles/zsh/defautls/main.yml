@@ -1,0 +1,4 @@
+---
+
+zsh_oh_my_zsh_repo: git@github.com:robbyrussell/oh-my-zsh.git
+zsh_oh_my_zsh_path: "{{ lookup('env', 'HOME') }}/.oh-my-zsh"

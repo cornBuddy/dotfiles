@@ -21,3 +21,5 @@
     log-graph = log --graph --pretty=format:'%C(bold yellow)%h%C(reset) by %C(bold)%an%C(reset) [%ar] - %C(white)%s%C(reset) %C(bold green)%d%C(reset)'
 [core]
 	excludesfile = ~/.gitignore
+[status]
+	submoduleSummary = true
