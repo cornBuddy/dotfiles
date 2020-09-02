@@ -50,7 +50,7 @@ Plug 'mileszs/ack.vim' " {{{
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
-map <C-f> :Ack!<Space>
+map <C-f> :Ack!<Space><C-R>=expand('<cword>')<CR>
 " }}}
 
 Plug 'tpope/vim-fugitive' " {{{
