@@ -1,6 +1,5 @@
 {{ ansible_managed | comment }}
 
-# enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -9,18 +8,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
-# some git aliases
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit -m'
-alias gd='git diff'
-alias go='git checkout'
-alias gp='git pull --rebase ; git push'
-alias gl='git log-graph'
 
 alias xclip='xclip -selection clipboard'
 alias tree='tree -I "jspm_packages|node_modules|bower_components|deps"'
