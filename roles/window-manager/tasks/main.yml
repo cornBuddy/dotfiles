@@ -1,5 +1,7 @@
 ---
 
+- import_tasks: gpu-driver.yml
+
 - name: Install xorg
   pacman:
     state: latest
@@ -7,7 +9,6 @@
       - xorg-server
       - xorg-xinit
       - xorg-xkbcomp
-      - xf86-video-nouveau
   become: true
 
 - name: Install suckless deps

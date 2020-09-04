@@ -1,0 +1,23 @@
+---
+
+- name: Check is NVIDIA devices exist
+  shell: lspci | grep NVIDIA
+  ignore_errors: true
+  changed_when: false
+  register: driver_check
+
+- name: Set GPU driver name
+  set_fact:
+    wm_gpu_driver_name: >-
+      {{ wm_default_driver_name
+      if driver_check.failed
+      else wm_nvidia_driver_name }}
+
+- debug: var=wm_gpu_driver_name
+
+- name: Install xorg
+  pacman:
+    state: latest
+    name:
+      - "{{ wm_gpu_driver_name }}"
+  become: true
