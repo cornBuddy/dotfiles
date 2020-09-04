@@ -4,6 +4,7 @@
 
 - name: Install xorg
   pacman:
+    update_cache: true
     state: latest
     name:
       - xorg-server
@@ -11,30 +12,15 @@
       - xorg-xkbcomp
   become: true
 
-- name: Install suckless deps
-  pacman:
-    state: latest
-    name:
-      - make
-  become: true
+- import_tasks: suckless.yml
+  when: wm_install_suckless_soft | bool
 
-- name: Get suckess soft locations
-  find:
-    paths: "{{ wm_suckless_base_dir }}"
-    file_type: directory
-  register: content
-
-- set_fact:
-    wm_suckless_soft_dirs: >-
-      {{ content.files | map(attribute='path') | list }}
-
-- debug: var=wm_suckless_soft_dirs
-
-- name: Install suckless soft
-  shell: >-
-    make install -C {{ item }} && make clean -C {{ item }}
-  loop: "{{ wm_suckless_soft_dirs }}"
-  become: true
+- name: Create dirs
+  file:
+    state: directory
+    path: "{{ item }}"
+  loop:
+    - "{{ wm_xkbcomp_config_dir }}"
 
 - name: Configure
   template:

@@ -5,6 +5,7 @@ wm_suckless_base_dir: "{{ playbook_dir }}/suckless"
 wm_xkbcomp_config_dir: "{{ lookup('env', 'HOME') }}/.config/xkb"
 wm_xkbcomp_config_path: "{{ wm_xkbcomp_config_dir }}//my"
 
+wm_install_suckless_soft: true
 wm_xorg_dir: /etc/X11/xorg.conf.d
 
 wm_nvidia_driver_name: xf86-video-nouveau

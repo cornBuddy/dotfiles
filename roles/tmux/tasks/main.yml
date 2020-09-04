@@ -8,6 +8,7 @@
 
 - name: Install tmux
   pacman:
+    update_cache: true
     name:
       - tmux
     state: latest

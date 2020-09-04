@@ -2,6 +2,7 @@
 
 - name: Install alacritty
   pacman:
+    update_cache: true
     name:
       - alacritty
     state: latest

@@ -3,6 +3,7 @@
 - name: Install neovim
   pacman:
     state: latest
+    update_cache: true
     name:
       - neovim
       - the_silver_searcher

@@ -1,0 +1,32 @@
+---
+
+- name: Install suckless deps
+  pacman:
+    update_cache: true
+    state: latest
+    name:
+      - make
+      - gcc
+      - libx11
+      - libxrandr
+      - libxft
+      - libxinerama
+  become: true
+
+- name: Get suckess soft locations
+  find:
+    paths: "{{ wm_suckless_base_dir }}"
+    file_type: directory
+  register: content
+
+- set_fact:
+    wm_suckless_soft_dirs: >-
+      {{ content.files | map(attribute='path') | list }}
+
+- debug: var=wm_suckless_soft_dirs
+
+- name: Install suckless soft
+  shell: >-
+    make install -C {{ item }} && make clean -C {{ item }}
+  loop: "{{ wm_suckless_soft_dirs }}"
+  become: true

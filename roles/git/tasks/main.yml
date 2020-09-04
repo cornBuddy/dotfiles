@@ -2,6 +2,7 @@
 
 - name: Install git
   pacman:
+    update_cache: true
     name:
       - git
     state: latest
