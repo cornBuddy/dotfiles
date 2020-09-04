@@ -1,6 +1,0 @@
----
-
-x11_xinitrc_path: "{{ lookup('env', 'HOME') }}/.xinitrc"
-x11_suckless_base_dir: "{{ playbook_dir }}/suckless"
-x11_xkbcomp_config_dir: "{{ lookup('env', 'HOME') }}/.config/xkb"
-x11_xkbcomp_config_path: "{{ x11_xkbcomp_config_dir }}//my"

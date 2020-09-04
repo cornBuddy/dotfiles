@@ -19,20 +19,20 @@
 
 - name: Get suckess soft locations
   find:
-    paths: "{{ x11_suckless_base_dir }}"
+    paths: "{{ wm_suckless_base_dir }}"
     file_type: directory
   register: content
 
 - set_fact:
-    x11_suckless_soft_dirs: >-
+    wm_suckless_soft_dirs: >-
       {{ content.files | map(attribute='path') | list }}
 
-- debug: var=x11_suckless_soft_dirs
+- debug: var=wm_suckless_soft_dirs
 
 - name: Install suckless soft
   shell: >-
     make install -C {{ item }} && make clean -C {{ item }}
-  loop: "{{ x11_suckless_soft_dirs }}"
+  loop: "{{ wm_suckless_soft_dirs }}"
   become: true
 
 - name: Configure
@@ -41,6 +41,6 @@
     dest: "{{ item.dest }}"
   loop:
     - src: xinitrc.j2
-      dest: "{{ x11_xinitrc_path }}"
+      dest: "{{ wm_xinitrc_path }}"
     - src: xkbconf.j2
-      dest: "{{ x11_xkbcomp_config_path }}"
+      dest: "{{ wm_xkbcomp_config_path }}"
