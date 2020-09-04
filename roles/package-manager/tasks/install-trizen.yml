@@ -1,0 +1,33 @@
+---
+
+- name: Install trizen deps
+  pacman:
+    state: latest
+    update_cache: true
+    name:
+      - fakeroot
+      - binutils
+      - pacutils
+      - base-devel
+  become: true
+
+- name: Pull trizen
+  git:
+    dest: "{{ pacman_trizen_dir }}"
+    repo: "{{ pacman_trizen_repo }}"
+    force: true
+
+- name: Build trizen package
+  shell:
+    cmd: makepkg -si --noconfirm
+    chdir: "{{ pacman_trizen_dir }}"
+
+- name: Find trizen package
+  find:
+    paths: "{{ pacman_trizen_dir }}"
+    use_regex: true
+    patterns: '^trizen-[\d.]+.tar.gz$'
+  register: result
+
+- set_fact:
+    trizen_package: "{{ result.files[0].path }}"

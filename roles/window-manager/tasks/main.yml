@@ -2,7 +2,7 @@
 
 - import_tasks: gpu-driver.yml
 
-- name: Install xorg
+- name: Install base packages
   pacman:
     update_cache: true
     state: latest
@@ -11,6 +11,13 @@
       - xorg-server
       - xorg-xinit
       - xorg-xkbcomp
+  become: true
+
+- name: Install fonts
+  pacman:
+    update_cache: true
+    state: latest
+    name: "{{ wm_fonts_list }}"
   become: true
 
 - import_tasks: suckless.yml

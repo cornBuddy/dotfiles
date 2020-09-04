@@ -5,16 +5,11 @@ Vagrant.configure("2") do |config|
     inline: "sudo pacman -Rs --noconfirm virtualbox-guest-utils-nox || true"
   config.vm.provision "shell",
     inline: "sudo pacman -Syy --noconfirm virtualbox-guest-utils"
-  # config.vbguest.iso_path = "/usr/lib/virtualbox/additions/VBoxGuestAdditions.iso"
   config.vbguest.auto_update = false
   config.vbguest.no_remote = true
-  begin
-    config.vm.provision "ansible_local" do |ansible|
-      ansible.playbook = "provision.yml"
-      ansible.verbose = true
-      ansible.limit = "all,localhost"
-    end
-  rescue
-    retry
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "provision.yml"
+    ansible.verbose = true
+    ansible.limit = "all,localhost"
   end
 end
