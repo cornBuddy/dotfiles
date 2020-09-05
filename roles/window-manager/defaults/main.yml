@@ -4,9 +4,15 @@ wm_xinitrc_path: "{{ lookup('env', 'HOME') }}/.xinitrc"
 wm_suckless_base_dir: "{{ playbook_dir }}/suckless"
 wm_xkbcomp_config_dir: "{{ lookup('env', 'HOME') }}/.config/xkb"
 wm_xkbcomp_config_path: "{{ wm_xkbcomp_config_dir }}//my"
-
-wm_install_suckless_soft: true
 wm_xorg_dir: /etc/X11/xorg.conf.d
+wm_wayland_sessions_dir: /usr/share/wayland-sessions
 
 wm_nvidia_driver_name: xf86-video-nouveau
 wm_default_driver_name: xf86-video-vesa
+
+wm_install_dwm: false
+
+wm_install_dwl: true
+wm_dwl_git_repo: https://github.com/djpohly/dwl
+wm_dwl_dist: /tmp/dwl
+wm_dwl_binary: /usr/local/bin/dwl

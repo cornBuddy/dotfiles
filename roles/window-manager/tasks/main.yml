@@ -20,8 +20,11 @@
     name: "{{ wm_fonts_list }}"
   become: true
 
-- import_tasks: suckless.yml
-  when: wm_install_suckless_soft | bool
+- import_tasks: dwm.yml
+  when: wm_install_dwm | bool
+
+- import_tasks: dwl.yml
+  when: wm_install_dwl | bool
 
 - name: Create dirs
   file:
