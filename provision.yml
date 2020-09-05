@@ -2,6 +2,12 @@
 
 - hosts: localhost
   pre_tasks:
+    - name: Set timezone
+      file:
+        state: link
+        src: /usr/share/zoneinfo/Europe/Minsk
+        dest: /etc/localtime
+      become: true
   roles:
     - role: package-manager
     - role: zsh
