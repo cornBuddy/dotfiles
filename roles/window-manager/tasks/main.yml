@@ -34,14 +34,26 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    mode: 0644
+    mode: "{{ item.mode | default('0644') }}"
   become: true
   loop:
     - src: xinitrc.j2
       dest: "{{ wm_xinitrc_path }}"
+      mode: "0755"
     - src: xkbconf.j2
       dest: "{{ wm_xkbcomp_config_path }}"
     - src: xorg/50-touchpad.conf.j2
       dest: "{{ wm_xorg_dir }}/50-touchpad.conf"
     - src: xorg/60-mouse.conf.j2
       dest: "{{ wm_xorg_dir }}/60-mouse.conf"
+
+- name: Install display manager
+  shell:
+    trizen -Sy --noconfirm ly
+
+- name: Start display manager
+  systemd:
+    name: ly
+    daemon_reload: true
+    enabled: true
+  become: true

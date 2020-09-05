@@ -9,8 +9,8 @@
         dest: /etc/localtime
       become: true
   roles:
+    - role: user
     - role: package-manager
-    - role: zsh
     - role: neovim
     - role: tmux
     - role: window-manager
