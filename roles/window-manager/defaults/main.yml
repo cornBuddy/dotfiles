@@ -22,3 +22,6 @@ wm_dwl_binary: /usr/local/bin/dwl
 wm_install_sway: true
 wm_sway_packages:
   - sway
+  - swaylock
+  - swayidle
+wm_sway_config_path: "{{ lookup('env', 'HOME') }}/.config/sway"

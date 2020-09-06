@@ -1,24 +1,24 @@
 ---
 
-- import_tasks: gpu-driver.yml
-
-- import_tasks: xorg.yml
-
-- name: Install fonts
-  pacman:
-    update_cache: true
-    state: latest
-    name: "{{ wm_fonts_list }}"
-  become: true
-
-- import_tasks: dwm.yml
-  when: wm_install_dwm | bool
-
-- import_tasks: dwl.yml
-  when: wm_install_dwl | bool
+# - import_tasks: gpu-driver.yml
+#
+# - import_tasks: xorg.yml
+#
+# - name: Install fonts
+#   pacman:
+#     update_cache: true
+#     state: latest
+#     name: "{{ wm_fonts_list }}"
+#   become: true
+#
+# - import_tasks: dwm.yml
+#   when: wm_install_dwm | bool
+#
+# - import_tasks: dwl.yml
+#   when: wm_install_dwl | bool
 
 - import_tasks: sway.yml
-  when: wm_install_dwl | bool
+  when: wm_install_sway | bool
 
-- import_tasks: display-manager.yml
-  when: wm_install_display_manager | bool
+# - import_tasks: display-manager.yml
+#   when: wm_install_display_manager | bool

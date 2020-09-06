@@ -1,0 +1,14 @@
+---
+
+- name: Install sway
+  pacman:
+    update_cache: true
+    state: latest
+    name: "{{ wm_sway_packages }}"
+  become: true
+
+- name: Configure sway
+  template:
+    src: sway/config.j2
+    dest: "{{ wm_sway_config_path }}"
+  become: true
