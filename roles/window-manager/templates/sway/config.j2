@@ -54,6 +54,10 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+input * {
+    xkb_file {{ wm_xkbcomp_config_path }}
+}
+
 ### Key bindings
 #
 # Basics:
@@ -208,6 +212,7 @@ bar {
         background #323232
         inactive_workspace #32323200 #32323200 #5c5c5c
     }
+    font Terminus 14
 }
 
 include /etc/sway/config.d/*
