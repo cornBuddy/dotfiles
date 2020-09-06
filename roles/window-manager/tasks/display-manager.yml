@@ -1,0 +1,12 @@
+---
+
+- name: Install display manager
+  shell:
+    trizen -Sy --noconfirm ly
+
+- name: Start display manager
+  systemd:
+    name: ly
+    daemon_reload: true
+    enabled: true
+  become: true

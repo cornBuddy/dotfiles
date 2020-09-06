@@ -2,16 +2,7 @@
 
 - import_tasks: gpu-driver.yml
 
-- name: Install base packages
-  pacman:
-    update_cache: true
-    state: latest
-    name:
-      - xorg
-      - xorg-server
-      - xorg-xinit
-      - xorg-xkbcomp
-  become: true
+- import_tasks: xorg.yml
 
 - name: Install fonts
   pacman:
@@ -26,37 +17,8 @@
 - import_tasks: dwl.yml
   when: wm_install_dwl | bool
 
-- name: Create dirs
-  file:
-    state: directory
-    path: "{{ item }}"
-  loop:
-    - "{{ wm_xkbcomp_config_dir }}"
+- import_tasks: sway.yml
+  when: wm_install_dwl | bool
 
-- name: Configure
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    mode: "{{ item.mode | default('0644') }}"
-  become: true
-  loop:
-    - src: xinitrc.j2
-      dest: "{{ wm_xinitrc_path }}"
-      mode: "0755"
-    - src: xkbconf.j2
-      dest: "{{ wm_xkbcomp_config_path }}"
-    - src: xorg/50-touchpad.conf.j2
-      dest: "{{ wm_xorg_dir }}/50-touchpad.conf"
-    - src: xorg/60-mouse.conf.j2
-      dest: "{{ wm_xorg_dir }}/60-mouse.conf"
-
-- name: Install display manager
-  shell:
-    trizen -Sy --noconfirm ly
-
-- name: Start display manager
-  systemd:
-    name: ly
-    daemon_reload: true
-    enabled: true
-  become: true
+- import_tasks: display-manager.yml
+  when: wm_install_display_manager | bool

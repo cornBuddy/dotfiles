@@ -10,9 +10,15 @@ wm_wayland_sessions_dir: /usr/share/wayland-sessions
 wm_nvidia_driver_name: xf86-video-nouveau
 wm_default_driver_name: xf86-video-vesa
 
+wm_install_display_manager: true
+
 wm_install_dwm: false
 
-wm_install_dwl: true
+wm_install_dwl: false
 wm_dwl_git_repo: https://github.com/djpohly/dwl
 wm_dwl_dist: /tmp/dwl
 wm_dwl_binary: /usr/local/bin/dwl
+
+wm_install_sway: true
+wm_sway_packages:
+  - sway
