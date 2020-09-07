@@ -3,3 +3,4 @@
 wm_fonts_list:
   - terminus-font-otb
   - ttf-dejavu
+  - pango

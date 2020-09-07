@@ -18,6 +18,7 @@
   when: wm_install_dwl | bool
 
 - import_tasks: sway.yml
+  tags: [sway]
   when: wm_install_sway | bool
 
 - import_tasks: display-manager.yml

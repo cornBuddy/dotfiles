@@ -24,4 +24,5 @@ wm_sway_packages:
   - sway
   - swaylock
   - swayidle
-wm_sway_config_path: "{{ lookup('env', 'HOME') }}/.config/sway"
+wm_sway_config_dir: "{{ lookup('env', 'HOME') }}/.config/sway"
+wm_sway_config_path: "{{ wm_sway_config_dir }}/config"

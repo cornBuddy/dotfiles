@@ -7,8 +7,12 @@
     name: "{{ wm_sway_packages }}"
   become: true
 
+- name: Create dir for sway config
+  file:
+    state: directory
+    path: "{{ wm_sway_config_dir }}"
+
 - name: Configure sway
   template:
     src: sway/config.j2
     dest: "{{ wm_sway_config_path }}"
-  become: true
