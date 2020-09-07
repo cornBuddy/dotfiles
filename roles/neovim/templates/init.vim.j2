@@ -1,31 +1,28 @@
+{{ ansible_managed | comment(decoration='" ') }}
 let mapleader = ","
 let g:mapleader = ","
 
-" ********** PLUGINS ********** {{{
+" ********** PLUGINS **********
 if &compatible
     set nocompatible
 endif
 
 " Required:
-call plug#begin('~/.local/share/nvim/plugged')
+call plug#begin('{{ neovim_plugins_dir }}')
 
 Plug 'junegunn/vim-plug'
 
-Plug 'scrooloose/nerdtree' " {{{
+Plug 'scrooloose/nerdtree'
 map <leader>t :NERDTreeToggle<CR>
-" }}}
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'easymotion/vim-easymotion'
 
-Plug 'w0rp/ale'
-
-Plug 'blueyed/vim-diminactive' " {{{
+Plug 'blueyed/vim-diminactive'
 let g:diminactive_enable_focus = 1
-" }}}
 
-Plug 'ctrlpvim/ctrlp.vim' " {{{
+Plug 'ctrlpvim/ctrlp.vim'
 if executable('ag')
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
     let g:ctrlp_user_command =
@@ -44,67 +41,46 @@ let g:ctrlp_switch_buffer = 'et'
 let g:ctrlp_types = ['fil', 'buf']
 let g:ctrlp_extensions = ['tag']
 map <C-b> :CtrlPBuffer<CR>
-" }}}
 
-Plug 'mileszs/ack.vim' " {{{
+Plug 'mileszs/ack.vim'
 if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 map <C-f> :Ack!<Space><C-R>=expand('<cword>')<CR>
-" }}}
 
-Plug 'tpope/vim-fugitive' " {{{
-nmap <silent> <leader>gp :Gpush<CR>
-noremap <silent> <leader>gs :Gstatus<CR>
-" }}}
+Plug 'editorconfig/editorconfig-vim'
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp' " {{{
+Plug 'pearofducks/ansible-vim'
+
+" LSP
+Plug 'prabirshrestha/vim-lsp'
 let g:lsp_async_completion = 1
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio'] },
-        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..')) },
-        \ 'whitelist': ['javascript', 'javascript.jsx']
-        \ })
-    autocmd FileType javascript setlocal omnifunc=lsp#complete
-endif
-if executable('dockerfile-language-server-nodejs')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'dockerfile-language-server-nodejs',
-        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'dockerfile-language-server-nodejs --stdio'] },
-        \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..')) },
-        \ 'whitelist': ['Dockerfile']
-        \ })
-    autocmd FileType javascript setlocal omnifunc=lsp#complete
-endif
 nnoremap <silent> K :LspHover<CR>
 nnoremap <silent> gd :LspDefinition<CR>
 nnoremap <silent> <F2> :LspRename<CR>
 nnoremap <silent> <F10> :LspReferences<CR>
-" }}}
 
-Plug 'nathanaelkane/vim-indent-guides' " {{{
+Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'ctrlp']
 let g:indent_guides_default_mapping = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
-" }}}
 
-Plug 'editorconfig/editorconfig-vim'
+Plug 'mattn/vim-lsp-settings'
 
-Plug 'ap/vim-css-color'
+Plug 'prabirshrestha/asyncomplete.vim'
 
-Plug 'pearofducks/ansible-vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+Plug 'dense-analysis/ale'
 
 " colors
 Plug 'JarrodCTaylor/spartan'
 
 " Required:
-call plug#end() " }}}
+call plug#end()
 
 " -----------------------------------------------------------------------------
 filetype plugin indent on

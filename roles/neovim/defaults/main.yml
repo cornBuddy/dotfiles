@@ -1,6 +1,8 @@
 ---
 
 neovim_config_path: "{{ lookup('env', 'HOME') }}/.config/nvim"
+neovim_plugins_dir: >-
+  {{ lookup('env', 'HOME') }}/.local/share/nvim/plugged
 neovim_plug_dir: >-
   {{ lookup('env', 'HOME') }}/.local/share/nvim/site/autoload
 neovim_plug_url: >-

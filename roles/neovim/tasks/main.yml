@@ -24,19 +24,27 @@
     force: true
 
 - name: Configure
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: true
+  loop:
+    - src: init.vim.j2
+      dest: "{{ neovim_config_path }}/init.vim"
+  notify:
+    - install plugins
+
+- name: Setup ftplugin
   copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     force: true
   loop:
-    - src: init.vim
-      dest: "{{ neovim_config_path }}/init.vim"
     - src: ftplugin
       dest: "{{ neovim_config_path }}/after"
-  notify:
-    - install plugins
 
 - name: Update plugins
   shell: >-
     nvim --headless +PlugUpgrade +qa
+    && nvim --headless +PlugClean +qa
     && nvim --headless +PlugUpdate +qa
