@@ -46,5 +46,4 @@
 - name: Update plugins
   shell: >-
     nvim --headless +PlugUpgrade +qa
-    && nvim --headless +PlugClean +qa
     && nvim --headless +PlugUpdate +qa
