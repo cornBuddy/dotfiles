@@ -55,14 +55,6 @@ Plug 'pearofducks/ansible-vim'
 Plug 'hashivim/vim-terraform'
 let g:terraform_fmt_on_save=1
 
-" LSP
-Plug 'prabirshrestha/vim-lsp'
-let g:lsp_async_completion = 1
-nnoremap <silent> K :LspHover<CR>
-nnoremap <silent> gd :LspDefinition<CR>
-nnoremap <silent> <F2> :LspRename<CR>
-nnoremap <silent> <F10> :LspReferences<CR>
-
 Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
@@ -71,16 +63,34 @@ let g:indent_guides_default_mapping = 0
 let g:indent_guides_guide_size = 1
 let g:indent_guides_start_level = 2
 
+" LSP
+Plug 'prabirshrestha/vim-lsp'
+let g:lsp_async_completion = 1
+let g:lsp_virtual_text_enabled = 0
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_echo_delay = 200
+nnoremap <silent> K :LspHover<CR>
+nnoremap <silent> gd :LspDefinition<CR>
+nnoremap <silent> <F2> :LspRename<CR>
+nnoremap <silent> <F10> :LspReferences<CR>
+
 Plug 'mattn/vim-lsp-settings'
 
 Plug 'prabirshrestha/asyncomplete.vim'
 
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-Plug 'dense-analysis/ale'
-
 " colors
 Plug 'JarrodCTaylor/spartan'
+
+Plug 'arcticicestudio/nord-vim'
+
+" enable true colors
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 " Required:
 call plug#end()
@@ -108,7 +118,7 @@ set noerrorbells novisualbell t_vb= tm=500
 set foldcolumn=0
 syntax enable
 set background=dark
-colorscheme spartan
+colorscheme nord
 set ffs=unix,dos,mac
 set nobackup nowb noswapfile backupcopy=yes
 set shiftwidth=4 tabstop=4 expandtab
@@ -127,16 +137,6 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
-
-" ********** COLORS **********
-highlight ColorColumn ctermbg=235
-highlight myWarn ctermbg=166 ctermfg=255 cterm=underline
-highlight myWarnSign ctermfg=166 ctermbg=236
-
-highlight link CursorLine ColorColumn
-highlight link CursorColumn ColorColumn
-highlight link IndentGuidesOdd  ColorColumn
-highlight link IndentGuidesEven ColorColumn
 
 " ********** FUNCTIONS **********
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
