@@ -14,9 +14,6 @@
 - import_tasks: dwm.yml
   when: wm_install_dwm | bool
 
-- import_tasks: dwl.yml
-  when: wm_install_dwl | bool
-
 - import_tasks: sway.yml
   tags: [sway]
   when: wm_install_sway | bool
