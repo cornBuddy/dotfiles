@@ -10,9 +10,17 @@
 - name: Create dir for sway config
   file:
     state: directory
-    path: "{{ wm_sway_config_dir }}"
+    path: "{{ item }}"
+  loop:
+    - "{{ wm_sway_config_dir }}"
+    - "{{ wm_waybar_config_dir }}"
 
 - name: Configure sway
   template:
-    src: sway/config.j2
-    dest: "{{ wm_sway_config_path }}"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: sway/config.j2
+      dest: "{{ wm_sway_config_path }}"
+    - src: waybar/config.j2
+      dest: "{{ wm_waybar_config_dir }}/config"
