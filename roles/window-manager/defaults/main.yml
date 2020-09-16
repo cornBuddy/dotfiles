@@ -25,3 +25,5 @@ wm_sway_packages:
 wm_sway_config_dir: "{{ lookup('env', 'HOME') }}/.config/sway"
 wm_sway_config_path: "{{ wm_sway_config_dir }}/config"
 wm_waybar_config_dir: "{{ lookup('env', 'HOME') }}/.config/waybar"
+wm_waybar_style_path: "{{ wm_waybar_config_dir }}/style.css"
+wm_sway_layout_script_path: "{{ wm_waybar_config_dir }}/layout.sh"

@@ -19,8 +19,14 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default(0644) }}"
   loop:
     - src: sway/config.j2
       dest: "{{ wm_sway_config_path }}"
     - src: waybar/config.j2
       dest: "{{ wm_waybar_config_dir }}/config"
+    - src: waybar/layout.sh.j2
+      mode: '0755'
+      dest: "{{ wm_sway_layout_script_path }}"
+    - src: waybar/style.css.j2
+      dest: "{{ wm_waybar_style_path }}"

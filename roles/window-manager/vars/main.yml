@@ -4,3 +4,6 @@ wm_fonts_list:
   - terminus-font-otb
   - ttf-dejavu
   - pango
+  - ttf-fira-code
+  - ttf-font-awesome
+  - cantarell-fonts
