@@ -1,0 +1,21 @@
+{{ ansible_managed | comment }}
+
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty -e tmux
+set $uifont "Cantarell 14px"
+set $highlight #3daee9
+set $prompt #18b218
+set $menu bemenu-run --fn $uifont --prompt "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
+
+# Workspaces
+set $workspace_www 1:www
+set $workspace_terminals 2:terminals
+set $workspace_mail 3:mail
+set $workspace_messenger 4:messenger

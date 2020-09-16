@@ -23,6 +23,14 @@
   loop:
     - src: sway/config.j2
       dest: "{{ wm_sway_config_path }}"
+    - src: sway/vars.j2
+      dest: "{{ wm_sway_config_dir }}/vars"
+    - src: sway/keys.j2
+      dest: "{{ wm_sway_config_dir }}/keys"
+    - src: sway/io.j2
+      dest: "{{ wm_sway_config_dir }}/io"
+    - src: sway/style.j2
+      dest: "{{ wm_sway_config_dir }}/style"
     - src: waybar/config.j2
       dest: "{{ wm_waybar_config_dir }}/config"
     - src: waybar/layout.sh.j2
