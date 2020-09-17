@@ -8,14 +8,7 @@ include {{ wm_sway_config_dir }}/io
 
 include {{ wm_sway_config_dir }}/keys
 
-### Idle configuration
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w \
-    timeout 300 'swaylock -f -c 000000' \
-    timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -f -c 000000'
+include {{ wm_sway_config_dir }}/autostart
 
 
 ### Status Bar:

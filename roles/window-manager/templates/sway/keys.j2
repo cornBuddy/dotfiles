@@ -19,12 +19,6 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-# media keys
-bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 2+
-bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer sset Master 2-
-bindsym --locked XF86AudioMute exec --no-startup-id amixer sset Master toggle
-bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 10%+
 
 # Moving around:
 # Move your focus around
@@ -98,3 +92,14 @@ mode "resize" {
   bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
+# media keys
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer sset Master 2+
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer sset Master 2-
+bindsym --locked XF86AudioMute exec --no-startup-id amixer sset Master toggle
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 10%+
+
+# screenshot
+bindsym Print exec grim {{ wm_sway_screenshot_dir }}/screen-"$(date +%s)".png
+bindsym $mod+Print exec grim -g "$(slurp)" {{ wm_sway_screenshot_dir }}/screen-"$(date +%s)".png

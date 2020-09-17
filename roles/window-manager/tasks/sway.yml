@@ -14,6 +14,7 @@
   loop:
     - "{{ wm_sway_config_dir }}"
     - "{{ wm_waybar_config_dir }}"
+    - "{{ wm_sway_screenshot_dir }}"
 
 - name: Configure sway
   template:
@@ -31,6 +32,8 @@
       dest: "{{ wm_sway_config_dir }}/io"
     - src: sway/style.j2
       dest: "{{ wm_sway_config_dir }}/style"
+    - src: sway/autostart.j2
+      dest: "{{ wm_sway_config_dir }}/autostart"
     - src: waybar/config.j2
       dest: "{{ wm_waybar_config_dir }}/config"
     - src: waybar/layout.sh.j2
