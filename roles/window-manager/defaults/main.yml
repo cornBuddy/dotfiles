@@ -23,7 +23,6 @@ wm_sway_packages:
   - brightnessctl
   - waybar
   - mako
-  - dex
   - slurp
   - grim
 wm_sway_config_dir: "{{ lookup('env', 'HOME') }}/.config/sway"
