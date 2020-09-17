@@ -13,10 +13,10 @@
 
     "modules-left": [
         "sway/workspaces",
-        "sway/mode"
+        "sway/mode",
+        "sway/window",
     ],
     "modules-center": [
-        "sway/window"
     ],
     "modules-right": [
         "backlight",
@@ -104,10 +104,10 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "  {bandwidthUpBits} {bandwidthDownBits} ({signalStrength}%)", // Icon: wifi
+        "format-wifi": "  ({signalStrength}%)", // Icon: wifi
         "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {essid} {frequency}"
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {essid} {frequency}\n {bandwidthUpBits} {bandwidthDownBits} "
     },
 
     "sway/mode": {
