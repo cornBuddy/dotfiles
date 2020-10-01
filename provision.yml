@@ -1,6 +1,7 @@
 ---
 
 - hosts: localhost
+  gather_facts: false
   pre_tasks:
     - name: Set timezone
       file:

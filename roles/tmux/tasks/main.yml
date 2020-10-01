@@ -14,7 +14,20 @@
     state: latest
   become: true
 
+- name: Install gitmux
+  unarchive:
+    src: "{{ tmux_gitmux_download_url }}"
+    dest: /usr/local/bin
+    mode: 0755
+    remote_src: true
+  become: true
+
 - name: Configure
   template:
-    src: tmux.conf.j2
-    dest: "{{ tmux_config_path }}"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: tmux.conf.j2
+      dest: "{{ tmux_config_path }}"
+    - src: gitmux.conf.j2
+      dest: "{{ tmux_gitmux_config_path }}"
