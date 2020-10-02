@@ -11,8 +11,14 @@
       become: true
   roles:
     - role: user
+      tags: user
     - role: package-manager
+      tags: package-manager
     - role: neovim
+      tags: neovim
     - role: tmux
+      tags: tmux
     - role: window-manager
+      tags: window-manager
     - role: alacritty
+      tags: alacritty
