@@ -29,16 +29,7 @@
     - src: zsh_aliases.j2
       dest: "{{ lookup('env', 'HOME') }}/.zsh_aliases"
 
-- name: Create custom themes dir
-  file:
-    state: directory
-    path: "{{ zsh_hom_my_zsh_external_themes_path }}"
-
-- name: Download external themes
-  get_url:
-    url: "{{ item }}"
-    dest: "{{ zsh_hom_my_zsh_external_themes_path }}"
-  loop: "{{ zsh_hom_my_zsh_external_themes }}"
+- import_tasks: oh-my-zsh-custom.yml
 
 - name: Set zsh as default shell
   user:
