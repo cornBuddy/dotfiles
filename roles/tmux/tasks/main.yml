@@ -31,3 +31,10 @@
       dest: "{{ tmux_config_path }}"
     - src: gitmux.conf.j2
       dest: "{{ tmux_gitmux_config_path }}"
+
+- name: Enable tmux-continuum
+  systemd:
+    state: restarted
+    enabled: true
+    scope: user
+    name: tmux
