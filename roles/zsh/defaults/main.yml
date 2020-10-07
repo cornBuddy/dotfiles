@@ -7,7 +7,7 @@ zsh_oh_my_zsh_custom: >-
 zsh_oh_my_zsh_custom_plugins_dir: >-
   {{ zsh_oh_my_zsh_custom }}/plugins
 zsh_oh_my_zsh_external_themes:
-  - https://gist.githubusercontent.com/cornBuddy/a6a010252e15960485fb1ce47b8635df/raw/34e5900d7f433c0b49493498e3d7e2f3989b6f98/saf.zsh-theme
+  - https://gist.githubusercontent.com/cornBuddy/a6a010252e15960485fb1ce47b8635df/raw/e79a86b7072ccb263837795597628727f654da49/saf.zsh-theme
 zsh_oh_my_zsh_external_plugins:
   - repo: https://github.com/superbrothers/zsh-kubectl-prompt
     path: "{{ zsh_oh_my_zsh_custom_plugins_dir }}/zsh-kubectl-prompt"
