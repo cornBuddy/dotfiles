@@ -1,11 +1,10 @@
 ---
 
 - name: Install git
-  pacman:
-    update_cache: true
+  package:
     name:
       - git
-    state: latest
+    state: present
   become: true
 
 - name: Configure

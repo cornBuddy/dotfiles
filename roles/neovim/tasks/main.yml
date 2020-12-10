@@ -1,12 +1,11 @@
 ---
 
 - name: Install neovim
-  pacman:
-    state: latest
-    update_cache: true
+  package:
+    state: present
     name:
       - neovim
-      - the_silver_searcher
+      - "{{ neovim_the_silver_searcher_package_name }}"
   become: true
 
 - name: Create plug dirs

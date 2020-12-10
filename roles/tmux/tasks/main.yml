@@ -7,11 +7,10 @@
     force: true
 
 - name: Install tmux
-  pacman:
-    update_cache: true
+  package:
     name:
       - tmux
-    state: latest
+    state: present
   become: true
 
 - name: Install gitmux

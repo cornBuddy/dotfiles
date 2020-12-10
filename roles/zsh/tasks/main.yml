@@ -1,12 +1,11 @@
 ---
 
 - name: Install zsh
-  pacman:
-    update_cache: true
+  package:
     name:
       - zsh
       - zsh-completions
-    state: latest
+    state: present
   become: true
 
 - name: Pull oh-my-zsh
