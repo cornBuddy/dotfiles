@@ -1,3 +1,12 @@
 ---
 
 alacritty_config_dir: "{{ lookup('env', 'HOME') }}/.config/alacritty"
+
+alacritty_font: >-
+  {{ 'Anonymous Pro for Powerline'
+  if ansible_distribution == 'MacOSX'
+  else 'Terminus' }}
+alacritty_font_size: >-
+  {{ 13
+  if ansible_distribution == 'MacOSX'
+  else 10 }}

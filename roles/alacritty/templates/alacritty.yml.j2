@@ -3,15 +3,15 @@
 
 font:
   normal:
-    family: Terminus
+    family: {{ alacritty_font }}
   bold:
-    family: Terminus
+    family: {{ alacritty_font }}
   italic:
-    family: Terminus
-  size: 10
+    family: {{ alacritty_font }}
+  size: {{ alacritty_font_size }}
   offset:
-    x: 0
-    y: 0
+    x: -1
+    y: 2
   glyph_offset:
     x: 0
     y: 0
@@ -67,6 +67,7 @@ schemes:
 colors: *ref_0
 window:
   startup_mode: {{ "SimpleFullscreen" if ansible_distribution == 'MacOSX' else "Fullscreen" }}
+  dynamic_padding: true
 cursor:
   style: Block
   unfocused_hollow: true
