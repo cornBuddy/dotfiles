@@ -3,7 +3,7 @@
 alacritty_config_dir: "{{ lookup('env', 'HOME') }}/.config/alacritty"
 
 alacritty_font: >-
-  {{ 'Anonymous Pro for Powerline'
+  {{ 'Anonymice Nerd Font Mono'
   if ansible_distribution == 'MacOSX'
   else 'Terminus' }}
 alacritty_font_size: >-
