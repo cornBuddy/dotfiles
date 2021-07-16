@@ -1,4 +1,5 @@
 ---
+{{ ansible_managed | comment }}
 
 font:
   normal:
@@ -64,9 +65,8 @@ schemes:
       cyan: '#6d96a5'
       white: '#aeb3bb'
 colors: *ref_0
-mouse:
-  url:
-    launcher: xdg-open
+window:
+  startup_mode: {{ "SimpleFullscreen" if ansible_distribution == 'MacOSX' else "Fullscreen" }}
 cursor:
   style: Block
   unfocused_hollow: true

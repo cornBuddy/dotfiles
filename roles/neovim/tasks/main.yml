@@ -6,7 +6,7 @@
     name:
       - neovim
       - "{{ neovim_the_silver_searcher_package_name }}"
-  become: true
+  become: false
 
 - name: Create plug dirs
   file:

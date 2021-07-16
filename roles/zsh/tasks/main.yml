@@ -6,7 +6,7 @@
       - zsh
       - zsh-completions
     state: present
-  become: true
+  become: "{{ ansible_distribution != 'MacOSX' }}"
 
 - name: Pull oh-my-zsh
   git:
@@ -35,3 +35,4 @@
     name: "{{ lookup('env', 'USER') }}"
     shell: /bin/zsh
   become: true
+  when: ansible_distribution != 'MacOSX'

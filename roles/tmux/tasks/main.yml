@@ -11,7 +11,7 @@
     name:
       - tmux
     state: present
-  become: true
+  become: false
 
 - name: Install gitmux
   unarchive:
@@ -37,3 +37,4 @@
     enabled: true
     scope: user
     name: tmux
+  when: ansible_distribution != 'MacOSX'

@@ -1,11 +1,18 @@
 ---
 
-- name: Install alacritty
-  pacman:
-    update_cache: true
+- name: Install alacritty (mac)
+  homebrew_cask:
     name:
       - alacritty
     state: latest
+  when: ansible_distribution == 'MacOSX'
+
+- name: Install alacritty (linux)
+  package:
+    name:
+      - alacritty
+    state: latest
+  when: ansible_distribution != 'MacOSX'
   become: true
 
 - name: Create config dir
@@ -14,6 +21,6 @@
     state: directory
 
 - name: Copy config file
-  copy:
-    src: alacritty.yml
+  template:
+    src: alacritty.yml.j2
     dest: "{{ alacritty_config_dir }}/alacritty.yml"

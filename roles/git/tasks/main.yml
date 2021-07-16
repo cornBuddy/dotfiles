@@ -5,7 +5,7 @@
     name:
       - git
     state: present
-  become: true
+  when: ansible_distribution != 'MacOSX'
 
 - name: Configure
   template:

@@ -7,4 +7,8 @@ tmux_tpm_git_url: https://github.com/tmux-plugins/tpm
 tmux_gitmux_version: 0.7.4
 tmux_gitmux_config_path: "{{ lookup('env', 'HOME') }}/.gitmux.conf"
 tmux_gitmux_download_url: >-
-  https://github.com/arl/gitmux/releases/download/v{{ tmux_gitmux_version }}/gitmux_{{ tmux_gitmux_version }}_linux_amd64.tar.gz
+  https://github.com/arl/gitmux/releases/download/v{{
+    tmux_gitmux_version
+  }}/gitmux_{{ tmux_gitmux_version }}_{{
+    "macOS" if ansible_distribution == "MacOSX" else "linux"
+  }}_amd64.tar.gz
