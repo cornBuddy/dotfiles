@@ -1,3 +1,4 @@
+{# TODO: switch to lua based config #}
 {{ ansible_managed | comment(decoration='" ') }}
 let mapleader = ","
 let g:mapleader = ","
@@ -76,7 +77,6 @@ Plug 'pearofducks/ansible-vim'
 Plug 'jvirtanen/vim-hcl'
 
 Plug 'hashivim/vim-terraform'
-" NOTE: candidate for removal if lsp formatting will work
 let g:terraform_fmt_on_save=1
 
 Plug 'towolf/vim-helm'
@@ -93,6 +93,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'ray-x/lsp_signature.nvim'
 
 Plug 'onsails/lspkind-nvim'
+
+" autocompletion
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
 
 " ui
 Plug 'vim-airline/vim-airline'
@@ -194,7 +198,8 @@ local function on_attach(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
   -- Enable completion triggered by <c-x><c-o>
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- TODO: switch to https://github.com/hrsh7th/nvim-cmp or something
+  -- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
   -- Mappings.
   local opts = { noremap = true, silent = true }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -270,6 +275,50 @@ require "lsp_signature".setup({
   zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
   padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
 })
+
+-- Autocompletion
+-- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
+vim.o.completeopt = 'menuone,noselect'
+local lspkind = require('lspkind')
+local cmp = require 'cmp'
+cmp.setup {
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.kind = lspkind.presets.default[vim_item.kind]
+      return vim_item
+    end
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
+      else
+        fallback()
+      end
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+  },
+}
+
 EOF
 
 " -----------------------------------------------------------------------------
