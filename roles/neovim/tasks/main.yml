@@ -3,9 +3,7 @@
 - name: Install neovim
   package:
     state: present
-    name:
-      - neovim
-      - "{{ neovim_the_silver_searcher_package_name }}"
+    name: "{{ neovim_packages }}"
   become: false
 
 - name: Create plug dirs
@@ -32,6 +30,7 @@
       dest: "{{ neovim_config_path }}/init.vim"
   notify:
     - install plugins
+    - install language servers
 
 - name: Setup ftplugin
   copy:

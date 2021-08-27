@@ -11,9 +11,6 @@
     name: "{{ wm_fonts_list }}"
   become: true
 
-- import_tasks: dwm.yml
-  when: wm_install_dwm | bool
-
 - import_tasks: sway.yml
   tags: [sway]
   when: wm_install_sway | bool

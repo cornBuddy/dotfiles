@@ -12,41 +12,62 @@ call plug#begin('{{ neovim_plugins_dir }}')
 
 Plug 'junegunn/vim-plug'
 
-Plug 'scrooloose/nerdtree'
-map <leader>t :NERDTreeToggle<CR>
+Plug 'kyazdani42/nvim-web-devicons'
 
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'kyazdani42/nvim-tree.lua'
+let g:nvim_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★",
+    \   'deleted': "",
+    \   'ignored': "◌"
+    \   },
+    \ 'folder': {
+    \   'arrow_open': "",
+    \   'arrow_closed': "",
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   },
+    \   'lsp': {
+    \     'hint': "",
+    \     'info': "",
+    \     'warning': "",
+    \     'error': "",
+    \   }
+    \ }
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_follow = 1
+let g:nvim_tree_hide_dotfiles = 1
+let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_auto_open = 1
+nnoremap <leader>t :NvimTreeToggle<CR>
+nnoremap <C-r> :NvimTreeRefresh<CR>
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'easymotion/vim-easymotion'
 
 Plug 'blueyed/vim-diminactive'
 let g:diminactive_enable_focus = 1
 
-Plug 'ctrlpvim/ctrlp.vim'
-if executable('ag')
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command =
-        \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$" --ignore-dir "node_modules"'
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-else
-    " Fall back to using git ls-files if Ag is not available
-    let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-endif
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'e'
-let g:ctrlp_dont_split = 'NERD_tree_2'
-let g:ctrlp_switch_buffer = 'et'
-let g:ctrlp_types = ['fil', 'buf']
-let g:ctrlp_extensions = ['tag']
-map <C-b> :CtrlPBuffer<CR>
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-b> <cmd>Telescope buffers<cr>
+nnoremap <C-f> <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-Plug 'mileszs/ack.vim'
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-endif
-map <C-f> :Ack!<Space><C-R>=expand('<cword>')<CR>
+Plug 'folke/todo-comments.nvim'
+nnoremap <silent> <F10> :TodoTelescope<CR>
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -55,39 +76,23 @@ Plug 'pearofducks/ansible-vim'
 Plug 'jvirtanen/vim-hcl'
 
 Plug 'hashivim/vim-terraform'
+" NOTE: candidate for removal if lsp formatting will work
 let g:terraform_fmt_on_save=1
 
 Plug 'towolf/vim-helm'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
-Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'ctrlp']
-let g:indent_guides_default_mapping = 0
-let g:indent_guides_guide_size = 1
-let g:indent_guides_start_level = 2
+Plug 'lukas-reineke/indent-blankline.nvim'
+let g:indent_blankline_show_first_indent_level = v:false
 
 " LSP
-Plug 'prabirshrestha/async.vim'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'neovim/nvim-lspconfig'
 
-Plug 'prabirshrestha/vim-lsp'
-let g:lsp_async_completion = 1
-let g:lsp_virtual_text_enabled = 0
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_echo_delay = 200
-let g:lsp_document_code_action_signs_enabled = 0
-nnoremap <silent> K :LspHover<CR>
-nnoremap <silent> gd :LspDefinition<CR>
-nnoremap <silent> <F2> :LspRename<CR>
-nnoremap <silent> <F10> :LspReferences<CR>
+Plug 'ray-x/lsp_signature.nvim'
 
-Plug 'mattn/vim-lsp-settings'
-
-Plug 'prabirshrestha/asyncomplete.vim'
-
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'onsails/lspkind-nvim'
 
 " ui
 Plug 'vim-airline/vim-airline'
@@ -99,8 +104,6 @@ let g:airline_theme = 'minimalist'
 let g:airline_powerline_fonts = 1
 
 " colors
-Plug 'JarrodCTaylor/spartan'
-
 Plug 'arcticicestudio/nord-vim'
 
 " enable true colors
@@ -112,6 +115,162 @@ endif
 
 " Required:
 call plug#end()
+lua << EOF
+require("todo-comments").setup {
+  signs = false,
+}
+
+require("indent_blankline").setup {
+    space_char_blankline = " ",
+    show_current_context = true,
+}
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {
+    "bash",
+    "comment",
+    "dockerfile",
+    "hcl",
+    "python",
+    "rust",
+    "toml",
+    "yaml",
+  },
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_config = {
+      horizontal = {
+        mirror = false,
+      },
+      vertical = {
+        mirror = false,
+      },
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    winblend = 0,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    color_devicons = true,
+    use_less = true,
+    path_display = {},
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+  }
+}
+
+local function on_attach(_, bufnr)
+  local function buf_set_keymap(...)
+    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  end
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+  -- Mappings.
+  local opts = { noremap = true, silent = true }
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+  buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+  buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+  buf_set_keymap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  buf_set_keymap("n", "<C-space>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  buf_set_keymap("v", "<C-space>", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
+  buf_set_keymap("n", "[", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+  buf_set_keymap("n", "]", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+  buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+  buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+end
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
+}
+
+local function setup_servers()
+  require'lspinstall'.setup()
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    require'lspconfig'[server].setup{
+      on_attach = on_attach,
+      capabilities = capabilities,
+      flags = {
+        debounce_text_changes = 300,
+      },
+    }
+  end
+end
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
+
+require "lsp_signature".setup({
+  bind = true,
+  doc_lines = 2,
+  floating_window = true,
+  fix_pos = true,
+  hint_enable = true,
+  hint_prefix = " ",
+  hint_scheme = "String",
+  use_lspsaga = false,
+  hi_parameter = "Search",
+  max_height = 22,
+  max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+  handler_opts = {
+    border = "single", -- double, single, shadow, none
+  },
+  zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
+  padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
+})
+EOF
 
 " -----------------------------------------------------------------------------
 filetype plugin indent on

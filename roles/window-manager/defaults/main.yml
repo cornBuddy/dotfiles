@@ -12,8 +12,6 @@ wm_default_driver_name: xf86-video-vesa
 
 wm_install_display_manager: true
 
-wm_install_dwm: false
-
 wm_install_sway: true
 wm_sway_packages:
   - sway
