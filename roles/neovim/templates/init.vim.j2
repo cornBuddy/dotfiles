@@ -81,7 +81,6 @@ Plug 'pearofducks/ansible-vim'
 Plug 'jvirtanen/vim-hcl'
 
 Plug 'hashivim/vim-terraform'
-let g:terraform_fmt_on_save=1
 
 Plug 'towolf/vim-helm'
 
@@ -201,7 +200,6 @@ local function on_attach(_, bufnr)
     vim.api.nvim_buf_set_option(bufnr, ...)
   end
   -- Enable completion triggered by <c-x><c-o>
-  -- TODO: switch to https://github.com/hrsh7th/nvim-cmp or something
   -- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
   -- Mappings.
   local opts = { noremap = true, silent = true }
@@ -217,8 +215,6 @@ local function on_attach(_, bufnr)
   buf_set_keymap("v", "<C-space>", "<cmd>lua vim.lsp.buf.range_code_action()<CR>", opts)
   buf_set_keymap("n", "[", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-  buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
