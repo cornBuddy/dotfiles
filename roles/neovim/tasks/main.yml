@@ -28,6 +28,8 @@
   loop:
     - src: init.vim.j2
       dest: "{{ neovim_config_path }}/init.vim"
+  tags:
+    - neovim-init
   notify:
     - install plugins
     - install language servers
