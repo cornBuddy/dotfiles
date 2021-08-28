@@ -32,15 +32,6 @@
     - install plugins
     - install language servers
 
-- name: Setup ftplugin
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    force: true
-  loop:
-    - src: ftplugin
-      dest: "{{ neovim_config_path }}/after"
-
 - name: Update plugins
   shell: >-
     nvim --headless +PlugUpgrade +qa
