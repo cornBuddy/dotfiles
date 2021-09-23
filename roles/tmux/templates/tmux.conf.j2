@@ -45,8 +45,8 @@ set -g @continuum-boot 'on'
 set -g @continuum-boot-options 'alacritty,fullscreen'
 set -g @continuum-restore 'on'
 
-
 run '{{ tmux_plugins_dir }}/tpm/tpm'
 
 # override nord plugin defaults
 set -g status-right "#{prefix_highlight}#[fg=brightblack,bg=black,nobold,noitalics,nounderscore]#[fg=white,bg=brightblack] #(gitmux -cfg {{ tmux_gitmux_config_path }} '#{pane_current_path}') #({{ tmux_plugins_dir }}/tmux-continuum/scripts/continuum_save.sh)"
+run-shell {{ tmux_plugins_dir }}/tmux-continuum/continuum.tmux

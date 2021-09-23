@@ -14,6 +14,7 @@ neovim_language_servers:
   - terraform
   - rust
   - yaml
+  - ruby
 neovim_packages:
   - neovim
   - node
