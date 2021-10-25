@@ -16,40 +16,8 @@ Plug 'junegunn/vim-plug'
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'kyazdani42/nvim-tree.lua'
-let g:nvim_tree_icons = {
-    \ 'default': '',
-    \ 'symlink': '',
-    \ 'git': {
-    \   'unstaged': "✗",
-    \   'staged': "✓",
-    \   'unmerged': "",
-    \   'renamed': "➜",
-    \   'untracked': "★",
-    \   'deleted': "",
-    \   'ignored': "◌"
-    \   },
-    \ 'folder': {
-    \   'arrow_open': "",
-    \   'arrow_closed': "",
-    \   'default': "",
-    \   'open': "",
-    \   'empty': "",
-    \   'empty_open': "",
-    \   'symlink': "",
-    \   'symlink_open': "",
-    \   },
-    \   'lsp': {
-    \     'hint': "",
-    \     'info': "",
-    \     'warning': "",
-    \     'error': "",
-    \   }
-    \ }
 let g:nvim_tree_gitignore = 1
-let g:nvim_tree_follow = 1
 let g:nvim_tree_hide_dotfiles = 1
-let g:nvim_tree_lsp_diagnostics = 1
-let g:nvim_tree_auto_open = 1
 nnoremap <leader>t :NvimTreeToggle<CR>
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -117,6 +85,28 @@ endif
 " Required:
 call plug#end()
 lua << EOF
+require('nvim-tree').setup {
+  hijack_netrw = true,
+  update_cwd = true,
+  update_to_buf_dir = {
+    enable = true,
+    auto_open = true,
+  },
+  diagnostics = {
+    enable = true,
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    }
+  },
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  },
+}
+
 require('gitsigns').setup {
   current_line_blame = true,
 }
