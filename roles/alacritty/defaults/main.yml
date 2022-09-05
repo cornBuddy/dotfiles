@@ -7,6 +7,6 @@ alacritty_font: >-
   if ansible_distribution == 'MacOSX'
   else 'Terminus' }}
 alacritty_font_size: >-
-  {{ 13
+  {{ 14
   if ansible_distribution == 'MacOSX'
   else 10 }}

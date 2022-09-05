@@ -15,6 +15,7 @@ neovim_language_servers:
   - rust
   - yaml
   - ruby
+  - gopls
 neovim_packages:
   - neovim
   - node
