@@ -6,35 +6,13 @@
     name: "{{ neovim_packages }}"
   become: false
 
-- name: Create plug dirs
-  file:
-    path: "{{ item.path }}"
-    state: directory
-  loop:
-    - path: "{{ neovim_config_path }}/after/ftplugin"
-    - path: "{{ neovim_plug_dir }}"
-
-- name: Install plug
-  get_url:
-    url: "{{ neovim_plug_url }}"
-    dest: "{{ neovim_plug_dir }}/plug.vim"
-    force: true
+- name: Install packer.nvim
+  ansible.builtin.git:
+    repo: "{{ neovim_packer_repo }}"
+    dest: "{{ neovim_packer_path }}"
+    depth: 1
 
 - name: Configure
-  template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    force: true
-  loop:
-    - src: init.vim.j2
-      dest: "{{ neovim_config_path }}/init.vim"
-  tags:
-    - neovim-init
-  notify:
-    - install plugins
-    - install language servers
-
-- name: Update plugins
-  shell: >-
-    nvim --headless +PlugUpgrade +qa
-    && nvim --headless +PlugUpdate +qa
+  ansible.builtin.copy:
+    src: "files/nvim"
+    dest: "{{ neovim_config_path }}"

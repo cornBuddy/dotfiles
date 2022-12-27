@@ -1,27 +1,8 @@
 ---
 
-neovim_config_path: "{{ lookup('env', 'HOME') }}/.config/nvim"
-neovim_plugins_dir: >-
-  {{ lookup('env', 'HOME') }}/.local/share/nvim/plugged
-neovim_plug_dir: >-
-  {{ lookup('env', 'HOME') }}/.local/share/nvim/site/autoload
-neovim_plug_url: >-
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-neovim_language_servers:
-  - bash
-  - python
-  - dockerfile
-  - terraform
-  - rust
-  - yaml
-  - ruby
-  - gopls
+neovim_config_path: "{{ lookup('env', 'HOME') }}/.config"
 neovim_packages:
   - neovim
-  - node
-  - yarn
-  - >-
-    {{ 'silversearcher-ag'
-    if ansible_distribution == 'Ubuntu'
-    else 'the_silver_searcher' }}
-  - ripgrep
+neovim_packer_repo: https://github.com/wbthomason/packer.nvim.git
+neovim_packer_path: >-
+  {{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim

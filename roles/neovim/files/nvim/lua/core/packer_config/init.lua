@@ -1,0 +1,6 @@
+require("core.packer_config.colorscheme")
+require("core.packer_config.nvim_tree")
+require("core.packer_config.galaxyline")
+require("core.packer_config.telescope")
+require("core.packer_config.treesitter")
+require("core.packer_config.indent_blankline")
