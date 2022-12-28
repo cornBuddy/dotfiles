@@ -132,27 +132,6 @@ gls.left[4] = {
     separator_highlight = { colors.section_bg, colors.bg },
   }
 }
--- gls.left[5] = {
---   GitIcon = {
---     provider = function() return '  ' end,
---     condition = in_git_repo,
---     highlight = {colors.red,colors.bg},
---   }
--- }
--- gls.left[6] = {
---   GitBranch = {
---     provider = function()
---       local vcs = require('galaxyline.provider_vcs')
---       local branch_name = vcs.get_git_branch()
---       if (string.len(branch_name) > 28) then
---         return string.sub(branch_name, 1, 25).."..."
---       end
---       return branch_name .. " "
---     end,
---     condition = in_git_repo,
---     highlight = {colors.fg,colors.bg},
---   }
--- }
 gls.left[7] = {
   DiffAdd = {
     provider = vcs.diff_add,
@@ -278,5 +257,3 @@ gls.short_line_right[1] = {
 
 -- Force manual load so that nvim boots with a status line
 gl.load_galaxyline()
-
-local vcs = require('galaxyline.provider_vcs')

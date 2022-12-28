@@ -16,3 +16,6 @@
   ansible.builtin.copy:
     src: "files/nvim"
     dest: "{{ neovim_config_path }}"
+
+- name: Sync plugins
+  ansible.builtin.command: nvim --headless +PackerSync +qa
