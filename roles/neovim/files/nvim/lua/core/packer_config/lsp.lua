@@ -6,7 +6,8 @@ local language_servers = {
   "jsonls",
   "sumneko_lua",
   "pylsp",
-  "tflint",
+  "terraformls",
+  "gopls",
   "yamlls",
 }
 require("mason-lspconfig").setup({

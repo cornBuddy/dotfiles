@@ -3,6 +3,7 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.wrap = false
+vim.opt.mouse = nil
 
 -- remove trailing characters on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
