@@ -29,6 +29,7 @@ local on_attach = function(_, _)
   vim.keymap.set('n', 'gr', require("telescope.builtin").lsp_references)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover)
   vim.keymap.set('n', '<F1>', vim.lsp.buf.signature_help)
+  vim.keymap.set('n', '<F4>', ":TroubleToggle<CR>")
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
