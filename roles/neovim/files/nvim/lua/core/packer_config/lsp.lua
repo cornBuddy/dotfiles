@@ -1,15 +1,16 @@
 require("mason").setup()
+local language_servers = {
+  "ansiblels",
+  "bashls",
+  "dockerls",
+  "jsonls",
+  "sumneko_lua",
+  "pylsp",
+  "tflint",
+  "yamlls",
+}
 require("mason-lspconfig").setup({
-  ensure_installed = {
-    "ansiblels",
-    "bashls",
-    "dockerls",
-    "jsonls",
-    "sumneko_lua",
-    "pylsp",
-    "tflint",
-    "yamlls",
-  }
+  ensure_installed = language_servers,
 })
 
 vim.diagnostic.config({
@@ -18,7 +19,7 @@ vim.diagnostic.config({
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
+local on_attach = function(_, _)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', '<C-r>', vim.lsp.buf.rename)
@@ -39,10 +40,6 @@ local lsp_setup = {
   },
 }
 
-require("lspconfig").ansiblels.setup(lsp_setup)
-require("lspconfig").bashls.setup(lsp_setup)
-require("lspconfig").dockerls.setup(lsp_setup)
-require("lspconfig").jsonls.setup(lsp_setup)
-require("lspconfig").sumneko_lua.setup(lsp_setup)
-require("lspconfig").pylsp.setup(lsp_setup)
-require("lspconfig").tflint.setup(lsp_setup)
+for _, lang in pairs(language_servers) do
+  require("lspconfig")[lang].setup(lsp_setup)
+end
