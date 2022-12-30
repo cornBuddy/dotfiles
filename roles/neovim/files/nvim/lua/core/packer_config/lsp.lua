@@ -20,16 +20,22 @@ vim.diagnostic.config({
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, _)
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', '<C-r>', vim.lsp.buf.rename)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-  vim.keymap.set('n', 'gr', require("telescope.builtin").lsp_references)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-  vim.keymap.set('n', '<F1>', vim.lsp.buf.signature_help)
-  vim.keymap.set('n', '<F4>', ":TroubleToggle document_diagnostics<CR>")
+local on_attach = function(_, bufnr)
+  local nmap = function(keys, func, desc)
+    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+  end
+  nmap('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
+  nmap('<leader>ca', vim.lsp.buf.code_action, '[c]ode [a]ction')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
+    '[d]ocument [s]ymbols')
+  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
+    '[w]orkspace [s]ymbols')
+  nmap('gd', vim.lsp.buf.definition, "[g]o to [d]efinition")
+  nmap('gi', vim.lsp.buf.implementation, "[g]o to [i]mplementation")
+  nmap('gr', require("telescope.builtin").lsp_references, "[g]o to [r]eferences")
+  nmap('K', vim.lsp.buf.hover, "hover documentation")
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'signature documentation')
+  nmap('<F4>', ":TroubleToggle document_diagnostics<CR>", "diagnostic")
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
