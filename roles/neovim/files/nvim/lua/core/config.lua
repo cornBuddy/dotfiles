@@ -4,6 +4,9 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.wrap = false
 vim.opt.mouse = nil
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.scrolloff = 10
 
 -- remove trailing characters on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {

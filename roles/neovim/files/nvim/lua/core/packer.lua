@@ -26,6 +26,7 @@ return require('packer').startup(function(use)
   use 'folke/todo-comments.nvim'
   use 'gpanders/editorconfig.nvim'
   use 'levouh/tint.nvim'
+  use 'towolf/vim-helm'
   use {
     'phaazon/hop.nvim',
     branch = 'v2',
