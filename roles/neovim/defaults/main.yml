@@ -3,6 +3,7 @@
 neovim_config_path: "{{ lookup('env', 'HOME') }}/.config"
 neovim_packages:
   - neovim
+  - delve
 neovim_packer_repo: https://github.com/wbthomason/packer.nvim.git
 neovim_packer_path: >-
   {{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim
