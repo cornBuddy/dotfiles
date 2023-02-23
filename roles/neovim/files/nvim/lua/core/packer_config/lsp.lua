@@ -4,7 +4,7 @@ local language_servers = {
   "bashls",
   "dockerls",
   "jsonls",
-  "sumneko_lua",
+  "lua_ls",
   "pylsp",
   "terraformls",
   "gopls",
