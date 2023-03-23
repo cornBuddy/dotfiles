@@ -8,6 +8,7 @@ require("tint").setup({
     local floating = vim.api.nvim_win_get_config(winid).relative ~= ""
     local nvimtree = filetype == "NvimTree"
     local dap = string.find(filetype, "^dap") ~= nil
-    return floating or nvimtree or dap
+    local trouble = filetype == "Trouble"
+    return floating or nvimtree or dap or trouble
   end
 })
