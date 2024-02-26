@@ -13,9 +13,11 @@
     depth: 1
 
 - name: Configure
-  ansible.builtin.copy:
-    src: "files/nvim"
+  ansible.builtin.git:
+    repo: "{{ neovim_config_repo }}"
     dest: "{{ neovim_config_path }}"
+    depth: 1
+    force: true
 
 - name: Sync plugins
   ansible.builtin.command: nvim --headless +PackerSync +qa

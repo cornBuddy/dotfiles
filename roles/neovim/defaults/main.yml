@@ -1,6 +1,7 @@
 ---
 
-neovim_config_path: "{{ lookup('env', 'HOME') }}/.config"
+neovim_config_repo: "https://github.com/cornBuddy/nvim-config"
+neovim_config_path: "{{ lookup('env', 'HOME') }}/.config/nvim"
 neovim_packages:
   - neovim
   - delve
