@@ -1,0 +1,21 @@
+---
+
+- name: Download minikube binary
+  ansible.builtin.get_url:
+    url: >-
+      https://storage.googleapis.com/minikube/releases/latest/minikube-linux-{{
+      packages_arch }}
+    dest: /tmp/minikube
+
+- name: Copy minikube into PATH
+  ansible.builtin.copy:
+    dest: /usr/local/bin/minikube
+    src: /tmp/minikube
+    remote_src: true
+  become: true
+
+- name: Make minikube executable
+  ansible.builtin.file:
+    path: /usr/local/bin/minikube
+    mode: "0755"
+  become: true

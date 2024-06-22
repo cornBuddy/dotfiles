@@ -1,38 +1,62 @@
 ---
 
+- name: Add apt repositories
+  ansible.builtin.apt_repository:
+    repo: "deb http://{{ zsh_url }}/ /"
+  become: true
+  # NOTE: skipping because the key is expired
+  when: false
+
+- name: Add apt key
+  ansible.builtin.apt_key:
+    url: "https://{{ zsh_url }}/Release.key"
+    validate_certs: false
+  become: true
+  # NOTE: skipping because the key is expired
+  when: false
+
+- name: Update packages cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
 - name: Install zsh
-  package:
-    name:
-      - zsh
-      - zsh-completions
+  ansible.builtin.package:
+    name: "{{ zsh_packages }}"
     state: present
-  become: "{{ ansible_distribution != 'MacOSX' }}"
+  become: true
 
 - name: Pull oh-my-zsh
-  git:
+  ansible.builtin.git:
     dest: "{{ zsh_oh_my_zsh_path }}"
     repo: "{{ zsh_oh_my_zsh_repo }}"
     force: true
     accept_hostkey: true
 
 - name: Configure
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
-    mode: 0755
+    mode: "0755"
   loop:
     - src: zshrc.j2
-      dest: "{{ lookup('env', 'HOME') }}/.zshrc"
+      dest: "{{ ansible_env.HOME }}/.zshrc"
     - src: zshenv.j2
-      dest: "{{ lookup('env', 'HOME') }}/.zshenv"
+      dest: "{{ ansible_env.HOME }}/.zshenv"
     - src: zsh_aliases.j2
-      dest: "{{ lookup('env', 'HOME') }}/.zsh_aliases"
+      dest: "{{ ansible_env.HOME }}/.zsh_aliases"
 
-- import_tasks: oh-my-zsh-custom.yml
+- name: Install custom zsh theme
+  ansible.builtin.import_tasks: oh-my-zsh-custom.yml
+
+- name: Fix permissions
+  ansible.builtin.file:
+    path: "{{ zsh_oh_my_zsh_path }}"
+    mode: "g-w,o-w"
+    recurse: true
 
 - name: Set zsh as default shell
-  user:
-    name: "{{ lookup('env', 'USER') }}"
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
     shell: /bin/zsh
   become: true
-  when: ansible_distribution != 'MacOSX'

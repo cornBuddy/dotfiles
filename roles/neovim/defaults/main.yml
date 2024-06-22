@@ -1,10 +1,10 @@
 ---
-
-neovim_config_repo: "https://github.com/cornBuddy/nvim-config"
-neovim_config_path: "{{ lookup('env', 'HOME') }}/.config/nvim"
 neovim_packages:
-  - neovim
-  - delve
-neovim_packer_repo: https://github.com/wbthomason/packer.nvim.git
-neovim_packer_path: >-
-  {{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim
+  - nvim
+neovim_config_repo: "git@github.com:cornBuddy/nvim-config.git"
+neovim_config_path: "{{ ansible_env.HOME }}/.config/nvim"
+
+neovim_plug_url: >-
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+neovim_plug_path: >-
+  {{ ansible_env.HOME }}/.local/share/nvim/site/autoload/

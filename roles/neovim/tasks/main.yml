@@ -1,23 +1,22 @@
 ---
-
 - name: Install neovim
-  package:
+  community.general.snap:
     state: present
     name: "{{ neovim_packages }}"
-  become: false
+    classic: true
+  become: true
 
-- name: Install packer.nvim
-  ansible.builtin.git:
-    repo: "{{ neovim_packer_repo }}"
-    dest: "{{ neovim_packer_path }}"
-    depth: 1
+- name: Install plugin manager
+  ansible.builtin.get_url:
+    url: "{{ neovim_plug_url }}"
+    dest: "{{ neovim_plug_path }}"
 
 - name: Configure
   ansible.builtin.git:
     repo: "{{ neovim_config_repo }}"
     dest: "{{ neovim_config_path }}"
-    depth: 1
     force: true
 
 - name: Sync plugins
-  ansible.builtin.command: nvim --headless +PackerSync +qa
+  ansible.builtin.command: nvim --headless +PlugInstall +qa
+  changed_when: false

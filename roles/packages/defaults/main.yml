@@ -1,0 +1,64 @@
+---
+
+packages_reboot: false
+
+packages_arch: >-
+  {{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}
+packages_docker_repo_url: https://download.docker.com/linux
+packages_docker_apt_gpg_key: >-
+  {{ packages_docker_repo_url }}/{{ ansible_distribution | lower }}/gpg
+packages_docker_apt_gpg_path: /etc/apt/trusted.gpg.d/docker.asc
+
+packages_packer_apt_gpg_key: https://apt.releases.hashicorp.com/gpg
+packages_packer_apt_gpg_path: /etc/apt/trusted.gpg.d/packer.asc
+
+packages_extra: []
+packages_snap_extra: []
+packages_pip_extra: []
+packages_apt_repositories:
+  - ppa:ansible/ansible
+  - ppa:keithw/mosh-dev
+  - >-
+    deb [arch={{ packages_arch }}]
+    https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
+packages_install:
+  - software-properties-common
+  - mosh
+  - curl
+  - build-essential
+  - gcc
+  - g++
+  - htop
+  - ripgrep
+  - ca-certificates
+  - gnupg
+  - python3-virtualenv
+  - tree
+
+packages_install_ssm: false
+packages_install_node_exporter: false
+packages_install_skaffold: false
+packages_install_minikube: false
+packages_install_node_js: false
+packages_install_operator_sdk: false
+
+packages_install_go: false
+packages_golang_install_dir: "/opt/go"
+
+packages_install_docker: false
+packages_docker_items:
+  - containerd.io
+  - docker-ce
+  - docker-ce-cli
+  - docker-buildx-plugin
+  - docker-compose-plugin
+packages_docker_repo: >-
+  deb [arch={{ packages_arch }}]
+  {{ packages_docker_repo_url }}/{{ ansible_distribution | lower }}
+  {{ ansible_distribution_release }} stable
+
+packages_install_terragrunt: false
+packages_terragrunt_version: v0.58.13
+
+packages_install_kops: false
+packages_kops_version: v1.28.0

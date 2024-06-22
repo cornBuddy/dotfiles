@@ -1,28 +1,27 @@
 ---
-
 - name: Download tpm
-  git:
+  ansible.builtin.git:
     dest: "{{ tmux_plugins_dir }}/tpm"
     repo: "{{ tmux_tpm_git_url }}"
     force: true
 
 - name: Install tmux
-  package:
+  ansible.builtin.package:
     name:
       - tmux
     state: present
-  become: false
+  become: true
 
 - name: Install gitmux
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ tmux_gitmux_download_url }}"
     dest: /usr/local/bin
-    mode: 0755
+    mode: "0755"
     remote_src: true
   become: true
 
 - name: Configure
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   loop:
@@ -30,11 +29,3 @@
       dest: "{{ tmux_config_path }}"
     - src: gitmux.conf.j2
       dest: "{{ tmux_gitmux_config_path }}"
-
-- name: Enable tmux-continuum
-  systemd:
-    state: restarted
-    enabled: true
-    scope: user
-    name: tmux
-  when: ansible_distribution != 'MacOSX'

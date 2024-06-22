@@ -1,0 +1,21 @@
+---
+
+- name: Download skaffold binary
+  ansible.builtin.get_url:
+    url: >-
+      https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-{{
+      packages_arch }}
+    dest: /tmp/skaffold
+
+- name: Copy skaffold into PATH
+  ansible.builtin.copy:
+    dest: /usr/local/bin/skaffold
+    src: /tmp/skaffold
+    remote_src: true
+  become: true
+
+- name: Make skaffold executable
+  ansible.builtin.file:
+    path: /usr/local/bin/skaffold
+    mode: "0755"
+  become: true

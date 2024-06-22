@@ -1,19 +1,18 @@
 ---
-
 - name: Create group
-  group:
+  ansible.builtin.group:
     name: "{{ user_primary_group }}"
     gid: "{{ user_group_id }}"
   become: true
 
 - name: Create secondary groups
-  group:
+  ansible.builtin.group:
     name: "{{ item }}"
   loop: "{{ user_secondary_groups }}"
   become: true
 
 - name: Create user
-  user:
+  ansible.builtin.user:
     group: "{{ user_primary_group }}"
     groups: "{{ user_secondary_groups }}"
     name: "{{ user_name }}"
@@ -22,19 +21,19 @@
   become: true
 
 - name: Set defaults
-  lineinfile:
-    path: "/etc/sudoers.d/{{ user_name }}"
-    line: "Defaults:{{ user_name }} {{ item }}"
-    validate: '/usr/sbin/visudo -cf %s'
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/{{ user_name }}
+    line: Defaults:{{ user_name }} {{ item }}
+    validate: /usr/sbin/visudo -cf %s
     create: true
   become: true
   loop: "{{ user_sudo_defaults }}"
 
 - name: Config sudo
-  lineinfile:
-    path: "/etc/sudoers.d/{{ user_name }}"
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/{{ user_name }}
     line: "{{ user_name }} {{ item }}"
-    validate: '/usr/sbin/visudo -cf %s'
+    validate: /usr/sbin/visudo -cf %s
     create: true
   become: true
   loop: "{{ user_sudo_privileges }}"

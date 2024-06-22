@@ -1,8 +1,0 @@
----
-
-pacman_pacmand: /etc/pacman.d
-pacman_mirrorlist: "{{ pacman_pacmand }}/mirrorlist"
-pacman_conf: /etc/pacman.conf
-
-pacman_trizen_dir: /tmp/trizen
-pacman_trizen_repo: https://aur.archlinux.org/trizen.git

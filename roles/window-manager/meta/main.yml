@@ -1,6 +1,0 @@
----
-
-dependencies:
-  - role: user
-  - role: package-manager
-  - role: git

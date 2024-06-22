@@ -1,3 +1,4 @@
 ---
-
-git_main_config_path: "{{ lookup('env', 'HOME') }}/.gitconfig"
+git_main_config_path: "{{ ansible_env.HOME }}/.gitconfig"
+git_user_signingkey: "{{ ansible_env.HOME }}/.ssh/github.pub"
+git_user_email: "heorhi.sakovich@gmail.com"

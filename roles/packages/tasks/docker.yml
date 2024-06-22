@@ -1,0 +1,25 @@
+---
+
+- name: Get docker gpg key
+  ansible.builtin.get_url:
+    url: "{{ packages_docker_apt_gpg_key }}"
+    dest: "{{ packages_docker_apt_gpg_path }}"
+  become: true
+
+- name: Add apt repositories
+  ansible.builtin.apt_repository:
+    repo: "{{ packages_docker_repo }}"
+  become: true
+
+- name: Install extra packages
+  ansible.builtin.package:
+    name: "{{ packages_docker_items }}"
+    state: present
+  become: true
+
+- name: Add current user to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    groups: docker
+    append: true
+  become: true

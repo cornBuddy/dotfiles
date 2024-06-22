@@ -1,13 +1,13 @@
 ---
-
 - name: Install git
-  package:
+  ansible.builtin.package:
     name:
       - git
     state: present
   when: ansible_distribution != 'MacOSX'
+  become: true
 
 - name: Configure
-  template:
+  ansible.builtin.template:
     src: gitconfig.j2
     dest: "{{ git_main_config_path }}"

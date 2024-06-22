@@ -1,23 +1,22 @@
 ---
-
 - name: Create custom dir
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ zsh_oh_my_zsh_custom }}"
 
 - name: Download external themes
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ item }}"
     dest: "{{ zsh_oh_my_zsh_custom }}"
   loop: "{{ zsh_oh_my_zsh_external_themes }}"
 
 - name: Create plugins dir
-  file:
+  ansible.builtin.file:
     state: directory
     path: "{{ zsh_oh_my_zsh_custom }}/plugins"
 
 - name: Download plugins
-  git:
+  ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "{{ item.path }}"
     force: true

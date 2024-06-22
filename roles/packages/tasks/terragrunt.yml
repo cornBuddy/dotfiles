@@ -1,0 +1,15 @@
+---
+
+- name: Download terragrunt binary
+  ansible.builtin.get_url:
+    url: >-
+      https://github.com/gruntwork-io/terragrunt/releases/download/{{
+      packages_terragrunt_version }}/terragrunt_linux_{{ packages_arch }}
+    dest: /usr/local/bin/terragrunt
+  become: true
+
+- name: Make terragrunt executable
+  ansible.builtin.file:
+    path: /usr/local/bin/terragrunt
+    mode: "0755"
+  become: true

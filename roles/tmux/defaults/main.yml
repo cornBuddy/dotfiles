@@ -1,14 +1,23 @@
 ---
-
-tmux_config_path: "{{ lookup('env', 'HOME') }}/.tmux.conf"
-tmux_plugins_dir: "{{ lookup('env', 'HOME') }}/.tmux/plugins"
+tmux_config_path: "{{ ansible_env.HOME }}/.tmux.conf"
+tmux_plugins_dir: "{{ ansible_env.HOME }}/.tmux/plugins"
 tmux_tpm_git_url: https://github.com/tmux-plugins/tpm
 
-tmux_gitmux_version: 0.7.4
-tmux_gitmux_config_path: "{{ lookup('env', 'HOME') }}/.gitmux.conf"
+tmux_status_battery: >-
+  #{battery_status_bg}
+  Batt: #{battery_icon} #{battery_percentage} #{battery_remain}
+tmux_status_gitmux: >-
+  #[fg=brightblack,bg=black]#[fg=white,bg=brightblack]
+  #(gitmux -cfg {{ tmux_gitmux_config_path }}
+  '#{pane_current_path}')#[bg=brightblack]
+tmux_status_continuum: >-
+  #({{ tmux_plugins_dir }}/tmux-continuum/scripts/continuum_save.sh)
+
+tmux_gitmux_version: "0.10.2"
+tmux_gitmux_config_path: "{{ ansible_env.HOME }}/.gitmux.conf"
 tmux_gitmux_download_url: >-
   https://github.com/arl/gitmux/releases/download/v{{
     tmux_gitmux_version
-  }}/gitmux_{{ tmux_gitmux_version }}_{{
+  }}/gitmux_v{{ tmux_gitmux_version }}_{{
     "macOS" if ansible_distribution == "MacOSX" else "linux"
   }}_amd64.tar.gz

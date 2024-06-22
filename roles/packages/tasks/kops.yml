@@ -1,0 +1,15 @@
+---
+
+- name: Download kops binary
+  ansible.builtin.get_url:
+    url: >-
+      https://github.com/kubernetes/kops/releases/download/{{
+      packages_kops_version }}/kops-linux-{{ packages_arch }}
+    dest: /usr/local/bin/kops
+  become: true
+
+- name: Make kops executable
+  ansible.builtin.file:
+    path: /usr/local/bin/kops
+    mode: "0755"
+  become: true

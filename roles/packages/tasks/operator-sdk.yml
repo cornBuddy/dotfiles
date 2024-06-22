@@ -1,0 +1,13 @@
+---
+
+- name: Checkout operator sdk repo
+  ansible.builtin.git:
+    dest: /tmp/operator-sdk
+    repo: git@github.com:operator-framework/operator-sdk.git
+    version: master
+    depth: 1
+
+- name: Install operator sdk
+  community.general.make:
+    chdir: /tmp/operator-sdk
+    target: install

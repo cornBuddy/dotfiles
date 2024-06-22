@@ -1,9 +1,8 @@
 ---
-
 user_primary_group: users
 user_group_id: "{{ omit }}"
 user_secondary_groups: []
-user_name: "{{ lookup('env', 'USER') }}"
+user_name: "{{ ansible_env.USER }}"
 user_id: "{{ omit }}"
 user_home: "{{ omit }}"
 user_shell: /bin/zsh

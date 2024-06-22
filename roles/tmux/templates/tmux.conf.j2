@@ -1,16 +1,16 @@
 {{ ansible_managed | comment }}
 
+# store longer buffer history
+set -g history-limit 10000
+
 # don't wait escape-key
 set -s escape-time 0
 
 # start windows ndexing is 1
 set -g base-index 1
+set -g pane-base-index 1
 set-window-option -g pane-base-index 1
-
-set-option -g default-shell "/bin/zsh"
-
-# vi behavior
-set-window-option -g mode-keys vi
+set-option -g renumber-windows on
 
 # binds
 unbind C-b
@@ -23,10 +23,17 @@ bind-key l select-pane -R
 bind-key r source-file {{ tmux_config_path }} \; display-message "updated"
 bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
+bind '"' split-window -v -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
 
 # force to use 256-colors
 set -g default-terminal "xterm-256color"
 set -ga terminal-overrides ",xterm-256color:Tc"
+
+# opts
+set-option -g default-shell "/bin/zsh"
+set-window-option -g mode-keys vi
+set -g status-right-length 80
 
 # plugins
 set -g @plugin 'tmux-plugins/tpm'
@@ -39,6 +46,8 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-strategy-nvim 'session'
 set -g @resurrect-capture-pane-contents 'on'
 
+set -g @plugin 'tmux-plugins/tmux-battery'
+
 set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-save-interval '5'
 set -g @continuum-boot 'on'
@@ -48,5 +57,4 @@ set -g @continuum-restore 'on'
 run '{{ tmux_plugins_dir }}/tpm/tpm'
 
 # override nord plugin defaults
-set -g status-right "#{prefix_highlight}#[fg=brightblack,bg=black,nobold,noitalics,nounderscore]#[fg=white,bg=brightblack] #(gitmux -cfg {{ tmux_gitmux_config_path }} '#{pane_current_path}') #({{ tmux_plugins_dir }}/tmux-continuum/scripts/continuum_save.sh)"
-run-shell {{ tmux_plugins_dir }}/tmux-continuum/continuum.tmux
+set -g status-right "{{ tmux_status_right }}"

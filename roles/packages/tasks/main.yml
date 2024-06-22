@@ -1,0 +1,88 @@
+---
+
+- name: Get packer gpg key
+  ansible.builtin.get_url:
+    url: "{{ packages_packer_apt_gpg_key }}"
+    dest: "{{ packages_packer_apt_gpg_path }}"
+  become: true
+
+- name: Add apt repositories
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+  loop: "{{ packages_apt_repositories }}"
+  become: true
+
+- name: Upgrade all apt packages
+  ansible.builtin.apt:
+    upgrade: dist
+    autoremove: true
+    clean: true
+    update_cache: true
+  notify: Reboot
+  become: true
+
+- name: Install default packages
+  ansible.builtin.package:
+    name: "{{ packages_install }}"
+    state: present
+  become: true
+
+- name: Ensure that snapd is installed
+  ansible.builtin.apt:
+    name: snapd
+    state: present
+  become: true
+
+- name: Install snap extra packages
+  community.general.snap:
+    state: present
+    name: "{{ item.name }}"
+    classic: "{{ item.classic }}"
+    channel: "{{ item.channel | default(omit) }}"
+  loop: "{{ packages_snap_extra }}"
+  become: true
+
+- name: Install pip packages
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    state: latest
+  loop: "{{ packages_pip_extra }}"
+  become: true
+
+- name: Install extra packages
+  ansible.builtin.package:
+    name: "{{ packages_extra }}"
+    state: present
+  become: true
+
+- name: Set proper permissions to golang_install_dir
+  ansible.builtin.file:
+    state: directory
+    recurse: true
+    path: "{{ packages_golang_install_dir }}"
+    owner: "{{ ansible_env.USER }}"
+  become: true
+
+- name: Install docker
+  ansible.builtin.import_tasks: docker.yml
+  when: packages_install_docker | bool
+
+- name: Install skaffold
+  ansible.builtin.import_tasks: skaffold.yml
+  when: packages_install_skaffold | bool
+
+- name: Install minikube
+  ansible.builtin.import_tasks: minikube.yml
+  when: packages_install_minikube | bool
+
+- name: Install operator sdk
+  ansible.builtin.import_tasks: operator-sdk.yml
+  when: packages_install_operator_sdk | bool
+
+- name: Install terragunt
+  ansible.builtin.import_tasks: terragrunt.yml
+  when: packages_install_terragrunt | bool
+
+- name: Install kops
+  ansible.builtin.import_tasks: kops.yml
+  when: packages_install_kops | bool

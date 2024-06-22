@@ -1,0 +1,11 @@
+---
+
+roles:
+  - name: deekayen.awscli2
+  - name: diodonfrost.amazon_ssm
+  - name: geerlingguy.nodejs
+  - name: gantsign.golang
+
+collections:
+  - name: prometheus.prometheus
+  - name: community.general

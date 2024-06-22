@@ -1,0 +1,55 @@
+---
+- name: Provision workstation
+  hosts: localhost
+  gather_facts: true
+  pre_tasks:
+    - name: Set lid close behaviour
+      ansible.builtin.lineinfile:
+        path: "/etc/systemd/logind.conf"
+        line: "HandleLidSwitch=lock"
+      become: true
+    - name: Set log max size
+      ansible.builtin.lineinfile:
+        path: "/etc/systemd/journald.conf"
+        regexp: "^SystemMaxUse="
+        line: "SystemMaxUse=50M"
+      notify:
+        - Restart journald
+      become: true
+  handlers:
+    - name: Restart journald
+      ansible.builtin.service:
+        name: systemd-journald
+        state: restarted
+      become: true
+  roles:
+    - role: user
+      vars:
+        user_name: cornbuddy
+    - role: packages
+      tags: packages
+      vars:
+        packages_install_skaffold: true
+        packages_install_minikube: true
+        packages_install_go: true
+        packages_install_node_js: true
+        packages_install_terragrunt: true
+        packages_install_docker: true
+        packages_extra:
+          - xsel
+          - ansible
+          - packer
+          - wireguard
+          - openresolv
+          - openjdk-19-jdk
+        packages_pip_extra:
+          - pre-commit
+        packages_snap_extra:
+          - name: kubectl
+            classic: true
+          - name: helm
+            classic: true
+          - name: kustomize
+            classic: false
+          - name: terraform
+            classic: true

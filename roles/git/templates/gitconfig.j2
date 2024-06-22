@@ -2,29 +2,42 @@
 
 [user]
     name = Heorhi Sakovich
-    email = heorhi.sakovich@gmail.com
+    email = {{ git_user_email }}
+    signingkey = {{ git_user_signingkey }}
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
 [push]
     default = simple
+
+[pager]
+    branch = false
+
+[pull]
+    rebase = true
+
 [merge]
     tool = nvimdiff
     conflictStyle = merge
+
 [mergetool]
     prompt = true
+
 [mergetool "nvimdiff"]
     cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
 [diff]
     tool = nvimdiff
+
 [difftool]
     prompt = false
+
 [difftool "nvimdiff"]
     cmd = nvim -d $BASE $LOCAL
-[alias]
-    log-specific = log --abbrev-commit --decorate --stat --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)%C(reset)%n'
+
 [status]
     submoduleSummary = true
-[credential]
-    helper = store
-[pager]
-    branch = false
-[pull]
-    rebase = true

@@ -1,0 +1,22 @@
+---
+dependencies:
+  - role: zsh
+  - role: git
+  - role: neovim
+  - role: tmux
+  - role: deekayen.awscli2
+  - role: diodonfrost.amazon_ssm
+    become: true
+    when: packages_install_ssm
+  - role: prometheus.prometheus.node_exporter
+    when: packages_install_node_exporter
+  - role: geerlingguy.nodejs
+    when: packages_install_node_js
+    vars:
+      nodejs_version: 20.x
+    become: true
+  - role: gantsign.golang
+    when: packages_install_go
+    vars:
+      golang_install_dir: "{{ packages_golang_install_dir }}"
+    become: true
