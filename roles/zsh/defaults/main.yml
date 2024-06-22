@@ -5,11 +5,6 @@ zsh_oh_my_zsh_custom: >-
   {{ ansible_env.HOME }}/.oh-my-zsh/custom
 zsh_oh_my_zsh_custom_plugins_dir: >-
   {{ zsh_oh_my_zsh_custom }}/plugins
-zsh_oh_my_zsh_external_themes:
-  - https://gist.githubusercontent.com/cornBuddy/a6a010252e15960485fb1ce47b8635df/raw/e79a86b7072ccb263837795597628727f654da49/saf.zsh-theme
-zsh_oh_my_zsh_external_plugins:
-  - repo: https://github.com/superbrothers/zsh-kubectl-prompt
-    path: "{{ zsh_oh_my_zsh_custom_plugins_dir }}/zsh-kubectl-prompt"
 
 zsh_local_bin_path: "{{ ansible_env.HOME }}/.local/bin"
 zsh_go_root: "/opt/go"
