@@ -1,0 +1,5 @@
+---
+- name: sync omf
+  ansible.builtin.shell:
+    cmd: omf install
+    executable: /bin/fish

@@ -1,0 +1,31 @@
+---
+- name: Add fish repo
+  ansible.builtin.apt_repository:
+    repo: "{{ fish_ppa_repo }}"
+  become: true
+
+- name: Update packages cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: Install fish
+  ansible.builtin.package:
+    name: "{{ fish_packages }}"
+    state: present
+  become: true
+
+- name: Configure
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0755"
+  loop:
+    - src: config.fish.j2
+      dest: "{{ fish_config_dir }}/config.fish"
+    - src: env.fish.j2
+      dest: "{{ fish_config_dir }}/conf.d/env.fish"
+    - src: alias.fish.j2
+      dest: "{{ fish_config_dir }}/conf.d/alias.fish"
+
+- ansible.builtin.import_tasks: omf.yml

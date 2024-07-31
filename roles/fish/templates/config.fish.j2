@@ -1,0 +1,14 @@
+#!/usr/bin/fish
+
+{{ ansible_managed | comment }}
+
+# disable git info from promt when tmux is running
+function __fish_git_prompt_ready
+    not set --query TMUX
+end
+
+fish_vi_key_bindings
+
+set -U fish_greeting
+
+bind -M insert \cf accept-autosuggestion

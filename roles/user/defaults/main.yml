@@ -5,7 +5,7 @@ user_secondary_groups: []
 user_name: "{{ ansible_env.USER }}"
 user_id: "{{ omit }}"
 user_home: "{{ omit }}"
-user_shell: /bin/zsh
+user_shell: /bin/fish
 
 user_sudo_defaults:
   - "!requiretty"

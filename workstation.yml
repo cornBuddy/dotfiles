@@ -23,6 +23,8 @@
         state: restarted
       become: true
   roles:
+    - role: fish
+      tags: fish
     - role: user
       vars:
         user_name: cornbuddy

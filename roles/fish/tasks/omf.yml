@@ -1,0 +1,25 @@
+---
+- name: Download oh my fish
+  ansible.builtin.git:
+    repo: "{{ fish_omf_repo }}"
+    dest: "{{ fish_omf_dir }}"
+
+- name: Install omf
+  ansible.builtin.shell:
+    cmd: bin/install --noninteractive
+    chdir: "{{ fish_omf_dir }}"
+  register: install_omf
+  failed_when:
+    - '"Existing installation detected at" not in install_omf.stdout'
+
+- name: Configure omf
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0755"
+  notify: sync omf
+  loop:
+    - src: bundle.j2
+      dest: "{{ fish_omf_config_dir }}/bundle"
+    - src: theme.j2
+      dest: "{{ fish_omf_config_dir }}/theme"
