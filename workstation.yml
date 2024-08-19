@@ -23,16 +23,13 @@
         state: restarted
       become: true
   roles:
-    - role: fish
-      tags: fish
     - role: user
       vars:
         user_name: cornbuddy
+      when: ansible_distribution != 'MacOSX'
     - role: packages
       tags: packages
       vars:
-        packages_install_skaffold: true
-        packages_install_minikube: true
         packages_install_go: true
         packages_install_node_js: true
         packages_install_terragrunt: true
