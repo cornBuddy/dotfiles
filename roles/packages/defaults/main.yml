@@ -17,13 +17,11 @@ packages_snap_extra: []
 packages_pip_extra: []
 packages_apt_repositories:
   - ppa:ansible/ansible
-  - ppa:keithw/mosh-dev
   - >-
     deb [arch={{ packages_arch }}]
     https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main
 packages_install:
   - software-properties-common
-  - mosh
   - curl
   - build-essential
   - gcc
