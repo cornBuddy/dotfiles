@@ -15,6 +15,11 @@
     state: present
   become: true
 
+- name: Create fish config directory
+  ansible.builtin.file:
+    path: "{{ fish_config_dir }}"
+    state: directory
+
 - name: Configure
   ansible.builtin.template:
     src: "{{ item.src }}"
