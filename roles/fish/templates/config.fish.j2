@@ -7,8 +7,14 @@ function __fish_git_prompt_ready
     not set --query TMUX
 end
 
+# general
 fish_vi_key_bindings
-
 set -U fish_greeting
 
+# prompt
+set -U pure_enable_git false
+set -U pure_reverse_prompt_symbol_in_vimode false
+set -U pure_show_system_time true
+
+# hotkeys
 bind -M insert \cf accept-autosuggestion

@@ -1,0 +1,22 @@
+---
+- name: install fisher
+  ansible.builtin.shell:
+    cmd: >-
+      curl -sL
+      https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish
+      | source
+      && fisher install jorgebucaran/fisher
+    executable: /bin/fish
+  changed_when: false
+
+- name: Configure
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0755"
+  notify: sync fisher
+  loop:
+    - src: fish_plugins.j2
+      dest: "{{ fish_config_dir }}/fish_plugins"
+    - src: theme.j2
+      dest: "{{ fish_config_dir }}/conf.d/theme.fish"

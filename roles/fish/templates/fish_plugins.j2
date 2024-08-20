@@ -1,0 +1,5 @@
+{{ ansible_managed | comment }}
+
+{% for plugin in fish_fisher_plugins %}
+{{ plugin }}
+{% endfor %}

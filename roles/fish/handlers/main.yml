@@ -3,3 +3,8 @@
   ansible.builtin.shell:
     cmd: omf install
     executable: /bin/fish
+
+- name: sync fisher
+  ansible.builtin.shell:
+    cmd: fisher update
+    executable: /bin/fish

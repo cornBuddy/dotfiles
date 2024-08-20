@@ -37,3 +37,6 @@
       dest: "{{ fish_config_dir }}/conf.d/alias.fish"
 
 - ansible.builtin.import_tasks: omf.yml
+  when: false
+
+- ansible.builtin.import_tasks: fisher.yml

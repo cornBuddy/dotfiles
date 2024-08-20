@@ -21,5 +21,3 @@
   loop:
     - src: bundle.j2
       dest: "{{ fish_omf_config_dir }}/bundle"
-    - src: theme.j2
-      dest: "{{ fish_omf_config_dir }}/theme"

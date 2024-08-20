@@ -1,11 +1,13 @@
-{{ ansible_managed | comment }}
+#!/usr/bin/fish
 
+{{ ansible_managed | comment }}
 
 alias gc "git commit"
 alias gc! "git commit --verbose --amend"
 alias gcmsg "git commit --message"
 
+alias ga "git add"
 alias gst "git status"
 alias gd "git diff"
 alias gp "git push"
-alias gpsup "git push --set-upstream origin $(vcs-branch)"
+alias gpsup "git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
