@@ -6,6 +6,13 @@
     classic: true
   become: true
 
+- name: Create nvim config directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "{{ neovim_plug_path }}"
+
 - name: Install plugin manager
   ansible.builtin.get_url:
     url: "{{ neovim_plug_url }}"
