@@ -2,12 +2,19 @@
 
 {{ ansible_managed | comment }}
 
-alias gc "git commit"
-alias gc! "git commit --verbose --amend"
-alias gcmsg "git commit --message"
-
 alias ga "git add"
 alias gst "git status"
 alias gd "git diff"
 alias gp "git push"
+alias gb "git branch"
+alias gco "git checkout"
+
+alias glog "git log --oneline --decorate --graph"
+alias glg "git log --stat"
+
+alias gc "git commit"
+alias gc! "git commit --verbose --amend"
+alias gcmsg "git commit --message"
+
 alias gpsup "git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
+alias gpf! "git push --force"

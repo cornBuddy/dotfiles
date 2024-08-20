@@ -5,6 +5,8 @@
     name: "{{ neovim_packages }}"
     classic: true
   become: true
+  when:
+    - ansible_distribution == "Ubuntu"
 
 - name: Create nvim config directories
   ansible.builtin.file:

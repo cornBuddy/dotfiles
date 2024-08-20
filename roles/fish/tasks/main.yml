@@ -3,17 +3,21 @@
   ansible.builtin.apt_repository:
     repo: "{{ fish_ppa_repo }}"
   become: true
+  when:
+    - ansible_distribution == "Ubuntu"
 
 - name: Update packages cache
   ansible.builtin.apt:
     update_cache: true
   become: true
+  when:
+    - ansible_distribution == "Ubuntu"
 
 - name: Install fish
   ansible.builtin.package:
     name: "{{ fish_packages }}"
     state: present
-  become: true
+  become: "{{ ansible_distribution != 'MacOSX' }}"
 
 - name: Create fish config directories
   ansible.builtin.file:
@@ -35,6 +39,8 @@
       dest: "{{ fish_config_dir }}/conf.d/env.fish"
     - src: alias.fish.j2
       dest: "{{ fish_config_dir }}/conf.d/alias.fish"
+    - src: theme.j2
+      dest: "{{ fish_config_dir }}/conf.d/theme.fish"
 
 - ansible.builtin.import_tasks: omf.yml
   when: false

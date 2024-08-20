@@ -10,7 +10,7 @@
     name:
       - tmux
     state: present
-  become: true
+  become: "{{ ansible_distribution != 'MacOSX' }}"
 
 - name: Install gitmux
   ansible.builtin.unarchive:

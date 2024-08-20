@@ -28,7 +28,6 @@
     - role: user
       vars:
         user_name: cornbuddy
-      when: ansible_distribution != 'MacOSX'
     - role: packages
       tags: packages
       vars:
