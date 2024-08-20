@@ -41,7 +41,7 @@
           - ansible
           - packer
           - wireguard
-          - openjdk-19-jdk
+          - openjdk-21-jdk
         packages_pip_extra:
           - pre-commit
         packages_snap_extra:
