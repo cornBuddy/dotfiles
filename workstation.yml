@@ -41,7 +41,6 @@
           - ansible
           - packer
           - wireguard
-          - openresolv
           - openjdk-19-jdk
         packages_pip_extra:
           - pre-commit
