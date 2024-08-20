@@ -46,7 +46,7 @@
   ansible.builtin.pip:
     name: "{{ item }}"
     state: latest
-    break_system_packages: true
+    extra_args: --break-system-packages
   loop: "{{ packages_pip_extra }}"
   become: true
 
