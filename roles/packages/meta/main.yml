@@ -1,6 +1,5 @@
 ---
 dependencies:
-  - role: zsh
   - role: fish
   - role: git
   - role: neovim
