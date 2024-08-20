@@ -15,10 +15,13 @@
     state: present
   become: true
 
-- name: Create fish config directory
+- name: Create fish config directories
   ansible.builtin.file:
-    path: "{{ fish_config_dir }}"
+    path: "{{ item }}"
     state: directory
+  loop:
+    - "{{ fish_config_dir }}"
+    - "{{ fish_config_dir }}/conf.d"
 
 - name: Configure
   ansible.builtin.template:

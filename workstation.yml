@@ -8,6 +8,7 @@
         path: "/etc/systemd/logind.conf"
         line: "HandleLidSwitch=lock"
       become: true
+      when: ansible_distribution != 'MacOSX'
     - name: Set log max size
       ansible.builtin.lineinfile:
         path: "/etc/systemd/journald.conf"
@@ -16,6 +17,7 @@
       notify:
         - Restart journald
       become: true
+      when: ansible_distribution != 'MacOSX'
   handlers:
     - name: Restart journald
       ansible.builtin.service:
