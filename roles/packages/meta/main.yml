@@ -1,5 +1,6 @@
 ---
 dependencies:
+  - role: alacritty
   - role: fish
   - role: git
   - role: neovim

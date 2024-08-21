@@ -22,5 +22,5 @@
 
 - name: Copy config file
   template:
-    src: alacritty.yml.j2
-    dest: "{{ alacritty_config_dir }}/alacritty.yml"
+    src: alacritty.toml.j2
+    dest: "{{ alacritty_config_dir }}/alacritty.toml"
