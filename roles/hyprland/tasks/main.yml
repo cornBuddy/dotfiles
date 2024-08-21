@@ -1,0 +1,38 @@
+---
+- name: add pikaos repo
+  deb822_repository:
+    name: pikaos
+    types: deb
+    uris: https://ppa.pika-os.com
+    suites: pikauwu
+    signed_by: https://ppa.pika-os.com/key.gpg
+    components:
+      - main
+      - external
+  become: true
+
+- name: update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: install hyprland packages
+  ansible.builtin.package:
+    name: "{{ hyprland_packages }}"
+    state: present
+  become: true
+
+- name: create hyprland directory
+  ansible.builtin.file:
+    path: "{{ hyrpland_confid_dir }}"
+    state: directory
+
+- name: configure hyprland
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - src: hyprland.conf.j2
+      dest: "{{ hyrpland_confid_dir }}/hyprland.conf"
+    - src: hotkeys.conf.j2
+      dest: "{{ hyrpland_confid_dir }}/hotkeys.conf"

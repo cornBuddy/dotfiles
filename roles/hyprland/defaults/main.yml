@@ -1,0 +1,5 @@
+---
+hyprland_packages:
+  - hyprland
+  - waybar
+hyrpland_confid_dir: "{{ ansible_env.HOME }}/.config/hypr"

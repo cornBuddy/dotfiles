@@ -25,6 +25,8 @@
         state: restarted
       become: true
   roles:
+    - role: hyprland
+      tags: hyprland
     - role: user
       vars:
         user_name: cornbuddy
