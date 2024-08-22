@@ -7,11 +7,7 @@ dependencies:
   - role: tmux
   - role: deekayen.awscli2
     when: ansible_distribution != 'MacOSX'
-  - role: diodonfrost.amazon_ssm
-    become: true
     when: packages_install_ssm
-  - role: prometheus.prometheus.node_exporter
-    when: packages_install_node_exporter
   - role: geerlingguy.nodejs
     when: packages_install_node_js
     vars:

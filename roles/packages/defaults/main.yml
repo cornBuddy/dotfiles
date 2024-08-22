@@ -33,8 +33,6 @@ packages_install:
   - python3-virtualenv
   - tree
 
-packages_install_ssm: false
-packages_install_node_exporter: false
 packages_install_skaffold: false
 packages_install_minikube: false
 packages_install_node_js: false
