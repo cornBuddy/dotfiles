@@ -27,6 +27,7 @@
     path: "{{ hyrpland_confid_dir }}"
     state: directory
 
+  # TODO: https://wiki.hyprland.org/Configuring/Master-Layout/#config, no_gaps_when_only
 - name: configure hyprland
   ansible.builtin.template:
     src: "{{ item.src }}"
