@@ -1,5 +1,7 @@
 ---
-git_main_config_path: "{{ ansible_env.HOME }}/.gitconfig"
-git_user_signingkey: "{{ ansible_env.HOME }}/.ssh/github.pub"
-git_ssh_config: "{{ ansible_env.HOME }}/.ssh/config"
 git_user_email: "heorhi.sakovich@gmail.com"
+git_main_config_path: "{{ ansible_env.HOME }}/.gitconfig"
+
+git_user_signingkey: "{{ ansible_env.HOME }}/.ssh/github.pub"
+git_github_identity_file: "{{ ansible_env.HOME }}/.ssh/github"
+git_ssh_config: "{{ ansible_env.HOME }}/.ssh/config"
