@@ -18,6 +18,8 @@
     name: "{{ fish_packages }}"
     state: present
   become: "{{ ansible_distribution != 'MacOSX' }}"
+  when:
+    - ansible_distribution != "NixOS"
 
 - name: Create fish config directories
   ansible.builtin.file:
@@ -42,6 +44,4 @@
     - src: theme.j2
       dest: "{{ fish_config_dir }}/conf.d/theme.fish"
 
-- ansible.builtin.import_tasks: omf.yml
-  when: false
 - ansible.builtin.import_tasks: fisher.yml

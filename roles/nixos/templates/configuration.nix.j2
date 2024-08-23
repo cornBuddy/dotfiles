@@ -1,0 +1,85 @@
+{{ ansible_managed | comment }}
+
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [
+      ./hardware-configuration.nix
+    ];
+
+  environment.systemPackages = with pkgs; [
+    pkgs.ansible
+    pkgs.curl
+    pkgs.git
+    pkgs.google-chrome
+    pkgs.neovim
+    pkgs.openssh
+    pkgs.gcc
+    pkgs.nodejs_22
+    pkgs.jdk22
+    pkgs.python3
+    pkgs.go
+    pkgs.terraform
+    pkgs.terragrunt
+    pkgs.fish
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+
+  programs.fish.enable = true;
+  programs.firefox.enable = false;
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "workstation";
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "Asia/Tbilisi";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+
+  services.openssh.enable = true;
+  services.logind.lidSwitch = "lock";
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  users.users.cornbuddy = {
+    shell = pkgs.fish;
+    isNormalUser = true;
+    description = "cornbuddy";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [
+      kdePackages.kate
+    ];
+  };
+
+  system.stateVersion = "24.05";
+}

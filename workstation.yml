@@ -2,6 +2,7 @@
 - name:
   hosts: localhost
   gather_facts: true
+
   pre_tasks:
     - name: Set lid close behaviour
       ansible.builtin.lineinfile:
@@ -18,17 +19,23 @@
         - Restart journald
       become: true
       when: ansible_distribution == 'Ubuntu'
+    # to fetch all dependencies and perform switch
+    - ansible.builtin.import_role:
+        name: nixos
+      tags: nixos
+      when: ansible_distribution == 'NixOS'
   handlers:
     - name: Restart journald
       ansible.builtin.service:
         name: systemd-journald
         state: restarted
       become: true
+
   roles:
-    - role: nixos
-      tags: nixos
     - role: neovim
       tags: neovim
+    - role: fish
+      tags: fish
       # - role: hyprland
       #   tags: hyprland
       # - role: user

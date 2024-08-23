@@ -5,13 +5,6 @@ fish_packages:
 
 fish_config_dir: "{{ lookup('env', 'HOME') }}/.config/fish"
 
-fish_omf_repo: https://github.com/oh-my-fish/oh-my-fish
-fish_omf_dir: "{{ fish_config_dir }}/oh-my-fish"
-fish_omf_config_dir: "{{ lookup('env', 'HOME') }}/.config/omf"
-fish_omf_plugins:
-  - aws
-  - vcs
-
 fish_fisher_plugins:
   - jorgebucaran/fisher
   - jorgebucaran/autopair.fish

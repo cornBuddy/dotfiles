@@ -1,0 +1,7 @@
+{{ ansible_managed | comment }}
+
+Host github.com
+  User git
+  Hostname github.com
+  PreferredAuthentications publickey
+  IdentityFile {{ git_github_identity_file }}
