@@ -1,2 +1,2 @@
 ---
-nixos_config_directory: /etc/nixos/configuration.nix
+nixos_config_directory: /etc/nixos

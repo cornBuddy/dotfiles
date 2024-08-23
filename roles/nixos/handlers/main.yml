@@ -1,0 +1,4 @@
+---
+- name: nixos rebuild
+  command: nixos-rebuild switch
+  become: true
