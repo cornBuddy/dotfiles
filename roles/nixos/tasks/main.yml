@@ -1,0 +1,11 @@
+---
+- name: Configure
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0644"
+  become: true
+  notify: nixos rebuild
+  loop:
+    - src: configuration.nix.j2
+      dest: "{{ nixos_config_directory }}/configuration.nix"

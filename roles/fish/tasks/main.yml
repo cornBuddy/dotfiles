@@ -44,5 +44,4 @@
 
 - ansible.builtin.import_tasks: omf.yml
   when: false
-
 - ansible.builtin.import_tasks: fisher.yml

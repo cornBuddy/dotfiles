@@ -25,6 +25,8 @@
         state: restarted
       become: true
   roles:
+    - role: nixos
+      tags: nixos
     - role: hyprland
       tags: hyprland
     - role: user
