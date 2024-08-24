@@ -25,10 +25,13 @@
   become: true
   when: ansible_distribution != 'NixOS'
 
-- name: create hyprland directory
+- name: create hyprland directories
   ansible.builtin.file:
-    path: "{{ hyrpland_confid_dir }}"
+    path: "{{ item }}"
     state: directory
+  loop:
+    - "{{ hyrpland_confid_dir }}"
+    - "{{ hyprland_waybar_config_dir }}"
 
 - name: configure hyprland
   ansible.builtin.template:
@@ -39,8 +42,7 @@
       dest: "{{ hyrpland_confid_dir }}/hyprland.conf"
     - src: hotkeys.conf.j2
       dest: "{{ hyrpland_confid_dir }}/hotkeys.conf"
-
-- name: configure waybar
-  ansible.builtin.copy:
-    src: waybar
-    dest: "{{ ansible_env.HOME }}/.config"
+    - src: waybar/config.j2
+      dest: "{{ hyprland_waybar_config_dir }}/config"
+    - src: waybar/style.css.j2
+      dest: "{{ hyprland_waybar_config_dir }}/style.css"

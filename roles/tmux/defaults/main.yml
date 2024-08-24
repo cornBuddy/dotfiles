@@ -9,8 +9,6 @@ tmux_status_gitmux: >-
   #[fg=brightblack,bg=black]#[fg=white,bg=brightblack]
   #(gitmux -cfg {{ tmux_gitmux_config_path }}
   '#{pane_current_path}')#[bg=brightblack]
-tmux_status_continuum: >-
-  #({{ tmux_plugins_dir }}/tmux-continuum/scripts/continuum_save.sh)
 
 tmux_gitmux_version: "0.10.2"
 tmux_gitmux_config_path: "{{ ansible_env.HOME }}/.gitmux.conf"

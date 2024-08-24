@@ -11,6 +11,8 @@
   environment.systemPackages = with pkgs; [
     pkgs.waybar
     pkgs.hyprland
+    pkgs.pavucontrol
+    pkgs.wl-clipboard
     pkgs.ansible
     pkgs.curl
     pkgs.git
@@ -104,7 +106,7 @@
     shell = pkgs.fish;
     isNormalUser = true;
     description = "cornbuddy";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [
       kdePackages.kate
     ];
