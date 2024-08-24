@@ -32,12 +32,14 @@
       become: true
 
   roles:
-    - role: neovim
-      tags: neovim
-    - role: fish
-      tags: fish
     - role: alacritty
       tags: alacritty
+    - role: fish
+      tags: fish
+    - role: neovim
+      tags: neovim
+    - role: tmux
+      tags: tmux
       # - role: hyprland
       #   tags: hyprland
       # - role: user
