@@ -4,8 +4,7 @@ tmux_plugins_dir: "{{ ansible_env.HOME }}/.tmux/plugins"
 tmux_tpm_git_url: https://github.com/tmux-plugins/tpm
 
 tmux_status_battery: >-
-  #{battery_status_bg}
-  Batt: #{battery_icon} #{battery_percentage} #{battery_remain}
+  #{battery_icon} #{battery_percentage}
 tmux_status_gitmux: >-
   #[fg=brightblack,bg=black]#[fg=white,bg=brightblack]
   #(gitmux -cfg {{ tmux_gitmux_config_path }}

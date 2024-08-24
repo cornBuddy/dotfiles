@@ -37,10 +37,13 @@ set -ga terminal-overrides ",xterm-256color:Tc"
 # opts
 set-window-option -g mode-keys vi
 set -g status-right-length 80
+set -g status-right "{{ tmux_status_right }}"
 
 # plugins
 set -g @plugin 'tmux-plugins/tpm'
+
 set -g @plugin 'arcticicestudio/nord-tmux'
+set -g @nord_tmux_show_status_content "0"
 
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @yank_selection 'primary'
@@ -59,6 +62,3 @@ set -g @continuum-restore 'on'
 
 set-environment -g PATH "/run/current-system/sw/bin:/bin:/usr/bin"
 run '{{ tmux_plugins_dir }}/tpm/tpm'
-
-# override nord plugin defaults
-set -g status-right "{{ tmux_status_right }}"
