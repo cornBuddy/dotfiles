@@ -10,24 +10,26 @@
       - main
       - external
   become: true
+  when: ansible_distribution == 'Ubuntu'
 
 - name: update apt cache
   ansible.builtin.apt:
     update_cache: true
   become: true
+  when: ansible_distribution == 'Ubuntu'
 
 - name: install hyprland packages
   ansible.builtin.package:
     name: "{{ hyprland_packages }}"
     state: present
   become: true
+  when: ansible_distribution != 'NixOS'
 
 - name: create hyprland directory
   ansible.builtin.file:
     path: "{{ hyrpland_confid_dir }}"
     state: directory
 
-  # TODO: https://wiki.hyprland.org/Configuring/Master-Layout/#config, no_gaps_when_only
 - name: configure hyprland
   ansible.builtin.template:
     src: "{{ item.src }}"

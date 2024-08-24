@@ -29,6 +29,16 @@
     pkgs.gitmux
     pkgs.zip
     pkgs.unzip
+    pkgs.htop
+    pkgs.tree
+    pkgs.pre-commit
+    pkgs.packer
+    pkgs.docker_27
+    pkgs.docker-buildx
+    pkgs.docker-compose
+    pkgs.kubectl
+    pkgs.kubernetes-helm
+    pkgs.kustomize
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -62,6 +72,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  virtualisation.docker.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
@@ -77,6 +88,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
   services.xserver.xkb = {
     layout = "us";
     variant = "";

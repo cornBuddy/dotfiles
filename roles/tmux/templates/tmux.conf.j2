@@ -16,15 +16,19 @@ set-option -g renumber-windows on
 unbind C-b
 set -g prefix C-g
 bind C-g send-prefix
+
 bind-key h select-pane -L
 bind-key j select-pane -D
 bind-key k select-pane -U
 bind-key l select-pane -R
+
+bind-key g resize-pane -t 2 -x 100
+bind '"' split-window -v -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+
 bind-key r source-file {{ tmux_config_path }} \; display-message "updated"
 bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'r' send -X rectangle-toggle
-bind '"' split-window -v -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
 
 # force to use 256-colors
 set -g default-terminal "xterm-256color"
