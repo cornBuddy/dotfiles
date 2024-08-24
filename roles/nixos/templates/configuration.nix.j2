@@ -11,6 +11,7 @@
   environment.systemPackages = with pkgs; [
     pkgs.waybar
     pkgs.wlogout
+    pkgs.sudo-rs
     pkgs.hyprland
     pkgs.pavucontrol
     pkgs.wl-clipboard
@@ -19,6 +20,7 @@
     pkgs.git
     pkgs.google-chrome
     pkgs.neovim
+    pkgs.ripgrep
     pkgs.openssh
     pkgs.gcc
     pkgs.gnumake
@@ -102,7 +104,11 @@
     variant = "";
   };
 
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo-rs = {
+    enable = true;
+    wheelNeedsPassword = false;
+    execWheelOnly = true;
+  };
   users.users.cornbuddy = {
     shell = pkgs.fish;
     isNormalUser = true;
