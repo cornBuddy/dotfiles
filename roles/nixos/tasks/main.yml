@@ -1,6 +1,4 @@
 ---
-# FIXME:
-# * need to reconnect to wifi on boot
 - name: Configure
   ansible.builtin.template:
     src: "{{ item.src }}"

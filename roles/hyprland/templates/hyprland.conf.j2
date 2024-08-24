@@ -19,9 +19,9 @@ monitor = DP-2,1920x1080,0x-1080,1 # external screen
 # Autostart necessary processes (like notifications daemons, status bars, etc.)
 # Or execute your favorite apps at launch like this:
 
-exec-once = $terminal
 exec-once = waybar
 exec-once = google-chrome-stable
+exec-once = [workspace 2 silent] $terminal --command tmux
 
 
 #####################
@@ -114,10 +114,5 @@ gestures {
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
-# Example windowrule v1
-# windowrule = float, ^(kitty)$
-
-# Example windowrule v2
-# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-
-# TODO: start tmux in fullscreen
+# start tmux in fullscreen
+windowrulev2 = fullscreen, title:(tmux)
