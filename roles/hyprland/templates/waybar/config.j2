@@ -134,6 +134,7 @@
     },
     "custom/power": {
         "format":"",
-        "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Suspend' 'swaymsg exec systemctl suspend' -b 'shutdown' 'systemctl shutdown'"
+        "on-click": "wlogout --protocol layer-shell",
+        "tooltip": false
     }
 }

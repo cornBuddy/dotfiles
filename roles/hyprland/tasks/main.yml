@@ -32,9 +32,9 @@
   loop:
     - "{{ hyrpland_confid_dir }}"
     - "{{ hyprland_waybar_config_dir }}"
+    - "{{ hyprland_wlogout_config_dir }}"
 
 # TODO:
-# * powerbutton
 # * date format
 # * disk usage
 # * styles
@@ -47,6 +47,8 @@
       dest: "{{ hyrpland_confid_dir }}/hyprland.conf"
     - src: hotkeys.conf.j2
       dest: "{{ hyrpland_confid_dir }}/hotkeys.conf"
+    - src: wlogout/layout.j2
+      dest: "{{ hyprland_wlogout_config_dir }}/layout"
     - src: waybar/config.j2
       dest: "{{ hyprland_waybar_config_dir }}/config"
     - src: waybar/style.css.j2
