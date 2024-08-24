@@ -39,3 +39,8 @@
       dest: "{{ hyrpland_confid_dir }}/hyprland.conf"
     - src: hotkeys.conf.j2
       dest: "{{ hyrpland_confid_dir }}/hotkeys.conf"
+
+- name: configure waybar
+  ansible.builtin.copy:
+    src: waybar
+    dest: "{{ ansible_env.HOME }}/.config"
