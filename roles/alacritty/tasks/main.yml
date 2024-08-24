@@ -12,7 +12,7 @@
     name:
       - alacritty
     state: latest
-  when: ansible_distribution != 'MacOSX'
+  when: ansible_distribution == 'Ubuntu'
   become: true
 
 - name: Create config dir

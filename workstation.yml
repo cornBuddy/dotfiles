@@ -1,5 +1,5 @@
 ---
-- name:
+- name: provision workstation
   hosts: localhost
   gather_facts: true
 
@@ -36,6 +36,8 @@
       tags: neovim
     - role: fish
       tags: fish
+    - role: alacritty
+      tags: alacritty
       # - role: hyprland
       #   tags: hyprland
       # - role: user

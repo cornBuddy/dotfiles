@@ -23,6 +23,8 @@
     pkgs.terraform
     pkgs.terragrunt
     pkgs.fish
+    pkgs.nerdfonts
+    pkgs.alacritty
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -32,6 +34,12 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 3;
+
+  nix.settings.auto-optimise-store = true;
+  nix.gc.automatic = true;
+  nix.gc.dates = "daily";
+  nix.gc.options = "--delete-older-than 3d";
 
   networking.hostName = "workstation";
   networking.networkmanager.enable = true;
@@ -49,7 +57,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
 
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -71,6 +78,7 @@
     variant = "";
   };
 
+  security.sudo.wheelNeedsPassword = false;
   users.users.cornbuddy = {
     shell = pkgs.fish;
     isNormalUser = true;
