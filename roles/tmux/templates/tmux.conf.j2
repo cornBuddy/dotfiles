@@ -57,6 +57,7 @@ set -g @continuum-boot 'on'
 set -g @continuum-boot-options 'alacritty,fullscreen'
 set -g @continuum-restore 'on'
 
+set-environment -g PATH "/run/current-system/sw/bin:/bin:/usr/bin"
 run '{{ tmux_plugins_dir }}/tpm/tpm'
 
 # override nord plugin defaults
