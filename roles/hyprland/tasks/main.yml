@@ -33,6 +33,11 @@
     - "{{ hyrpland_confid_dir }}"
     - "{{ hyprland_waybar_config_dir }}"
 
+# TODO:
+# * powerbutton
+# * date format
+# * disk usage
+# * styles
 - name: configure hyprland
   ansible.builtin.template:
     src: "{{ item.src }}"
