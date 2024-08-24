@@ -1,8 +1,0 @@
-{{ ansible_managed | comment }}
-
-export EDITOR=nvim
-export PAGER=less
-
-export GOROOT="{{ zsh_go_root }}"
-export GOPATH="{{ zsh_go_path }}"
-export PATH="$PATH:{{ zsh_local_bin_path }}:$GOROOT/bin:$GOPATH/bin"
