@@ -6,55 +6,8 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./packages.nix
     ];
-
-  environment.systemPackages = with pkgs; [
-    pkgs.hyprland
-    pkgs.hyprlock
-    pkgs.waybar
-    pkgs.wlogout
-    pkgs.wl-clipboard
-    pkgs.sudo-rs
-    pkgs.pavucontrol
-    pkgs.ansible
-    pkgs.curl
-    pkgs.git
-    pkgs.google-chrome
-    pkgs.neovim
-    pkgs.ripgrep
-    pkgs.openssh
-    pkgs.gcc
-    pkgs.gnumake
-    pkgs.nodejs_22
-    pkgs.jdk22
-    pkgs.python3
-    pkgs.go
-    pkgs.terraform
-    pkgs.terragrunt
-    pkgs.fish
-    pkgs.nerdfonts
-    pkgs.alacritty
-    pkgs.tmux
-    pkgs.gitmux
-    pkgs.zip
-    pkgs.unzip
-    pkgs.htop
-    pkgs.tree
-    pkgs.pre-commit
-    pkgs.packer
-    pkgs.docker_27
-    pkgs.docker-buildx
-    pkgs.docker-compose
-    pkgs.kubectl
-    pkgs.kubernetes-helm
-    pkgs.kustomize
-  ];
-
-  nixpkgs.config.allowUnfree = true;
-
-  programs.fish.enable = true;
-  programs.hyprland.enable = true;
-  programs.firefox.enable = false;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -79,19 +32,13 @@
     LC_NUMERIC = "en_US.UTF-8";
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
   };
 
-  virtualisation.docker.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
-  services.openssh.enable = true;
   services.logind.lidSwitch = "lock";
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-
-  services.desktopManager.plasma6.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -105,11 +52,6 @@
     variant = "";
   };
 
-  security.sudo-rs = {
-    enable = true;
-    wheelNeedsPassword = false;
-    execWheelOnly = true;
-  };
   users.users.cornbuddy = {
     shell = pkgs.fish;
     isNormalUser = true;

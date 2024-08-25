@@ -4,6 +4,7 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
+    padding: 0 10px;
 }
 
 window#waybar {
@@ -93,10 +94,8 @@ button:hover {
 #tray,
 #mode,
 #idle_inhibitor,
-#scratchpad,
 #power-profiles-daemon,
 #mpd {
-    padding: 0 10px;
     color: #ffffff;
 }
 
@@ -276,44 +275,13 @@ label:focus {
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
     background: #97e1ad;
     color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
     min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
 }
 
 #keyboard-state > label.locked {
     background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad.empty {
-	background-color: transparent;
-}
-
-#privacy {
-    padding: 0;
-}
-
-#privacy-item {
-    padding: 0 5px;
-    color: white;
 }
 
 #privacy-item.screenshare {
@@ -327,3 +295,5 @@ label:focus {
 #privacy-item.audio-out {
     background-color: #0069d4;
 }
+
+

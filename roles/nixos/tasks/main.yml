@@ -7,5 +7,7 @@
   become: true
   notify: nixos rebuild
   loop:
+    - src: packages.nix.j2
+      dest: "{{ nixos_config_directory }}/packages.nix"
     - src: configuration.nix.j2
       dest: "{{ nixos_config_directory }}/configuration.nix"
