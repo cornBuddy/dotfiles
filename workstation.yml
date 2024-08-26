@@ -38,6 +38,7 @@
       tags: fish
     - role: hyprland
       tags: hyprland
+      when: ansible_distribution != 'MacOSX'
     - role: neovim
       tags: neovim
     - role: tmux
