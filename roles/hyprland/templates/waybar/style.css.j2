@@ -1,15 +1,13 @@
 {{ ansible_managed | comment(beginning='/*', end='*/') }}
 
-@define-color bg #2E3440;
+@define-color bg rgba(46, 52, 64, 0.4);
 @define-color light #D8DEE9;
 @define-color warning #ebcb8b;
 @define-color critical #BF616A;
-@define-color workspacesfocused #4C566A;
-@define-color tray @workspacesfocused;
 @define-color nord_bg #434C5E;
+@define-color nord_bg_light_blue #88c0d0;
 @define-color nord_bg_blue #546484;
-@define-color nord_light #D8DEE9;
-@define-color nord_light_font #D8DEE9;
+@define-color nord_light_font @light;
 @define-color nord_dark_font #434C5E;
 
 @keyframes blink-warning {
@@ -64,7 +62,9 @@
 #tray,
 #backlight,
 #language,
-#workspaces {
+#workspaces,
+#custom-power,
+#power-profiles-daemon {
     padding-left: 0.6em;
     padding-right: 0.6em;
     background: @nord_bg_blue;
@@ -76,8 +76,10 @@
 #pulseaudio:hover,
 #network:hover,
 #clock:hover,
-#power:hover {
-    background: #88c0d0;
+#custom-power:hover,
+#power-profiles-daemon:hover {
+    background: @nord_bg_light_blue;
+    color: @nord_dark_font;
 }
 
 /* Each module that should blink */
@@ -124,21 +126,19 @@
 #workspaces button {
     font-weight: bold; /* Somewhy the bar-wide setting is ignored*/
     padding: 0;
-    opacity: 0.3;
-    background: none;
+    padding-right: 0.5em;
     font-size: 1em;
+    color: @nord_light_font;
 }
 
-#workspaces button.focused {
-    background: @workspacesfocused;
-    color: #D8DEE9;
-    opacity: 1;
-    padding: 0 0.4em;
+#workspaces button.visible {
+    background: @nord_bg_light_blue;
+    color: @nord_dark_font;
 }
 
 #workspaces button.urgent {
-    border-color: #c9545d;
-    color: #c9545d;
+    border-color: @critical;
+    color: @critical;
     opacity: 1;
 }
 
@@ -158,7 +158,7 @@
 
 #clock {
     background: @nord_bg_blue;
-    color: #D8DEE9;
+    color: @nord_light_font;
 }
 
 #clock.date {
@@ -169,18 +169,6 @@
     background: @mode;
 }
 
-#pulseaudio.muted {
-    background: #BF616A;
-    color: #BF616A;
-    /* No styles */
-}
-
-#pulseaudio.source-muted {
-    background: #D08770;
-    color: #D8DEE9;
-    /* No styles */
-}
-
 #tray {
     background: @nord_bg;
 }
@@ -188,6 +176,7 @@
 /* workarounds */
 #cpu,
 #battery,
-#power {
+#custom-power,
+#power-profiles-daemon {
   padding-right: 1.0em;
 }
