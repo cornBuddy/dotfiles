@@ -8,8 +8,8 @@ source = {{ hyrpland_confid_dir }}/hotkeys.conf
 ################
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
-monitor = eDP-1,preferred,0x0,1 # laptop screen
-monitor = DP-1,1920x1080,0x-1080,1 # external screen
+monitor = eDP-1,preferred,auto,1 # laptop screen
+monitor = DP-1,highrr,auto-up,1 # external screen
 
 
 ###################
@@ -115,7 +115,8 @@ gestures {
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
 # start tmux in fullscreen
-windowrulev2 = fullscreen, title:(tmux)
+windowrulev2 = fullscreen, title:^(tmux.+)$
+windowrulev2 = float, title:(Volume Control)
 
 # this fix transparency of context menus
 windowrulev2 = opaque,class:(),title:()
