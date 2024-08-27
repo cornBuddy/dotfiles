@@ -33,6 +33,7 @@
     - "{{ hyrpland_confid_dir }}"
     - "{{ hyprland_waybar_config_dir }}"
     - "{{ hyprland_wlogout_config_dir }}"
+    - "{{ hyprland_tofi_config_dir }}"
 
 - name: configure hyprland
   ansible.builtin.template:
@@ -49,3 +50,5 @@
       dest: "{{ hyprland_waybar_config_dir }}/config"
     - src: waybar/style.css.j2
       dest: "{{ hyprland_waybar_config_dir }}/style.css"
+    - src: tofi/config
+      dest: "{{ hyprland_tofi_config_dir }}/config"

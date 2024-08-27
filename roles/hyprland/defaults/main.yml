@@ -5,3 +5,4 @@ hyprland_packages:
 hyrpland_confid_dir: "{{ ansible_env.HOME }}/.config/hypr"
 hyprland_waybar_config_dir: "{{ ansible_env.HOME }}/.config/waybar"
 hyprland_wlogout_config_dir: "{{ ansible_env.HOME }}/.config/wlogout"
+hyprland_tofi_config_dir: "{{ ansible_env.HOME }}/.config/tofi"
