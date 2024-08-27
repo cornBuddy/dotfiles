@@ -9,14 +9,19 @@
     executable: fish
   changed_when: false
 
-- name: Configure
+- name: configure fisher
   ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: "0755"
-  notify: sync fisher
   loop:
     - src: fish_plugins.j2
       dest: "{{ fish_config_dir }}/fish_plugins"
     - src: theme.j2
       dest: "{{ fish_config_dir }}/conf.d/theme.fish"
+
+- name: sync fisher
+  ansible.builtin.shell:
+    cmd: fisher update
+    executable: fish
+  changed_when: false

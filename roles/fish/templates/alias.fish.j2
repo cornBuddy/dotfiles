@@ -22,3 +22,10 @@ alias gcmsg "git commit --message"
 
 alias gpsup "git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
 alias gpf! "git push --force"
+
+function posix-source
+    for i in (cat $argv)
+        set arr (echo $i |tr = \n)
+        set -gx $arr[1] $arr[2]
+    end
+end

@@ -10,7 +10,7 @@ fish_fisher_plugins:
   - jorgebucaran/autopair.fish
   - pure-fish/pure
   - evanlucas/fish-kubectl-completions
+  - joehillen/ev-fish
 
-fish_go_root: /opt/go
 fish_go_path: "{{ ansible_env.HOME }}/go"
 fish_local_bin_path: "{{ ansible_env.HOME }}/.local/bin"
