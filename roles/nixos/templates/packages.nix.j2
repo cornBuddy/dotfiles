@@ -4,10 +4,17 @@
 
 { config, pkgs, ... }:
 
+let
+  unstable = import
+    (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
+    # reuse the current configuration
+    { config = config.nixpkgs.config; };
+in
 {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    unstable.moon
     pkgs.hyprland
     pkgs.hyprlock
     pkgs.wlogout
