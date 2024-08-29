@@ -6,3 +6,7 @@ hyrpland_confid_dir: "{{ ansible_env.HOME }}/.config/hypr"
 hyprland_waybar_config_dir: "{{ ansible_env.HOME }}/.config/waybar"
 hyprland_wlogout_config_dir: "{{ ansible_env.HOME }}/.config/wlogout"
 hyprland_tofi_config_dir: "{{ ansible_env.HOME }}/.config/tofi"
+
+hyprland_icons_dir: "{{ ansible_env.HOME }}/.icons"
+hyprland_icons_url: >-
+  https://github.com/guillaumeboehm/Nordzy-cursors-hyprcursor/releases/download/1.0.0/Nordzy-cursors-white-hyprcursor.tar.gz

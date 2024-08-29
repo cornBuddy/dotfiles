@@ -56,10 +56,7 @@
     shell = pkgs.fish;
     isNormalUser = true;
     description = "cornbuddy";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
+    extraGroups = [ "networkmanager" "wheel" "input" "docker" ];
   };
 
   system.stateVersion = "24.05";

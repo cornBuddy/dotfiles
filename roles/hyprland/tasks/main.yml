@@ -34,6 +34,13 @@
     - "{{ hyprland_waybar_config_dir }}"
     - "{{ hyprland_wlogout_config_dir }}"
     - "{{ hyprland_tofi_config_dir }}"
+    - "{{ hyprland_icons_dir }}"
+
+- name: install cursor theme
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: "{{ hyprland_icons_url }}"
+    dest: "{{ hyprland_icons_dir }}"
 
 - name: configure hyprland
   ansible.builtin.template:
