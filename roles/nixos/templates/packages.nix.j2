@@ -7,7 +7,6 @@
 let
   unstable = import
     (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
-    # reuse the current configuration
     { config = config.nixpkgs.config; };
 in
 {
@@ -40,6 +39,7 @@ in
     pkgs.python3
     pkgs.go
     pkgs.terraform
+    pkgs.terraform-docs
     pkgs.terragrunt
     pkgs.awscli2
     pkgs.fish
