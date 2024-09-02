@@ -1,4 +1,4 @@
 ---
 - name: nixos rebuild
-  command: nixos-rebuild switch
+  command: nixos-rebuild switch --upgrade
   become: true
