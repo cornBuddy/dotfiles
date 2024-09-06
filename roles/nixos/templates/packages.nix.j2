@@ -13,26 +13,8 @@ in
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    # development
     unstable.moon
-    pkgs.hyprland
-    pkgs.hyprlock
-    pkgs.wlogout
-    pkgs.wl-clipboard
-    pkgs.waybar
-    pkgs.tofi
-    pkgs.brightnessctl
-    pkgs.deluge
-    pkgs.wireguard-tools
-    pkgs.sudo-rs
-    pkgs.pavucontrol
-    pkgs.ansible
-    pkgs.curl
-    pkgs.dig
-    pkgs.git
-    pkgs.google-chrome
-    pkgs.neovim
-    pkgs.ripgrep
-    pkgs.openssh
     pkgs.gcc
     pkgs.gnumake
     pkgs.nodejs_22
@@ -43,15 +25,26 @@ in
     pkgs.terraform-docs
     pkgs.terragrunt
     pkgs.awscli2
-    pkgs.fish
-    pkgs.alacritty
+    pkgs.ansible
+    pkgs.git
+    pkgs.neovim
     pkgs.tmux
     pkgs.gitmux
-    pkgs.zip
-    pkgs.unzip
-    pkgs.htop
-    pkgs.tree
     pkgs.pre-commit
+    # window manager
+    pkgs.hyprland
+    pkgs.hyprlock
+    pkgs.hypridle
+    pkgs.wlogout
+    pkgs.wl-clipboard
+    pkgs.waybar
+    pkgs.tofi
+    pkgs.brightnessctl
+    # web
+    pkgs.google-chrome
+    pkgs.firefox
+    pkgs.deluge
+    # containers
     pkgs.packer
     pkgs.docker_27
     pkgs.docker-buildx
@@ -59,6 +52,22 @@ in
     pkgs.kubectl
     pkgs.kubernetes-helm
     pkgs.kustomize
+    # tools
+    pkgs.wireguard-tools
+    pkgs.sudo-rs
+    pkgs.acpi
+    pkgs.pavucontrol
+    pkgs.curl
+    pkgs.dig
+    pkgs.jq
+    pkgs.ripgrep
+    pkgs.openssh
+    pkgs.fish
+    pkgs.alacritty
+    pkgs.zip
+    pkgs.unzip
+    pkgs.htop
+    pkgs.tree
   ];
 
   fonts.packages = with pkgs; [
@@ -72,11 +81,9 @@ in
     execWheelOnly = true;
   };
 
-
   programs.fish.enable = true;
   programs.hyprland.enable = true;
-  programs.firefox.enable = false;
-
+  programs.firefox.enable = true;
 
   services.power-profiles-daemon.enable = true;
   services.openssh.enable = true;
