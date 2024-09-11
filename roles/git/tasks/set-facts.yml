@@ -1,0 +1,6 @@
+---
+- name: override platform dependent role default
+  ansible.builtin.set_fact:
+    git_user_email: heorhi.sakovich@softswiss.com
+    git_user_signingkey: "{{ ansible_env.HOME }}/.ssh/id_ed25519.pub"
+  when: ansible_distribution == 'MacOSX'

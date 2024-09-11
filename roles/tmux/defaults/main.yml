@@ -8,7 +8,7 @@ tmux_status_battery: >-
 tmux_status_gitmux: >-
   #[fg=brightblack,bg=black]#[fg=white,bg=brightblack]
   #(gitmux -cfg {{ tmux_gitmux_config_path }}
-  '#{pane_current_path}')#[bg=brightblack]
+  '#{pane_current_path} ')#[bg=brightblack]
 
 tmux_gitmux_version: "0.10.2"
 tmux_gitmux_config_path: "{{ ansible_env.HOME }}/.gitmux.conf"

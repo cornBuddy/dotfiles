@@ -1,4 +1,7 @@
 ---
+
+- ansible.builtin.import_tasks: set-facts.yml
+
 - name: Install git
   ansible.builtin.package:
     name:
