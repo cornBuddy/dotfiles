@@ -9,9 +9,7 @@
       ./packages.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 3;
+  system.stateVersion = "24.05";
 
   nix.settings.auto-optimise-store = true;
   nix.gc.automatic = true;
@@ -34,8 +32,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_GB.UTF-8";
   };
-
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   services.logind.lidSwitch = "lock";
@@ -52,6 +48,11 @@
     variant = "";
   };
 
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nouveau" ];
+  };
+
   users.users.cornbuddy = {
     shell = pkgs.fish;
     isNormalUser = true;
@@ -59,5 +60,19 @@
     extraGroups = [ "networkmanager" "wheel" "input" "docker" ];
   };
 
-  system.stateVersion = "24.05";
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 3;
+
+  boot.kernelModules = [ "nouveau" ];
+  boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" "nvidia_drm" "nvidia_modeset" ];
+
+  hardware.pulseaudio.enable = false;
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      mesa
+      mesa.drivers
+    ];
+  };
 }
