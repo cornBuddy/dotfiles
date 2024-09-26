@@ -30,3 +30,11 @@ function posix-source
         set -gx $arr[1] $arr[2]
     end
 end
+
+function sudo
+    if test "$argv" = !!
+        eval command sudo $history[1]
+    else
+        command sudo $argv
+    end
+end
