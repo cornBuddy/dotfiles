@@ -37,6 +37,8 @@
   loop:
     - src: config.fish.j2
       dest: "{{ fish_config_dir }}/config.fish"
+    - src: config.fish.j2
+      dest: "{{ fish_config_dir }}/functions/fish_right_prompt.fish"
     - src: env.fish.j2
       dest: "{{ fish_config_dir }}/conf.d/env.fish"
     - src: alias.fish.j2
