@@ -36,6 +36,9 @@
   security.rtkit.enable = true;
 
   services.logind.lidSwitch = "lock";
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+  '';
 
   services.pipewire = {
     enable = true;

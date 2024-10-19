@@ -15,6 +15,8 @@ in
   environment.systemPackages = with pkgs; [
     # development
     unstable.moon
+    unstable.cargo
+    unstable.rustc
     pkgs.gcc
     pkgs.gnumake
     pkgs.nodejs_22
@@ -33,15 +35,6 @@ in
     pkgs.pre-commit
     pkgs.packer
     pkgs.action-validator
-    # window manager
-    pkgs.hyprland
-    pkgs.hyprlock
-    pkgs.hypridle
-    pkgs.wlogout
-    pkgs.wl-clipboard
-    pkgs.waybar
-    pkgs.tofi
-    pkgs.brightnessctl
     # containers
     pkgs.minikube
     pkgs.docker
@@ -51,6 +44,15 @@ in
     pkgs.kubernetes-helm
     pkgs.kustomize
     pkgs.fluxcd
+    # window manager
+    pkgs.hyprland
+    pkgs.hyprlock
+    pkgs.hypridle
+    pkgs.wlogout
+    pkgs.wl-clipboard
+    pkgs.waybar
+    pkgs.tofi
+    pkgs.brightnessctl
     # tools
     pkgs.google-chrome
     pkgs.firefox
