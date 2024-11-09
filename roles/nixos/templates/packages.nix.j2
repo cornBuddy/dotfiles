@@ -17,6 +17,7 @@ in
     unstable.moon
     unstable.cargo
     unstable.rustc
+    pkgs.rustfmt
     pkgs.gcc
     pkgs.gnumake
     pkgs.nodejs_22
@@ -35,6 +36,17 @@ in
     pkgs.pre-commit
     pkgs.packer
     pkgs.action-validator
+    # language servers
+    pkgs.ansible-language-server
+    pkgs.nodePackages.bash-language-server
+    pkgs.dockerfile-language-server-nodejs
+    pkgs.docker-compose-language-service
+    pkgs.lua-language-server
+    pkgs.python312Packages.python-lsp-server
+    pkgs.terraform-ls
+    pkgs.gopls
+    pkgs.helm-ls
+    pkgs.rust-analyzer
     # containers
     pkgs.minikube
     pkgs.docker
