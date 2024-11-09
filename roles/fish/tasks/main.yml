@@ -28,6 +28,7 @@
   loop:
     - "{{ fish_config_dir }}"
     - "{{ fish_config_dir }}/conf.d"
+    - "{{ fish_config_dir }}/functions"
 
 - name: Configure
   ansible.builtin.template:
