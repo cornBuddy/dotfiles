@@ -7,6 +7,7 @@
     [
       ./hardware-configuration.nix
       ./packages.nix
+      ./nvidia.nix
     ];
 
   system.stateVersion = "24.05";
@@ -52,11 +53,6 @@
     variant = "";
   };
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nouveau" ];
-  };
-
   users.users.cornbuddy = {
     shell = pkgs.fish;
     isNormalUser = true;
@@ -68,15 +64,5 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 3;
 
-  boot.kernelModules = [ "nouveau" ];
-  boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" "nvidia_drm" "nvidia_modeset" ];
-
   hardware.pulseaudio.enable = false;
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      mesa
-      mesa.drivers
-    ];
-  };
 }

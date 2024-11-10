@@ -9,7 +9,7 @@ source = {{ hyrpland_confid_dir }}/hotkeys.conf
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
 monitor = eDP-1, preferred, auto, 1.25 # laptop screen
-monitor = DP-2, highrr, auto-up, 1.5 # external screen
+monitor = DP-2, 2560x1440, auto-up, 1 # external screen
 
 
 ###################
@@ -113,8 +113,8 @@ gestures {
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
 
-workspace = 1, monitor:DP-1
-workspace = 2, monitor:DP-1
+workspace = 1, monitor:DP-2
+workspace = 2, monitor:DP-2
 
 windowrulev2 = fullscreen, title:^(tmux)$
 windowrulev2 = float, title:(Volume Control)
