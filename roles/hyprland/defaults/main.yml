@@ -9,4 +9,4 @@ hyprland_tofi_config_dir: "{{ ansible_env.HOME }}/.config/tofi"
 
 hyprland_icons_dir: "{{ ansible_env.HOME }}/.icons"
 hyprland_icons_url: >-
-  https://github.com/guillaumeboehm/Nordzy-cursors-hyprcursor/releases/download/1.0.0/Nordzy-cursors-white-hyprcursor.tar.gz
+  https://github.com/guillaumeboehm/Nordzy-cursors/releases/download/v2.3.0/Nordzy-hyprcursors-white.tar.gz
