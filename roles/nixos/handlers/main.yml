@@ -1,4 +1,10 @@
 ---
-- name: nixos rebuild
+- name: nixos-rebuild switch
+  listen: nixos rebuild
   command: nixos-rebuild switch --upgrade
+  become: true
+
+- name: nixos-rebuild boot
+  listen: nixos rebuild
+  command: nixos-rebuild boot
   become: true

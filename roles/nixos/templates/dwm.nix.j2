@@ -1,0 +1,9 @@
+{{ ansible_managed | comment }}
+
+{ config, pkgs, lib, ... }:
+
+{
+  services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
+    src = {{ playbook_dir }}/files/dwm-flexipatch;
+  };
+}

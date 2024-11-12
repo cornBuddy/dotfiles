@@ -6,8 +6,8 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./dwm.nix
       ./packages.nix
-      ./nvidia.nix
     ];
 
   system.stateVersion = "24.05";
@@ -62,7 +62,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 3;
+  boot.loader.systemd-boot.configurationLimit = 5;
 
   hardware.pulseaudio.enable = false;
 }
