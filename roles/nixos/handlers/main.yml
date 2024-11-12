@@ -1,10 +1,10 @@
 ---
 - name: nixos-rebuild switch
   listen: nixos rebuild
-  command: nixos-rebuild switch --upgrade
+  command: nixos-rebuild switch --upgrade --show-trace
   become: true
 
 - name: nixos-rebuild boot
   listen: nixos rebuild
-  command: nixos-rebuild boot
+  command: nixos-rebuild boot --show-trace
   become: true

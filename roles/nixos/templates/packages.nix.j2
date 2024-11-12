@@ -8,10 +8,9 @@ let
   unstable = import
     (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
     { config = config.nixpkgs.config; };
+
 in
 {
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = with pkgs; [
     # development
     unstable.moon
@@ -57,7 +56,7 @@ in
     pkgs.kubernetes-helm
     pkgs.kustomize
     pkgs.fluxcd
-    # window manager
+    # hyprland
     pkgs.hyprland
     pkgs.hyprlock
     pkgs.hypridle
