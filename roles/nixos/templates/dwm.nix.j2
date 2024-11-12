@@ -3,7 +3,20 @@
 { config, pkgs, lib, ... }:
 
 {
-  services.xserver.windowManager.dwm.package = pkgs.dwm.overrideAttrs {
-    src = {{ playbook_dir }}/files/dwm-flexipatch;
+  services.xserver = {
+    enable = true;
+
+    displayManager = {
+      startx.enable = true;
+    };
+
+    windowManager = {
+      dwm = {
+        enable = true;
+        package = pkgs.dwm.overrideAttrs {
+          src = {{ playbook_dir }}/files/dwm-flexipatch;
+        };
+      };
+    };
   };
 }
