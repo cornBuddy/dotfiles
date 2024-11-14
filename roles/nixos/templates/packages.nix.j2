@@ -11,25 +11,27 @@ let
 
 in
 {
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     # development
+    unstable.neovim
     unstable.moon
     unstable.cargo
     unstable.rustc
+    unstable.go
     pkgs.rustfmt
     pkgs.gcc
     pkgs.gnumake
     pkgs.nodejs_22
     pkgs.jdk22
     pkgs.python3
-    pkgs.go
     pkgs.terraform
     pkgs.terraform-docs
     pkgs.terragrunt
     pkgs.awscli2
     pkgs.ansible
     pkgs.git
-    pkgs.neovim
     pkgs.tmux
     pkgs.gitmux
     pkgs.pre-commit
