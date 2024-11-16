@@ -41,13 +41,6 @@
     HandlePowerKey=ignore
   '';
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -57,12 +50,12 @@
     shell = pkgs.fish;
     isNormalUser = true;
     description = "cornbuddy";
-    extraGroups = [ "networkmanager" "wheel" "input" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "docker" "audio" ];
   };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
 
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = true;
 }

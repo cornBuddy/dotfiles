@@ -38,6 +38,7 @@ in
     pkgs.packer
     pkgs.action-validator
     # language servers
+    unstable.rust-analyzer
     pkgs.ansible-language-server
     pkgs.nodePackages.bash-language-server
     pkgs.dockerfile-language-server-nodejs
@@ -47,7 +48,6 @@ in
     pkgs.terraform-ls
     pkgs.gopls
     pkgs.helm-ls
-    pkgs.rust-analyzer
     pkgs.ccls
     # containers
     pkgs.minikube
@@ -68,6 +68,7 @@ in
     pkgs.tofi
     pkgs.brightnessctl
     # tools
+    unstable.ollama
     pkgs.google-chrome
     pkgs.firefox
     pkgs.deluge
