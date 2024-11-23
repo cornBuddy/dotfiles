@@ -8,10 +8,26 @@ let
   unstable = import
     (builtins.fetchTarball https://github.com/nixos/nixpkgs/tarball/nixos-unstable)
     { config = config.nixpkgs.config; };
-
 in
 {
   nixpkgs.config.allowUnfree = true;
+
+  services.xserver = {
+    enable = true;
+
+    displayManager = {
+      startx.enable = true;
+    };
+
+    windowManager = {
+      dwm = {
+        enable = true;
+        package = pkgs.dwm.overrideAttrs {
+          src = {{ playbook_dir }}/files/dwm-flexipatch;
+        };
+      };
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     # development
@@ -58,7 +74,7 @@ in
     pkgs.kubernetes-helm
     pkgs.kustomize
     pkgs.fluxcd
-    # hyprland
+    # window manager
     pkgs.hyprland
     pkgs.hyprlock
     pkgs.hypridle
