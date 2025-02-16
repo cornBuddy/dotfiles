@@ -1,4 +1,9 @@
 ---
+- name: nix-channel update
+  listen: nixos rebuild
+  command: nix-channel --update
+  become: true
+
 - name: nixos-rebuild switch
   listen: nixos rebuild
   command: nixos-rebuild switch --upgrade

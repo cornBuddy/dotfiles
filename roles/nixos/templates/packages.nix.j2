@@ -14,21 +14,9 @@ in
 
   services.xserver = {
     enable = true;
-
     xkb.options = "ctrl:swapcaps";
-
-    displayManager = {
-      startx.enable = true;
-    };
-
-    windowManager = {
-      dwm = {
-        enable = true;
-        package = pkgs.dwm.overrideAttrs {
-          src = {{ nixos_config_directory }}/dwm;
-        };
-      };
-    };
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -42,7 +30,7 @@ in
     pkgs.gcc
     pkgs.gnumake
     pkgs.nodejs_22
-    pkgs.jdk22
+    pkgs.jdk23
     pkgs.python3
     pkgs.terraform
     pkgs.terraform-docs
@@ -130,7 +118,5 @@ in
   services.openssh.enable = true;
   virtualisation.docker.enable = true;
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = false;
 }
